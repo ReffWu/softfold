@@ -1,0 +1,56 @@
+# Motion reference
+
+Reviewed on September 10, 2026 using the original downloaded videos and local prototype recordings. Recordings are not included in this repository.
+
+## Sources
+
+| Reference | Reviewed media | Duration |
+| --- | --- | --- |
+| [Bendy website](https://trybendy.app/) | website-demo.mp4 | 19.17 seconds, 1080 x 1920, 30 fps |
+| [Bendy launch post](https://x.com/adrianabelarde_/status/2097998552517759106) | launch-demo.mp4 | 33.02 seconds, 1920 x 1080, 30 fps |
+| Website scroll recording | website-scroll.mp4 | About 8.12 seconds, 1280 x 720 |
+| [Expo Duo context](https://x.com/nater02/status/2097776349217771912) | expo-duo-demo.mp4 | About 10 seconds, 864 x 720 |
+
+The website scroll recording comprises 100 browser captures. The embedded videos preserve their original frame rates. The published expo-duo 0.0.0 archive contains only package metadata, with no implementation to port.
+
+## Native video
+
+The portrait video opens around 0 to 3 seconds, closes around 4 to 7, reopens around 8 to 11, closes again around 12 to 15, and reopens around 16 to 19. Blur builds toward the top while the bottom remains readable longer.
+
+The landscape launch video contains three physical close/open cycles through approximately 23 seconds. Frames at 10.5 and 11.25 seconds show the key distinction: content still fills nearly the entire physical screen height. The top narrows mildly, the upper content blurs progressively, and dark corners deepen. The menu bar and Dock stay sharp and anchored. Some apparent perspective comes from the camera viewing the physical lid, so it must not be duplicated as software rotation.
+
+The final portion of that video shows a separate website miniature. Its 72-degree rotation, 1400-pixel perspective, and large top-edge fade create an intentionally collapsing card. Earlier prototype versions incorrectly transferred that geometry to the real desktop. Local prototype recordings showed the resulting mismatch: a large black area opened above a heavily compressed desktop.
+
+## Current reconstruction
+
+The new projection keeps the top and bottom edges at their original height. Its homogeneous horizontal taper grows from zero to a maximum top-edge inset of approximately 11.5 percent on each side. This is a visual approximation of the native footage, not a recovered native coefficient. Crop from the top, on by default in Settings, also shortens the desktop toward the hinge the way a closing lid shortens when seen from the front: the bottom row stays at the hinge and the shader samples only the lower cos(0.65 x 90 degrees x progress) of the desktop, so the top slides out of view. The full cosine read as too much stretch from a normal seat above the screen, so the angle is scaled by 0.65.
+
+Three cached Gaussian blur levels at nominal widths of 6, 16, and 36 pixels per 786-pixel reference width provide continuous progressive blur. With Blur by distance, on by default, blur strength follows each point's distance from where the open screen stood: its height above the hinge times sin(90 degrees x progress), so the hinge stays sharp and the top edge of a fully folded screen reaches the 36-pixel level. With it off, blur strength varies with closure and fades toward the lower tenth of the desktop. Subtle top-corner shading and side feathering complete the single effect. The side gaps are filled with the nearest desktop edge, stretched from a broad blur of the reduced frame, or with black, as chosen in Settings. The fill and the desktop are blurred as one surface: every blur level is computed from a composite that places the fill in a side margin around the reduced frame, so blurred content spreads across the fold's edge toward the top while the lower edge stays sharp. Each captured frame adds one scale and one copy into that composite. The blurred fill also runs a quarter-size broad blur and one stretch; the black fill clears the margin instead. On an M1 Max the blurred fill's chain measured about 0.2 ms per captured frame, up from 0.11 ms. An inverse projection in the fragment shader preserves the fold geometry while covering the full overlay.
+
+The effect covers the built-in screen's full display frame, including the menu bar and Dock. A non-activating panel joins fullscreen Spaces without taking keyboard focus. Space changes keep the same capture area and bring the panel back to the front.
+
+## Motion timing
+
+The default open position is 100 degrees. The calibration button captures a comfortable viewing angle and saves it across launches. Enabling the effect does not overwrite the chosen position. The baseline stays fixed while the user holds the lid partly closed and is retained across sleep and capture reinitialization.
+
+The input is a stream of readings in hundredths of a degree from feature report 7, or whole degrees from report 1 on sensors without it. A 0.6-degree noise band prevents alternating adjacent readings from constantly moving the target. Angular velocity is estimated with a 60 ms time constant. Prediction looks ahead by 35 ms and is limited to 0.75 degrees. Closure is mapped from the calibrated baseline toward eight degrees.
+
+A critically damped second-order filter maintains continuous position and velocity. Its response increases from 30 to 55 radians per second as estimated motion speeds up. The output keeps its direction between readings until the sensor indicates a reversal. This avoids small backward corrections from decaying predictions. Long gaps between rendered frames reset the integration step, preventing an initial jump after resting.
+
+There is no fixed playback timeline or additional SwiftUI animation in the motion path. The speed-dependent smoothing follows the general principle described by the [1 Euro filter authors](https://github.com/casiez/OneEuroFilter), using stronger smoothing at low speeds. The implementation uses a damped second-order response rather than that library's first-order filter.
+
+The sensor refreshes its value about every 98 ms, so the earlier 120 Hz polling mostly read the same value again. While the effect is enabled, the reader follows the sensor's cadence instead: a change seen right after an unchanged read fixes the refresh period and phase, the next read happens 6 ms before the following refresh, and reads repeat every 3 ms until the value changes. A refresh that repeats the value keeps the phase, and after five quiet periods the reader falls back to every 25 ms until the next change. On an M1 Max it caught every change a 1 ms reference poll saw, at about 34 reads a second, and the reader's CPU use fell from 4.1 to 1.4 percent of one core. Only changed readings reach the estimator, which keeps its velocity for 120 ms after a reading instead of 25 ms. With the effect disabled the sensor is read every 100 ms. It does not wait for input notifications, which did not track physical movement reliably. Consecutive failed reads clear the effect instead of leaving an old position on screen. A view-owned display link schedules drawing at a steady 60 Hz, passing the expected presentation timestamp to the motion estimator. MTKView remains in explicit-draw mode so only that display link controls cadence. Captured content arrives separately at up to 60 fps. The selected draw cadence avoids repeated drawable stalls observed when requesting 120 Hz. A synthetic run measured 16.67 ms average frame spacing and 16.79 ms at the 95th percentile, with a first motion draw taking 1.10 ms on the CPU. These are local rendering measurements, not sensor-to-display latency. Each newly captured frame generates cached GPU blur levels; lid movement only changes the final projection and blur blend. The renderer reuses the latest content and does not wait for a new capture frame to move.
+
+The previous 12 ms first-order filter followed individual degree changes too closely. High rendering frame rates did not eliminate the visible stair-step input. The current motion filter smooths position and velocity together and suppresses quantization jitter. A synthetic replay checks slow and fast closure at 30, 60, and 120 input samples per second, held adjacent-degree noise, and reopening.
+
+Before On appears, an offscreen GPU pass initializes the blur textures, Gaussian kernels, and fold pipeline, and capture supplies its first frame. A transparent window stays ordered at rest with drawing paused, so closing does not need to allocate a new window surface. The first 2.5 percent of closure smoothly blends the captured image into the live desktop. Capture runs only while it is needed. The stream stops three seconds after the overlay returns to rest, which also clears the macOS screen recording indicator, and a new stream starts as soon as the lid begins to close. On an M1 Max a new stream delivered its first frame 27 to 39 ms after starting. Until it arrives the overlay stays transparent, and the first frame fades in over 60 ms. At full reopening, a transparent frame is presented before drawing pauses.
+
+These checks do not measure physical end-to-end latency, which also depends on the sensor, capture, GPU, and display.
+
+## Implementation reference
+
+[LidAngleSensor](https://github.com/samhenrigold/LidAngleSensor) supplies the observed HID identifiers and feature-report layout. Hinge reads the little-endian angle through IOKit. Exact native Bendy shader parameters and sensor timing remain unavailable.
+
+## Recovery
+
+Sensor loss cancels both startup and active capture. Switching Spaces uses the full display frame directly, without enumerating shareable content. Capture restarts only when the display area changes. The overlay and capture only use the built-in display. When it turns off while an external display stays on, as in clamshell mode, Hinge waits without an error and starts again once the built-in display returns. A capture stream that stops on its own gets one restart a second later, which waits the same way if the display is gone; a second stop within five seconds is reported. Wake recovery waits up to five seconds for the sensor, and duplicate wake notifications do not interrupt an active session. Turning Hinge off cancels pending recovery.
