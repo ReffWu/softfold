@@ -113,7 +113,7 @@ struct SettingsView: View {
           .labelsHidden()
       }
       SettingsDivider()
-      SettingsRow("keyboard", tint: .gray, title: String(localized: "Turn Hinge on or off")) {
+      SettingsRow("keyboard", tint: .gray, title: String(localized: "Turn Softfold on or off")) {
         Text("⌃⌥H")
           .font(.system(size: 12, weight: .medium))
           .foregroundStyle(.secondary)
@@ -125,7 +125,7 @@ struct SettingsView: View {
       SettingsRow(
         "globe", tint: .indigo, title: String(localized: "Language"),
         subtitle: language == AppLanguage.atLaunch
-          ? nil : String(localized: "Relaunch Hinge to switch languages.")
+          ? nil : String(localized: "Relaunch Softfold to switch languages.")
       ) {
         if language != AppLanguage.atLaunch {
           Button("Relaunch", action: AppLanguage.relaunch)
@@ -157,7 +157,7 @@ struct SettingsView: View {
       title: String(localized: "Status"),
       footnote: String(
         localized:
-          "Hinge reads your display only to draw the fold. Frames stay in memory on your Mac.")
+          "Softfold reads your display only to draw the fold. Frames stay in memory on your Mac.")
     ) {
       let allowed = CGPreflightScreenCaptureAccess()
       SettingsRow(
@@ -188,10 +188,10 @@ struct SettingsView: View {
   private var about: some View {
     SettingsGroup(title: String(localized: "About")) {
       SettingsRow(
-        title: "Hinge \(version)", subtitle: String(localized: "Your desktop follows your lid."),
+        title: "Softfold \(version)", subtitle: String(localized: "Your desktop follows your lid."),
         leading: { Image(nsImage: NSApp.applicationIconImage).resizable() },
         trailing: {
-          if let project = URL(string: "https://github.com/Noveum/hinge") {
+          if let project = URL(string: "https://github.com/ReffWu/softfold") {
             Link("GitHub", destination: project).font(.system(size: 12))
           }
         })
@@ -200,7 +200,7 @@ struct SettingsView: View {
 
   private var loginItemNote: String? {
     loginItemStatus == .requiresApproval
-      ? String(localized: "Allow Hinge in Login Items to finish.") : nil
+      ? String(localized: "Allow Softfold in Login Items to finish.") : nil
   }
 
   private var launchAtLogin: Binding<Bool> {

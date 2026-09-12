@@ -49,8 +49,8 @@ These checks do not measure physical end-to-end latency, which also depends on t
 
 ## Implementation reference
 
-[LidAngleSensor](https://github.com/samhenrigold/LidAngleSensor) supplies the observed HID identifiers and feature-report layout. Hinge reads the little-endian angle through IOKit. Exact native Bendy shader parameters and sensor timing remain unavailable.
+[LidAngleSensor](https://github.com/samhenrigold/LidAngleSensor) supplies the observed HID identifiers and feature-report layout. Softfold reads the little-endian angle through IOKit. Exact native Bendy shader parameters and sensor timing remain unavailable.
 
 ## Recovery
 
-Sensor loss cancels both startup and active capture. Switching Spaces uses the full display frame directly, without enumerating shareable content. Capture restarts only when the display area changes. The overlay and capture only use the built-in display. When it turns off while an external display stays on, as in clamshell mode, Hinge waits without an error and starts again once the built-in display returns. A capture stream that stops on its own gets one restart a second later, which waits the same way if the display is gone; a second stop within five seconds is reported. Wake recovery waits up to five seconds for the sensor, and duplicate wake notifications do not interrupt an active session. Turning Hinge off cancels pending recovery.
+Sensor loss cancels both startup and active capture. Switching Spaces uses the full display frame directly, without enumerating shareable content. Capture restarts only when the display area changes. The overlay and capture only use the built-in display. When it turns off while an external display stays on, as in clamshell mode, Softfold waits without an error and starts again once the built-in display returns. A capture stream that stops on its own gets one restart a second later, which waits the same way if the display is gone; a second stop within five seconds is reported. Wake recovery waits up to five seconds for the sensor, and duplicate wake notifications do not interrupt an active session. Turning Softfold off cancels pending recovery.

@@ -35,7 +35,7 @@
 			<key>lastKnownFileType</key>
 			<string>sourcecode.swift</string>
 			<key>path</key>
-			<string>HingeApp.swift</string>
+			<string>SoftfoldApp.swift</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -159,9 +159,9 @@
 			<key>isa</key>
 			<string>PBXFileReference</string>
 			<key>lastKnownFileType</key>
-			<string>image.icns</string>
+			<string>folder.assetcatalog</string>
 			<key>path</key>
-			<string>AppIcon.icns</string>
+			<string>Assets.xcassets</string>
 			<key>sourceTree</key>
 			<string>&lt;group&gt;</string>
 		</dict>
@@ -263,7 +263,7 @@
 			<key>includeInIndex</key>
 			<string>0</string>
 			<key>path</key>
-			<string>Hinge.app</string>
+			<string>Softfold.app</string>
 			<key>sourceTree</key>
 			<string>BUILT_PRODUCTS_DIR</string>
 		</dict>
@@ -371,11 +371,13 @@
 			<key>buildSettings</key>
 			<dict>
 				<key>PRODUCT_NAME</key>
-				<string>Hinge</string>
+				<string>Softfold</string>
 				<key>EXECUTABLE_NAME</key>
-				<string>Hinge</string>
+				<string>Softfold</string>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>local.hinge.app</string>
+				<string>com.reffwu.softfold</string>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
 				<key>INFOPLIST_FILE</key>
 				<string>Info.plist</string>
 				<key>GENERATE_INFOPLIST_FILE</key>
@@ -430,11 +432,13 @@
 			<key>buildSettings</key>
 			<dict>
 				<key>PRODUCT_NAME</key>
-				<string>Hinge</string>
+				<string>Softfold</string>
 				<key>EXECUTABLE_NAME</key>
-				<string>Hinge</string>
+				<string>Softfold</string>
 				<key>PRODUCT_BUNDLE_IDENTIFIER</key>
-				<string>local.hinge.app</string>
+				<string>com.reffwu.softfold</string>
+				<key>ASSETCATALOG_COMPILER_APPICON_NAME</key>
+				<string>AppIcon</string>
 				<key>INFOPLIST_FILE</key>
 				<string>Info.plist</string>
 				<key>GENERATE_INFOPLIST_FILE</key>
@@ -442,11 +446,13 @@
 				<key>CODE_SIGN_STYLE</key>
 				<string>Manual</string>
 				<key>CODE_SIGN_IDENTITY</key>
-				<string>-</string>
+				<string>Developer ID Application</string>
+				<key>DEVELOPMENT_TEAM</key>
+				<string>37V2HFG7YT</string>
 				<key>ENABLE_APP_SANDBOX</key>
 				<string>NO</string>
 				<key>ENABLE_HARDENED_RUNTIME</key>
-				<string>NO</string>
+				<string>YES</string>
 				<key>ARCHS</key>
 				<string>arm64</string>
 				<key>SWIFT_EMIT_LOC_STRINGS</key>
@@ -503,9 +509,9 @@
 			<key>dependencies</key>
 			<array/>
 			<key>name</key>
-			<string>Hinge</string>
+			<string>Softfold</string>
 			<key>productName</key>
-			<string>Hinge</string>
+			<string>Softfold</string>
 			<key>productReference</key>
 			<string>38A007151ABE87CC01A5B6E9</string>
 			<key>productType</key>

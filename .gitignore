@@ -2,11 +2,8 @@ build/
 .DS_Store
 xcuserdata/
 *.xcuserstate
-web/.env*
-!web/.env.example
 
 dist/
-web/.vercel/
 
 node_modules/
 .venv/

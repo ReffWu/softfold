@@ -1,5 +1,5 @@
 {
-  "name": "hinge-checks",
+  "name": "softfold-checks",
   "private": true,
   "scripts": {
     "check": "python3 scripts/check.py policy && python3 scripts/check.py biome",

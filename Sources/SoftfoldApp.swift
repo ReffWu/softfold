@@ -3,13 +3,13 @@ import Carbon.HIToolbox
 import SwiftUI
 
 @main
-struct HingeApp: App {
+struct SoftfoldApp: App {
   @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
   @StateObject private var desktop = LiveDesktop()
   @StateObject private var navigator = Navigator()
 
   var body: some Scene {
-    Window("Hinge", id: "main") {
+    Window("Softfold", id: "main") {
       MainView(desktop: desktop, navigator: navigator)
         .onAppear {
           delegate.onTerminate = { desktop.shutDown() }
@@ -24,14 +24,14 @@ struct HingeApp: App {
     .commands {
       CommandGroup(replacing: .appInfo) {
         Text(
-          "Hinge \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")"
+          "Softfold \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")"
         )
       }
     }
     MenuBarExtra(
-      "Hinge", systemImage: desktop.isActive ? "laptopcomputer.and.arrow.down" : "laptopcomputer"
+      "Softfold", systemImage: desktop.isActive ? "laptopcomputer.and.arrow.down" : "laptopcomputer"
     ) {
-      HingeMenu(desktop: desktop, navigator: navigator)
+      SoftfoldMenu(desktop: desktop, navigator: navigator)
     }
   }
 }
@@ -88,13 +88,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   private func showHotKeyError(_ status: OSStatus) {
     let alert = NSAlert()
     alert.messageText = String(localized: "Keyboard shortcut unavailable")
-    alert.informativeText = String(localized: "Hinge could not register ⌃⌥H (error \(status)).")
+    alert.informativeText = String(localized: "Softfold could not register ⌃⌥H (error \(status)).")
     alert.alertStyle = .warning
     alert.runModal()
   }
 }
 
-struct HingeMenu: View {
+struct SoftfoldMenu: View {
   @ObservedObject var desktop: LiveDesktop
   @ObservedObject var navigator: Navigator
   @Environment(\.openWindow) private var openWindow
@@ -113,7 +113,7 @@ struct HingeMenu: View {
     Button("Set open position") { desktop.setOpenPosition() }
       .disabled(!desktop.sensorAvailable || desktop.isStarting)
     Divider()
-    Button("Open Hinge") {
+    Button("Open Softfold") {
       navigator.screen = .main
       openWindow(id: "main")
       NSApp.activate(ignoringOtherApps: true)
@@ -123,6 +123,6 @@ struct HingeMenu: View {
       openWindow(id: "main")
       NSApp.activate(ignoringOtherApps: true)
     }.keyboardShortcut(",")
-    Button("Quit Hinge") { NSApp.terminate(nil) }.keyboardShortcut("q")
+    Button("Quit Softfold") { NSApp.terminate(nil) }.keyboardShortcut("q")
   }
 }

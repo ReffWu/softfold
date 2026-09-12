@@ -2,7 +2,7 @@ import Foundation
 import IOKit.hid
 
 final class LidSensor {
-  private let queue = DispatchQueue(label: "hinge.sensor", qos: .userInteractive)
+  private let queue = DispatchQueue(label: "softfold.sensor", qos: .userInteractive)
   private var connection: LidConnection?
   private var tracking = false
   private var hasConnected = false

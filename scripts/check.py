@@ -20,12 +20,10 @@ except ModuleNotFoundError:
 ROOT = Path(__file__).resolve().parent.parent
 BIOME = {".js", ".jsx", ".ts", ".tsx", ".json", ".jsonc", ".css", ".html"}
 XML = {".plist", ".pbxproj", ".xcscheme", ".xml", ".svg"}
-PLAIN = {"LICENSE", "web/assets/.gitkeep"}
+PLAIN = {"LICENSE"}
 SHELL = {
     "scripts/requirements.txt",
     ".gitignore",
-    "web/.vercelignore",
-    "web/.env.example",
 }
 
 
@@ -59,19 +57,9 @@ def text_files():
                 f"{path}: tracked symlinks require explicit policy coverage"
             )
         data = (ROOT / path).read_bytes()
-        if path.as_posix() == "Resources/AppIcon.icns":
-            if not data.startswith(b"icns"):
-                raise ValueError(f"{path}: invalid icon signature")
-            continue
-        signatures = {
-            "web/assets/demo.mp4": (4, b"ftyp"),
-            "web/assets/demo-poster.jpg": (0, b"\xff\xd8\xff"),
-            "web/assets/og.png": (0, b"\x89PNG\r\n\x1a\n"),
-        }
-        if path.as_posix() in signatures:
-            offset, signature = signatures[path.as_posix()]
-            if data[offset : offset + len(signature)] != signature:
-                raise ValueError(f"{path}: invalid media signature")
+        if path.suffix == ".png":
+            if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+                raise ValueError(f"{path}: invalid image signature")
             continue
         try:
             yield path, data.decode("utf-8")
@@ -220,11 +208,7 @@ def links():
             ".lychee.toml",
             "--no-progress",
             "--root-dir",
-            str(ROOT / "web"),
-            "--remap",
-            r"[f]ile://.*/web/download$ https://hinge.noveum.ai/download",
-            "--remap",
-            rf"[h]ttps://hinge\.noveum\.ai/assets/(.*) {(ROOT / 'web/assets').as_uri()}/$1",
+            str(ROOT),
             *files,
         ]
     )

@@ -1,34 +1,84 @@
-# Hinge
+<div align="center">
 
-Give your MacBook desktop a little bend. Close the lid and watch your screen softly fold and blur. Open it and everything comes back.
+<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
 
-## For the nerds
+# Softfold
 
-Hinge reads the lid angle as often as the sensor updates it, in hundredths of a degree where your Mac reports them, and turns it into a continuous animation. Slow tilt, slow bend. Quick tilt, quick bend. A little smoothing fills in between readings.
+**Close the lid, and your desktop folds away softly.**
 
-ScreenCaptureKit supplies your live desktop, and Metal adds perspective and progressive blur at 60 fps. Capture only runs while the lid is closing or folded and stops a few seconds after it opens again. Everything stays in memory on your Mac. No recordings, no uploads.
+English · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-## Install
+[![macOS 14+](https://img.shields.io/badge/macOS-14%2B-blue?logo=apple&style=flat-square)](#which-macbooks-work)
+[![Apple silicon](https://img.shields.io/badge/Apple%20silicon-arm64-black?style=flat-square)](#which-macbooks-work)
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
 
-Requires an Apple silicon MacBook with a supported lid sensor and macOS 14 or later. Not every MacBook has one; Hinge tells you if yours doesn't.
+</div>
 
-[Download Hinge](https://hinge.noveum.ai/download), open the DMG, and drag Hinge into Applications. This prototype is not notarized; macOS may ask you to approve it under Privacy & Security.
+---
 
-Prefer building it yourself? Grab Xcode, then:
+Softfold follows your MacBook's hinge. As you lower the screen, your live desktop tilts back with it, blurs from the top down and fades into the dark edges. Lift it again and everything comes back, sharp and exactly where you left it.
+
+## Download
+
+[Download Softfold.dmg](https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg), open it and drag Softfold into Applications. The app is signed with a Developer ID and notarized by Apple, so it opens like any other app.
+
+On first launch, allow Screen Recording, reopen Softfold if macOS asks, and turn it on. It turns itself back on the next time you open it.
+
+The starting open angle is 100°. Prefer something else? Get comfortable and click **Set open position**. Softfold remembers it. <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd> turns it on or off from anywhere.
+
+## Which MacBooks work
+
+Softfold needs the lid angle sensor that Apple added in 2019, exposed on Apple silicon through the sensor coprocessor, plus macOS 14 or later. If your Mac has no sensor, Softfold tells you.
+
+| Status | Models |
+| --- | --- |
+| Works, confirmed by users | 14 and 16 inch MacBook Pro with M1 Pro or M1 Max (2021), M2 Max (2023), M3 Pro or M3 Max (2023), M4 Pro or M4 Max (2024). MacBook Air with M4 (2025) or M5 |
+| Has the sensor, not confirmed yet | 14 inch MacBook Pro with M3, M4 or M5. 14 and 16 inch MacBook Pro with M5 Pro or M5 Max. MacBook Air with M2 or M3 |
+| Not supported | MacBook Air with M1, every 13 inch MacBook Pro (Intel, M1 and M2), Intel MacBook Pro, 12 inch MacBook, MacBook Neo, desktop Macs |
+
+The 2019 16 inch MacBook Pro has the sensor too, but the released app is built for Apple silicon only.
+
+Not sure? Run this in Terminal. A line that ends in `las` means Softfold can read your lid:
 
 ```sh
-git clone https://github.com/Noveum/hinge.git
-cd hinge
-make build
-open build/Hinge.app
+hidutil list --matching '{"VendorID":0x5ac,"PrimaryUsagePage":32,"PrimaryUsage":138}'
 ```
 
-Allow Screen Recording, reopen Hinge if prompted, and turn it on. It turns itself back on the next time you open it. The starting angle is 100°. Prefer something else? Get comfy and click **Set open position**. Hinge remembers.
+Tried it on a model in the middle row? [Tell us how it went](https://github.com/ReffWu/softfold/issues).
 
-Hinge speaks your Mac's language: English, Simplified and Traditional Chinese, Japanese, Korean, German, French, Spanish, Italian, Brazilian Portuguese, Russian, Dutch, Turkish, Polish, Arabic and Vietnamese. To use a different one, pick it under **Settings > Controls > Language**.
+## How it works
 
-## Got an idea?
+Softfold reads the lid angle over IOKit HID in hundredths of a degree where the sensor reports them, following the sensor's own refresh cadence instead of polling blindly. A critically damped filter turns those readings into continuous motion. Slow tilt, slow fold. Quick tilt, quick fold.
 
-Feature requests are welcome. [Open an issue](https://github.com/Noveum/hinge/issues) or just shoot a PR. Small fixes, smoother motion, fun ideas: come play.
+ScreenCaptureKit supplies the live desktop, and Metal renders the perspective, the progressive blur and the side fill at 60 fps. Capture only runs while the lid is closing or folded and stops a few seconds after it opens again, which also clears the screen recording indicator. Frames stay in memory on your Mac. No recordings, no uploads, no analytics.
 
-[Development checks and setup](CHECKS.md).
+The full motion design is in [MOTION.md](MOTION.md).
+
+## Languages
+
+English, Simplified Chinese, Traditional Chinese, Japanese, Korean, German, French, Spanish, Italian, Brazilian Portuguese, Russian, Dutch, Turkish, Polish, Arabic and Vietnamese. Softfold follows your Mac's language, or pick one under **Settings > Controls > Language**.
+
+## Build from source
+
+Install Xcode, then:
+
+```sh
+git clone https://github.com/ReffWu/softfold.git
+cd softfold
+make build
+open build/Softfold.app
+```
+
+Development checks are described in [CHECKS.md](CHECKS.md), and signed releases in [RELEASE.md](RELEASE.md).
+
+## Contributing
+
+Ideas, bug reports and pull requests are welcome. [Open an issue](https://github.com/ReffWu/softfold/issues) or send a PR.
+
+## Credits
+
+Softfold began as a fork of [Hinge](https://github.com/Noveum/hinge) by Noveum.ai, released under the MIT License. The lid sensor's HID identifiers and report layout were first documented by [LidAngleSensor](https://github.com/samhenrigold/LidAngleSensor).
+
+## License
+
+[MIT](LICENSE)

@@ -1,27 +1,31 @@
-# Shipping Hinge
+# Shipping Softfold
 
-Every push to `main` builds the app, saves the `Hinge-macOS` workflow artifact, and publishes a GitHub release with `Hinge.dmg` and its SHA-256 checksum. The release waits for tracked-file policy, formatting, lint, link, and compilation checks. There are no test jobs.
+Releases are built on a Mac that has the Developer ID Application certificate for team `37V2HFG7YT` in its keychain and an Apple account signed in to Xcode. Nothing is signed or published by CI.
 
-## Local installer
+## Version
+
+Bump `CFBundleShortVersionString` and `CFBundleVersion` in `Info.plist` and commit.
+
+## Build, sign and notarize
 
 ```sh
-scripts/package.sh
+make release
 ```
 
-The installer appears in `dist/Hinge.dmg`. Open it and drag Hinge into Applications. Allow Screen Recording when prompted, then reopen Hinge if needed.
+`scripts/release.sh` archives the Release configuration with Xcode, signs it with the Developer ID Application certificate and the hardened runtime, submits it to Apple's notary service through the Xcode account, waits for the notarized app, checks it with `stapler` and `spctl`, and packs it into `dist/Softfold.dmg` with a SHA-256 checksum. The disk image is signed with the same identity.
 
-Local builds use an installed Apple Development identity when available. The hosted build currently uses ad-hoc signing because no certificate secrets are configured. These are prototype builds, not notarized releases; macOS may require approving the app under Privacy & Security before first launch.
+## Publish
 
-## Release publishing
+```sh
+scripts/release.sh --publish
+```
 
-The workflow uploads the installer to a draft release before marking it published and latest. Each run gets a unique tag, so previous installers remain available. No additional publishing secrets are required.
+This does everything above and then creates the GitHub release `v<version>` with the disk image and its checksum, marked as latest. The README download links point at `releases/latest`, so they follow the new release automatically.
 
-The website's `/download` endpoint serves the current release's `Hinge.dmg`. It follows the latest release automatically, so publishing an app update does not require editing the site.
+## Local builds
 
-## Website
+`make build` compiles `build/Softfold.app` with `swiftc`, signed with an Apple Development identity when one is installed and ad-hoc otherwise. `scripts/package.sh` wraps that build in `dist/Softfold.dmg` without notarization, for quick testing.
 
-Import the repository into Vercel with `web` as its root directory and `main` as its production branch. No build or install command is needed. Once connected, Vercel deploys future pushes automatically.
+## App icon
 
-The landing page lives in `web/index.html`, with styles and the original demo recording in `web/assets/`. Its download button uses `/download` to serve the latest release. The repository is public, so the endpoint works without credentials. An optional server-only `GITHUB_TOKEN` in Vercel with read-only Contents access to `Noveum/hinge` raises the GitHub API limit from 60 to 5,000 requests per hour.
-
-CI finishes by checking the deployed website assets, video seeking, and the public installer checksum against the new release. Deployment failures leave a failed workflow instead of a false success.
+`make icon` regenerates `Resources/Assets.xcassets/AppIcon.appiconset` and `docs/icon.png` from `scripts/make-icon.py`. It needs Python with Pillow and NumPy.

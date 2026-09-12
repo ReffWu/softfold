@@ -95,190 +95,190 @@
         }
       }
     },
-    "Allow Hinge in Login Items to finish." : {
+    "Allow Softfold in Login Items to finish." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اسمح لـ Hinge في عناصر تسجيل الدخول لإكمال الإعداد."
+            "value" : "اسمح لـ Softfold في عناصر تسجيل الدخول لإكمال الإعداد."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erlaube Hinge in den Anmeldeobjekten, um den Vorgang abzuschließen."
+            "value" : "Erlaube Softfold in den Anmeldeobjekten, um den Vorgang abzuschließen."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Permite Hinge en los ítems de inicio de sesión para terminar."
+            "value" : "Permite Softfold en los ítems de inicio de sesión para terminar."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Autorisez Hinge dans les éléments de connexion pour terminer."
+            "value" : "Autorisez Softfold dans les éléments de connexion pour terminer."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Consenti Hinge in Elementi login per completare."
+            "value" : "Consenti Softfold in Elementi login per completare."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "設定を完了するには、ログイン項目でHingeを許可してください。"
+            "value" : "設定を完了するには、ログイン項目でSoftfoldを許可してください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "설정을 완료하려면 로그인 항목에서 Hinge를 허용하십시오."
+            "value" : "설정을 완료하려면 로그인 항목에서 Softfold를 허용하십시오."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sta Hinge toe bij inlogonderdelen om af te ronden."
+            "value" : "Sta Softfold toe bij inlogonderdelen om af te ronden."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozwól na Hinge w rzeczach otwieranych podczas logowania, aby dokończyć."
+            "value" : "Pozwól na Softfold w rzeczach otwieranych podczas logowania, aby dokończyć."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Permita o Hinge em Itens de Início para concluir."
+            "value" : "Permita o Softfold em Itens de Início para concluir."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Разрешите Hinge в объектах входа, чтобы завершить."
+            "value" : "Разрешите Softfold в объектах входа, чтобы завершить."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tamamlamak için Giriş Öğeleri’nde Hinge’e izin verin."
+            "value" : "Tamamlamak için Giriş Öğeleri’nde Softfold’e izin verin."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cho phép Hinge trong Mục đăng nhập để hoàn tất."
+            "value" : "Cho phép Softfold trong Mục đăng nhập để hoàn tất."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "请在登录项中允许 Hinge 以完成设置。"
+            "value" : "请在登录项中允许 Softfold 以完成设置。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "請在登入項目中允許 Hinge 以完成設定。"
+            "value" : "請在登入項目中允許 Softfold 以完成設定。"
           }
         }
       }
     },
-    "Allow Hinge in Screen Recording settings, then quit and reopen it." : {
+    "Allow Softfold in Screen Recording settings, then quit and reopen it." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اسمح لـ Hinge في إعدادات تسجيل الشاشة، ثم أنهِه وافتحه من جديد."
+            "value" : "اسمح لـ Softfold في إعدادات تسجيل الشاشة، ثم أنهِه وافتحه من جديد."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erlaube Hinge in den Einstellungen für Bildschirmaufnahme, beende die App und öffne sie erneut."
+            "value" : "Erlaube Softfold in den Einstellungen für Bildschirmaufnahme, beende die App und öffne sie erneut."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Permite Hinge en la configuración de Grabación de pantalla y luego ciérralo y vuelve a abrirlo."
+            "value" : "Permite Softfold en la configuración de Grabación de pantalla y luego ciérralo y vuelve a abrirlo."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Autorisez Hinge dans les réglages Enregistrement de l’écran, puis quittez-le et rouvrez-le."
+            "value" : "Autorisez Softfold dans les réglages Enregistrement de l’écran, puis quittez-le et rouvrez-le."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Consenti Hinge nelle impostazioni di Registrazione schermo, poi chiudila e riaprila."
+            "value" : "Consenti Softfold nelle impostazioni di Registrazione schermo, poi chiudila e riaprila."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "「画面収録」設定でHingeを許可してから、Hingeを終了して開き直してください。"
+            "value" : "「画面収録」設定でSoftfoldを許可してから、Softfoldを終了して開き直してください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "'화면 기록' 설정에서 Hinge를 허용한 다음, 종료하고 다시 여십시오."
+            "value" : "'화면 기록' 설정에서 Softfold를 허용한 다음, 종료하고 다시 여십시오."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sta Hinge toe in de instellingen voor schermopname, stop de app en open hem opnieuw."
+            "value" : "Sta Softfold toe in de instellingen voor schermopname, stop de app en open hem opnieuw."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pozwól na Hinge w ustawieniach nagrywania ekranu, a potem zakończ i otwórz aplikację ponownie."
+            "value" : "Pozwól na Softfold w ustawieniach nagrywania ekranu, a potem zakończ i otwórz aplikację ponownie."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Permita o Hinge nos ajustes de Gravação de Tela e depois encerre e reabra o app."
+            "value" : "Permita o Softfold nos ajustes de Gravação de Tela e depois encerre e reabra o app."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Разрешите Hinge в настройках записи экрана, затем завершите и снова откройте его."
+            "value" : "Разрешите Softfold в настройках записи экрана, затем завершите и снова откройте его."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ekran Kaydı ayarlarında Hinge’e izin verin, ardından uygulamadan çıkıp yeniden açın."
+            "value" : "Ekran Kaydı ayarlarında Softfold’e izin verin, ardından uygulamadan çıkıp yeniden açın."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cho phép Hinge trong cài đặt Ghi màn hình, sau đó thoát và mở lại."
+            "value" : "Cho phép Softfold trong cài đặt Ghi màn hình, sau đó thoát và mở lại."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "请在“屏幕录制”设置中允许 Hinge，然后退出并重新打开。"
+            "value" : "请在“屏幕录制”设置中允许 Softfold，然后退出并重新打开。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "請在「螢幕錄製」設定中允許 Hinge，然後結束並重新開啟。"
+            "value" : "請在「螢幕錄製」設定中允許 Softfold，然後結束並重新開啟。"
           }
         }
       }
@@ -2260,290 +2260,290 @@
     "GitHub" : {
       "shouldTranslate" : false
     },
-    "Hinge" : {
+    "Softfold" : {
       "shouldTranslate" : false
     },
-    "Hinge %@" : {
+    "Softfold %@" : {
       "shouldTranslate" : false
     },
-    "Hinge could not register ⌃⌥H (error %d)." : {
+    "Softfold could not register ⌃⌥H (error %d)." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "تعذر على Hinge تسجيل ⌃⌥H (الخطأ %d)."
+            "value" : "تعذر على Softfold تسجيل ⌃⌥H (الخطأ %d)."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge konnte ⌃⌥H nicht registrieren (Fehler %d)."
+            "value" : "Softfold konnte ⌃⌥H nicht registrieren (Fehler %d)."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge no pudo registrar ⌃⌥H (error %d)."
+            "value" : "Softfold no pudo registrar ⌃⌥H (error %d)."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge n’a pas pu enregistrer ⌃⌥H (erreur %d)."
+            "value" : "Softfold n’a pas pu enregistrer ⌃⌥H (erreur %d)."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge non è riuscita a registrare ⌃⌥H (errore %d)."
+            "value" : "Softfold non è riuscita a registrare ⌃⌥H (errore %d)."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hingeは⌃⌥Hを登録できませんでした（エラー %d）。"
+            "value" : "Softfoldは⌃⌥Hを登録できませんでした（エラー %d）。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge가 ⌃⌥H를 등록할 수 없습니다(오류 %d)."
+            "value" : "Softfold가 ⌃⌥H를 등록할 수 없습니다(오류 %d)."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge kon ⌃⌥H niet registreren (fout %d)."
+            "value" : "Softfold kon ⌃⌥H niet registreren (fout %d)."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge nie może zarejestrować ⌃⌥H (błąd %d)."
+            "value" : "Softfold nie może zarejestrować ⌃⌥H (błąd %d)."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O Hinge não conseguiu registrar ⌃⌥H (erro %d)."
+            "value" : "O Softfold não conseguiu registrar ⌃⌥H (erro %d)."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge не удалось зарегистрировать ⌃⌥H (ошибка %d)."
+            "value" : "Softfold не удалось зарегистрировать ⌃⌥H (ошибка %d)."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge ⌃⌥H kestirmesini kaydedemedi (hata %d)."
+            "value" : "Softfold ⌃⌥H kestirmesini kaydedemedi (hata %d)."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge không thể đăng ký ⌃⌥H (lỗi %d)."
+            "value" : "Softfold không thể đăng ký ⌃⌥H (lỗi %d)."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge 无法注册 ⌃⌥H（错误 %d）。"
+            "value" : "Softfold 无法注册 ⌃⌥H（错误 %d）。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge 無法註冊 ⌃⌥H（錯誤 %d）。"
+            "value" : "Softfold 無法註冊 ⌃⌥H（錯誤 %d）。"
           }
         }
       }
     },
-    "Hinge is on but not running yet." : {
+    "Softfold is on but not running yet." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge مُفعّل لكنه لا يعمل بعد."
+            "value" : "Softfold مُفعّل لكنه لا يعمل بعد."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge ist eingeschaltet, läuft aber noch nicht."
+            "value" : "Softfold ist eingeschaltet, läuft aber noch nicht."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge está activado, pero aún no se está ejecutando."
+            "value" : "Softfold está activado, pero aún no se está ejecutando."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge est activé mais ne fonctionne pas encore."
+            "value" : "Softfold est activé mais ne fonctionne pas encore."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge è attivo ma non è ancora in esecuzione."
+            "value" : "Softfold è attivo ma non è ancora in esecuzione."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hingeはオンですが、まだ動作していません。"
+            "value" : "Softfoldはオンですが、まだ動作していません。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge가 켜져 있지만 아직 실행되지 않았습니다."
+            "value" : "Softfold가 켜져 있지만 아직 실행되지 않았습니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge staat aan maar is nog niet actief."
+            "value" : "Softfold staat aan maar is nog niet actief."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge jest włączony, ale jeszcze nie działa."
+            "value" : "Softfold jest włączony, ale jeszcze nie działa."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O Hinge está ativado, mas ainda não está em execução."
+            "value" : "O Softfold está ativado, mas ainda não está em execução."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge включен, но еще не работает."
+            "value" : "Softfold включен, но еще не работает."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge açık ancak henüz çalışmıyor."
+            "value" : "Softfold açık ancak henüz çalışmıyor."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge đang bật nhưng chưa chạy."
+            "value" : "Softfold đang bật nhưng chưa chạy."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge 已开启，但尚未运行。"
+            "value" : "Softfold 已开启，但尚未运行。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge 已開啟，但尚未執行。"
+            "value" : "Softfold 已開啟，但尚未執行。"
           }
         }
       }
     },
-    "Hinge reads your display only to draw the fold. Frames stay in memory on your Mac." : {
+    "Softfold reads your display only to draw the fold. Frames stay in memory on your Mac." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "يقرأ Hinge شاشتك فقط لرسم الطيّة. تبقى الإطارات في ذاكرة جهاز Mac لديك."
+            "value" : "يقرأ Softfold شاشتك فقط لرسم الطيّة. تبقى الإطارات في ذاكرة جهاز Mac لديك."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge liest deinen Bildschirm nur, um die Faltung zu zeichnen. Die Bilder bleiben im Arbeitsspeicher deines Mac."
+            "value" : "Softfold liest deinen Bildschirm nur, um die Faltung zu zeichnen. Die Bilder bleiben im Arbeitsspeicher deines Mac."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge lee tu pantalla solo para dibujar el pliegue. Las imágenes se quedan en la memoria de tu Mac."
+            "value" : "Softfold lee tu pantalla solo para dibujar el pliegue. Las imágenes se quedan en la memoria de tu Mac."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge lit votre écran uniquement pour dessiner le pli. Les images restent dans la mémoire de votre Mac."
+            "value" : "Softfold lit votre écran uniquement pour dessiner le pli. Les images restent dans la mémoire de votre Mac."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge legge lo schermo solo per disegnare la piega. I fotogrammi restano nella memoria del Mac."
+            "value" : "Softfold legge lo schermo solo per disegnare la piega. I fotogrammi restano nella memoria del Mac."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hingeが画面を読み取るのは折り目を描くためだけです。フレームはMacのメモリ内にのみ保持されます。"
+            "value" : "Softfoldが画面を読み取るのは折り目を描くためだけです。フレームはMacのメモリ内にのみ保持されます。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge는 접힘 효과를 그리기 위해서만 화면을 읽습니다. 프레임은 Mac의 메모리에만 머무릅니다."
+            "value" : "Softfold는 접힘 효과를 그리기 위해서만 화면을 읽습니다. 프레임은 Mac의 메모리에만 머무릅니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge leest je scherm alleen om de vouw te tekenen. De beelden blijven in het geheugen van je Mac."
+            "value" : "Softfold leest je scherm alleen om de vouw te tekenen. De beelden blijven in het geheugen van je Mac."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge odczytuje ekran tylko po to, by narysować zagięcie. Klatki pozostają w pamięci Maca."
+            "value" : "Softfold odczytuje ekran tylko po to, by narysować zagięcie. Klatki pozostają w pamięci Maca."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O Hinge lê sua tela só para desenhar a dobra. Os quadros ficam na memória do seu Mac."
+            "value" : "O Softfold lê sua tela só para desenhar a dobra. Os quadros ficam na memória do seu Mac."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge считывает экран только для отрисовки сгиба. Кадры остаются в памяти вашего Mac."
+            "value" : "Softfold считывает экран только для отрисовки сгиба. Кадры остаются в памяти вашего Mac."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge ekranınızı yalnızca katlamayı çizmek için okur. Kareler Mac’inizin belleğinde kalır."
+            "value" : "Softfold ekranınızı yalnızca katlamayı çizmek için okur. Kareler Mac’inizin belleğinde kalır."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge chỉ đọc màn hình để vẽ nếp gập. Các khung hình chỉ nằm trong bộ nhớ của máy Mac."
+            "value" : "Softfold chỉ đọc màn hình để vẽ nếp gập. Các khung hình chỉ nằm trong bộ nhớ của máy Mac."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge 读取屏幕内容只为绘制折叠效果，画面只保存在你的 Mac 内存中。"
+            "value" : "Softfold 读取屏幕内容只为绘制折叠效果，画面只保存在你的 Mac 内存中。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge 讀取螢幕內容只為繪製摺疊效果，畫面只保存在你的 Mac 記憶體中。"
+            "value" : "Softfold 讀取螢幕內容只為繪製摺疊效果，畫面只保存在你的 Mac 記憶體中。"
           }
         }
       }
@@ -3206,96 +3206,96 @@
         }
       }
     },
-    "No desktop frames arrived. Check Screen Recording permission and reopen Hinge." : {
+    "No desktop frames arrived. Check Screen Recording permission and reopen Softfold." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "لم تصل إطارات سطح المكتب. تحقق من إذن تسجيل الشاشة وأعد فتح Hinge."
+            "value" : "لم تصل إطارات سطح المكتب. تحقق من إذن تسجيل الشاشة وأعد فتح Softfold."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Es kamen keine Schreibtischbilder an. Prüfe die Berechtigung für Bildschirmaufnahme und öffne Hinge erneut."
+            "value" : "Es kamen keine Schreibtischbilder an. Prüfe die Berechtigung für Bildschirmaufnahme und öffne Softfold erneut."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No llegaron imágenes del escritorio. Revisa el permiso de Grabación de pantalla y vuelve a abrir Hinge."
+            "value" : "No llegaron imágenes del escritorio. Revisa el permiso de Grabación de pantalla y vuelve a abrir Softfold."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aucune image du bureau n’est arrivée. Vérifiez l’autorisation d’enregistrement de l’écran et rouvrez Hinge."
+            "value" : "Aucune image du bureau n’est arrivée. Vérifiez l’autorisation d’enregistrement de l’écran et rouvrez Softfold."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non sono arrivati fotogrammi della scrivania. Controlla il permesso di Registrazione schermo e riapri Hinge."
+            "value" : "Non sono arrivati fotogrammi della scrivania. Controlla il permesso di Registrazione schermo e riapri Softfold."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "デスクトップの画像が届きませんでした。画面収録の許可を確認して、Hingeを開き直してください。"
+            "value" : "デスクトップの画像が届きませんでした。画面収録の許可を確認して、Softfoldを開き直してください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "데스크탑 프레임이 도착하지 않았습니다. 화면 기록 권한을 확인하고 Hinge를 다시 여십시오."
+            "value" : "데스크탑 프레임이 도착하지 않았습니다. 화면 기록 권한을 확인하고 Softfold를 다시 여십시오."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Er kwamen geen beelden van het bureaublad binnen. Controleer de toestemming voor schermopname en open Hinge opnieuw."
+            "value" : "Er kwamen geen beelden van het bureaublad binnen. Controleer de toestemming voor schermopname en open Softfold opnieuw."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nie dotarły żadne klatki biurka. Sprawdź uprawnienie do nagrywania ekranu i otwórz Hinge ponownie."
+            "value" : "Nie dotarły żadne klatki biurka. Sprawdź uprawnienie do nagrywania ekranu i otwórz Softfold ponownie."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nenhum quadro da mesa chegou. Verifique a permissão de Gravação de Tela e reabra o Hinge."
+            "value" : "Nenhum quadro da mesa chegou. Verifique a permissão de Gravação de Tela e reabra o Softfold."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Кадры рабочего стола не поступили. Проверьте разрешение на запись экрана и снова откройте Hinge."
+            "value" : "Кадры рабочего стола не поступили. Проверьте разрешение на запись экрана и снова откройте Softfold."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Masaüstü karesi gelmedi. Ekran Kaydı iznini kontrol edin ve Hinge’i yeniden açın."
+            "value" : "Masaüstü karesi gelmedi. Ekran Kaydı iznini kontrol edin ve Softfold’i yeniden açın."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Không nhận được khung hình màn hình nền. Hãy kiểm tra quyền Ghi màn hình và mở lại Hinge."
+            "value" : "Không nhận được khung hình màn hình nền. Hãy kiểm tra quyền Ghi màn hình và mở lại Softfold."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "没有收到桌面画面。请检查屏幕录制权限并重新打开 Hinge。"
+            "value" : "没有收到桌面画面。请检查屏幕录制权限并重新打开 Softfold。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "沒有收到桌面畫面。請檢查螢幕錄製權限並重新開啟 Hinge。"
+            "value" : "沒有收到桌面畫面。請檢查螢幕錄製權限並重新開啟 Softfold。"
           }
         }
       }
@@ -3582,96 +3582,96 @@
         }
       }
     },
-    "Open Hinge" : {
+    "Open Softfold" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "فتح Hinge"
+            "value" : "فتح Softfold"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge öffnen"
+            "value" : "Softfold öffnen"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abrir Hinge"
+            "value" : "Abrir Softfold"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ouvrir Hinge"
+            "value" : "Ouvrir Softfold"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri Hinge"
+            "value" : "Apri Softfold"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hingeを開く"
+            "value" : "Softfoldを開く"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge 열기"
+            "value" : "Softfold 열기"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open Hinge"
+            "value" : "Open Softfold"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Otwórz Hinge"
+            "value" : "Otwórz Softfold"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abrir o Hinge"
+            "value" : "Abrir o Softfold"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Открыть Hinge"
+            "value" : "Открыть Softfold"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge’i Aç"
+            "value" : "Softfold’i Aç"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mở Hinge"
+            "value" : "Mở Softfold"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打开 Hinge"
+            "value" : "打开 Softfold"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打開 Hinge"
+            "value" : "打開 Softfold"
           }
         }
       }
@@ -4052,96 +4052,96 @@
         }
       }
     },
-    "Quit Hinge" : {
+    "Quit Softfold" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "إنهاء Hinge"
+            "value" : "إنهاء Softfold"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge beenden"
+            "value" : "Softfold beenden"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salir de Hinge"
+            "value" : "Salir de Softfold"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quitter Hinge"
+            "value" : "Quitter Softfold"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esci da Hinge"
+            "value" : "Esci da Softfold"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hingeを終了"
+            "value" : "Softfoldを終了"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge 종료"
+            "value" : "Softfold 종료"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stop Hinge"
+            "value" : "Stop Softfold"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zakończ Hinge"
+            "value" : "Zakończ Softfold"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Encerrar Hinge"
+            "value" : "Encerrar Softfold"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Завершить Hinge"
+            "value" : "Завершить Softfold"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge’den Çık"
+            "value" : "Softfold’den Çık"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thoát Hinge"
+            "value" : "Thoát Softfold"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "退出 Hinge"
+            "value" : "退出 Softfold"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "結束 Hinge"
+            "value" : "結束 Softfold"
           }
         }
       }
@@ -4240,96 +4240,96 @@
         }
       }
     },
-    "Relaunch Hinge to switch languages." : {
+    "Relaunch Softfold to switch languages." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "أعد تشغيل Hinge لتغيير اللغة."
+            "value" : "أعد تشغيل Softfold لتغيير اللغة."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Starte Hinge neu, um die Sprache zu wechseln."
+            "value" : "Starte Softfold neu, um die Sprache zu wechseln."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vuelve a abrir Hinge para cambiar de idioma."
+            "value" : "Vuelve a abrir Softfold para cambiar de idioma."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Relancez Hinge pour changer de langue."
+            "value" : "Relancez Softfold pour changer de langue."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Riapri Hinge per cambiare lingua."
+            "value" : "Riapri Softfold per cambiare lingua."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "言語を切り替えるには、Hingeを再起動してください。"
+            "value" : "言語を切り替えるには、Softfoldを再起動してください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "언어를 바꾸려면 Hinge를 다시 실행하십시오."
+            "value" : "언어를 바꾸려면 Softfold를 다시 실행하십시오."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Start Hinge opnieuw om van taal te wisselen."
+            "value" : "Start Softfold opnieuw om van taal te wisselen."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Uruchom ponownie Hinge, aby zmienić język."
+            "value" : "Uruchom ponownie Softfold, aby zmienić język."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reabra o Hinge para trocar de idioma."
+            "value" : "Reabra o Softfold para trocar de idioma."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Перезапустите Hinge, чтобы сменить язык."
+            "value" : "Перезапустите Softfold, чтобы сменить язык."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dili değiştirmek için Hinge’i yeniden başlatın."
+            "value" : "Dili değiştirmek için Softfold’i yeniden başlatın."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mở lại Hinge để đổi ngôn ngữ."
+            "value" : "Mở lại Softfold để đổi ngôn ngữ."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重新打开 Hinge 以切换语言。"
+            "value" : "重新打开 Softfold 以切换语言。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "重新開啟 Hinge 以切換語言。"
+            "value" : "重新開啟 Softfold 以切換語言。"
           }
         }
       }
@@ -5274,96 +5274,96 @@
         }
       }
     },
-    "Starts at 100°. Set your comfortable open position once, and Hinge remembers it." : {
+    "Starts at 100°. Set your comfortable open position once, and Softfold remembers it." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "يبدأ عند 100°. اضبط وضع الفتح المريح لك مرة واحدة، وسيتذكره Hinge."
+            "value" : "يبدأ عند 100°. اضبط وضع الفتح المريح لك مرة واحدة، وسيتذكره Softfold."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Standard ist 100°. Lege einmal deine bevorzugte Öffnungsposition fest, Hinge merkt sie sich."
+            "value" : "Standard ist 100°. Lege einmal deine bevorzugte Öffnungsposition fest, Softfold merkt sie sich."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empieza en 100°. Ajusta una vez tu posición de apertura cómoda y Hinge la recordará."
+            "value" : "Empieza en 100°. Ajusta una vez tu posición de apertura cómoda y Softfold la recordará."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "100° par défaut. Réglez une fois votre position d’ouverture préférée, Hinge s’en souviendra."
+            "value" : "100° par défaut. Réglez une fois votre position d’ouverture préférée, Softfold s’en souviendra."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parte da 100°. Imposta una volta la tua posizione di apertura preferita e Hinge la ricorderà."
+            "value" : "Parte da 100°. Imposta una volta la tua posizione di apertura preferita e Softfold la ricorderà."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "初期値は100°です。見やすい開き具合を一度設定すると、Hingeが記憶します。"
+            "value" : "初期値は100°です。見やすい開き具合を一度設定すると、Softfoldが記憶します。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "기본값은 100°입니다. 편한 열림 위치를 한 번 설정하면 Hinge가 기억합니다."
+            "value" : "기본값은 100°입니다. 편한 열림 위치를 한 번 설정하면 Softfold가 기억합니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Begint bij 100°. Stel één keer je favoriete openstand in en Hinge onthoudt die."
+            "value" : "Begint bij 100°. Stel één keer je favoriete openstand in en Softfold onthoudt die."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Domyślnie 100°. Ustaw raz wygodną pozycję otwarcia, a Hinge ją zapamięta."
+            "value" : "Domyślnie 100°. Ustaw raz wygodną pozycję otwarcia, a Softfold ją zapamięta."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Começa em 100°. Defina uma vez sua posição de abertura preferida, e o Hinge vai lembrar dela."
+            "value" : "Começa em 100°. Defina uma vez sua posição de abertura preferida, e o Softfold vai lembrar dela."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "По умолчанию 100°. Задайте удобное положение открытия один раз, и Hinge его запомнит."
+            "value" : "По умолчанию 100°. Задайте удобное положение открытия один раз, и Softfold его запомнит."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "100° ile başlar. Rahat açık konumunuzu bir kez ayarlayın, Hinge onu hatırlar."
+            "value" : "100° ile başlar. Rahat açık konumunuzu bir kez ayarlayın, Softfold onu hatırlar."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mặc định là 100°. Đặt vị trí mở thoải mái của bạn một lần, Hinge sẽ ghi nhớ."
+            "value" : "Mặc định là 100°. Đặt vị trí mở thoải mái của bạn một lần, Softfold sẽ ghi nhớ."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "默认 100°。设定一次你习惯的打开角度，Hinge 会记住它。"
+            "value" : "默认 100°。设定一次你习惯的打开角度，Softfold 会记住它。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "預設為 100°。設定一次你習慣的開啟角度，Hinge 會記住它。"
+            "value" : "預設為 100°。設定一次你習慣的開啟角度，Softfold 會記住它。"
           }
         }
       }
@@ -5744,96 +5744,96 @@
         }
       }
     },
-    "The lid sensor stopped responding. Hinge turns back on as soon as it reconnects." : {
+    "The lid sensor stopped responding. Softfold turns back on as soon as it reconnects." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "توقف مستشعر الغطاء عن الاستجابة. سيعود Hinge للعمل فور إعادة الاتصال."
+            "value" : "توقف مستشعر الغطاء عن الاستجابة. سيعود Softfold للعمل فور إعادة الاتصال."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Der Deckelsensor reagiert nicht mehr. Hinge schaltet sich wieder ein, sobald er wieder verbunden ist."
+            "value" : "Der Deckelsensor reagiert nicht mehr. Softfold schaltet sich wieder ein, sobald er wieder verbunden ist."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "El sensor de la tapa dejó de responder. Hinge se volverá a activar en cuanto se reconecte."
+            "value" : "El sensor de la tapa dejó de responder. Softfold se volverá a activar en cuanto se reconecte."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le capteur d’angle ne répond plus. Hinge se réactivera dès qu’il sera reconnecté."
+            "value" : "Le capteur d’angle ne répond plus. Softfold se réactivera dès qu’il sera reconnecté."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Il sensore dello schermo ha smesso di rispondere. Hinge si riattiverà appena si ricollega."
+            "value" : "Il sensore dello schermo ha smesso di rispondere. Softfold si riattiverà appena si ricollega."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ふたの角度センサーが応答しなくなりました。再接続されるとHingeは自動的にオンに戻ります。"
+            "value" : "ふたの角度センサーが応答しなくなりました。再接続されるとSoftfoldは自動的にオンに戻ります。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "덮개 각도 센서가 응답하지 않습니다. 다시 연결되면 Hinge가 자동으로 다시 켜집니다."
+            "value" : "덮개 각도 센서가 응답하지 않습니다. 다시 연결되면 Softfold가 자동으로 다시 켜집니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "De klepsensor reageert niet meer. Hinge gaat weer aan zodra de sensor opnieuw verbonden is."
+            "value" : "De klepsensor reageert niet meer. Softfold gaat weer aan zodra de sensor opnieuw verbonden is."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Czujnik pokrywy przestał odpowiadać. Hinge włączy się ponownie, gdy tylko czujnik się połączy."
+            "value" : "Czujnik pokrywy przestał odpowiadać. Softfold włączy się ponownie, gdy tylko czujnik się połączy."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "O sensor da tampa parou de responder. O Hinge será reativado assim que ele se reconectar."
+            "value" : "O sensor da tampa parou de responder. O Softfold será reativado assim que ele se reconectar."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Датчик крышки перестал отвечать. Hinge снова включится, как только он переподключится."
+            "value" : "Датчик крышки перестал отвечать. Softfold снова включится, как только он переподключится."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kapak sensörü yanıt vermiyor. Hinge, sensör yeniden bağlanır bağlanmaz tekrar açılır."
+            "value" : "Kapak sensörü yanıt vermiyor. Softfold, sensör yeniden bağlanır bağlanmaz tekrar açılır."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cảm biến nắp đã ngừng phản hồi. Hinge sẽ tự bật lại ngay khi kết nối lại."
+            "value" : "Cảm biến nắp đã ngừng phản hồi. Softfold sẽ tự bật lại ngay khi kết nối lại."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "屏幕开合角度传感器停止响应。重新连接后 Hinge 会自动重新开启。"
+            "value" : "屏幕开合角度传感器停止响应。重新连接后 Softfold 会自动重新开启。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "螢幕開合角度感測器沒有回應。重新連接後 Hinge 會自動重新開啟。"
+            "value" : "螢幕開合角度感測器沒有回應。重新連接後 Softfold 會自動重新開啟。"
           }
         }
       }
@@ -5932,284 +5932,284 @@
         }
       }
     },
-    "This Mac doesn't appear to have a lid angle sensor, so Hinge can't follow the lid." : {
+    "This Mac doesn't appear to have a lid angle sensor, so Softfold can't follow the lid." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "يبدو أن جهاز Mac هذا لا يحتوي على مستشعر لزاوية الغطاء، لذا لا يستطيع Hinge تتبُّع الغطاء."
+            "value" : "يبدو أن جهاز Mac هذا لا يحتوي على مستشعر لزاوية الغطاء، لذا لا يستطيع Softfold تتبُّع الغطاء."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dieser Mac scheint keinen Deckelwinkelsensor zu haben, daher kann Hinge dem Deckel nicht folgen."
+            "value" : "Dieser Mac scheint keinen Deckelwinkelsensor zu haben, daher kann Softfold dem Deckel nicht folgen."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parece que este Mac no tiene sensor de ángulo de la tapa, así que Hinge no puede seguirla."
+            "value" : "Parece que este Mac no tiene sensor de ángulo de la tapa, así que Softfold no puede seguirla."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ce Mac ne semble pas avoir de capteur d’angle d’écran, Hinge ne peut donc pas suivre l’écran."
+            "value" : "Ce Mac ne semble pas avoir de capteur d’angle d’écran, Softfold ne peut donc pas suivre l’écran."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sembra che questo Mac non abbia un sensore dell’angolo dello schermo, quindi Hinge non può seguirlo."
+            "value" : "Sembra che questo Mac non abbia un sensore dell’angolo dello schermo, quindi Softfold non può seguirlo."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "このMacにはふたの角度センサーがないようです。そのため、Hingeはふたの動きに追従できません。"
+            "value" : "このMacにはふたの角度センサーがないようです。そのため、Softfoldはふたの動きに追従できません。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 Mac에는 덮개 각도 센서가 없는 것 같습니다. 따라서 Hinge가 덮개를 따라갈 수 없습니다."
+            "value" : "이 Mac에는 덮개 각도 센서가 없는 것 같습니다. 따라서 Softfold가 덮개를 따라갈 수 없습니다."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Deze Mac lijkt geen klephoeksensor te hebben, dus Hinge kan de klep niet volgen."
+            "value" : "Deze Mac lijkt geen klephoeksensor te hebben, dus Softfold kan de klep niet volgen."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ten Mac prawdopodobnie nie ma czujnika kąta pokrywy, więc Hinge nie może za nią podążać."
+            "value" : "Ten Mac prawdopodobnie nie ma czujnika kąta pokrywy, więc Softfold nie może za nią podążać."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Este Mac parece não ter um sensor de ângulo da tampa, então o Hinge não consegue acompanhá-la."
+            "value" : "Este Mac parece não ter um sensor de ângulo da tampa, então o Softfold não consegue acompanhá-la."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Похоже, на этом Mac нет датчика угла крышки, поэтому Hinge не может следовать за ней."
+            "value" : "Похоже, на этом Mac нет датчика угла крышки, поэтому Softfold не может следовать за ней."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bu Mac’te kapak açısı sensörü yok gibi görünüyor, bu yüzden Hinge kapağı takip edemiyor."
+            "value" : "Bu Mac’te kapak açısı sensörü yok gibi görünüyor, bu yüzden Softfold kapağı takip edemiyor."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Máy Mac này có vẻ không có cảm biến góc nắp, nên Hinge không thể theo nắp máy."
+            "value" : "Máy Mac này có vẻ không có cảm biến góc nắp, nên Softfold không thể theo nắp máy."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "这台 Mac 似乎没有屏幕开合角度传感器，因此 Hinge 无法跟随屏幕开合。"
+            "value" : "这台 Mac 似乎没有屏幕开合角度传感器，因此 Softfold 无法跟随屏幕开合。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "這部 Mac 似乎沒有螢幕開合角度感測器，因此 Hinge 無法跟隨螢幕開合。"
+            "value" : "這部 Mac 似乎沒有螢幕開合角度感測器，因此 Softfold 無法跟隨螢幕開合。"
           }
         }
       }
     },
-    "Turn Hinge on or off" : {
+    "Turn Softfold on or off" : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "تشغيل Hinge أو إيقافه"
+            "value" : "تشغيل Softfold أو إيقافه"
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge ein- oder ausschalten"
+            "value" : "Softfold ein- oder ausschalten"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activar o desactivar Hinge"
+            "value" : "Activar o desactivar Softfold"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activer ou désactiver Hinge"
+            "value" : "Activer ou désactiver Softfold"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attiva o disattiva Hinge"
+            "value" : "Attiva o disattiva Softfold"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hingeのオン/オフ"
+            "value" : "Softfoldのオン/オフ"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge 켜기 또는 끄기"
+            "value" : "Softfold 켜기 또는 끄기"
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schakel Hinge in of uit"
+            "value" : "Schakel Softfold in of uit"
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Włącz lub wyłącz Hinge"
+            "value" : "Włącz lub wyłącz Softfold"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ativar ou desativar o Hinge"
+            "value" : "Ativar ou desativar o Softfold"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Включить или выключить Hinge"
+            "value" : "Включить или выключить Softfold"
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hinge’i aç veya kapat"
+            "value" : "Softfold’i aç veya kapat"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bật hoặc tắt Hinge"
+            "value" : "Bật hoặc tắt Softfold"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "开启或关闭 Hinge"
+            "value" : "开启或关闭 Softfold"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啟或關閉 Hinge"
+            "value" : "開啟或關閉 Softfold"
           }
         }
       }
     },
-    "Turn Hinge on to follow the lid." : {
+    "Turn Softfold on to follow the lid." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "شغّل Hinge ليتتبّع الغطاء."
+            "value" : "شغّل Softfold ليتتبّع الغطاء."
           }
         },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Schalte Hinge ein, damit es dem Deckel folgt."
+            "value" : "Schalte Softfold ein, damit es dem Deckel folgt."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activa Hinge para seguir la tapa."
+            "value" : "Activa Softfold para seguir la tapa."
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Activez Hinge pour suivre l’écran."
+            "value" : "Activez Softfold pour suivre l’écran."
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attiva Hinge per seguire lo schermo."
+            "value" : "Attiva Softfold per seguire lo schermo."
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ふたの動きに追従するには、Hingeをオンにしてください。"
+            "value" : "ふたの動きに追従するには、Softfoldをオンにしてください。"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "덮개를 따라가려면 Hinge를 켜십시오."
+            "value" : "덮개를 따라가려면 Softfold를 켜십시오."
           }
         },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zet Hinge aan om de klep te volgen."
+            "value" : "Zet Softfold aan om de klep te volgen."
           }
         },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Włącz Hinge, aby podążał za pokrywą."
+            "value" : "Włącz Softfold, aby podążał za pokrywą."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ative o Hinge para seguir a tampa."
+            "value" : "Ative o Softfold para seguir a tampa."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Включите Hinge, чтобы он следовал за крышкой."
+            "value" : "Включите Softfold, чтобы он следовал за крышкой."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Kapağı takip etmesi için Hinge’i açın."
+            "value" : "Kapağı takip etmesi için Softfold’i açın."
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bật Hinge để theo nắp máy."
+            "value" : "Bật Softfold để theo nắp máy."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "开启 Hinge 以跟随屏幕开合。"
+            "value" : "开启 Softfold 以跟随屏幕开合。"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "開啟 Hinge 以跟隨螢幕開合。"
+            "value" : "開啟 Softfold 以跟隨螢幕開合。"
           }
         }
       }

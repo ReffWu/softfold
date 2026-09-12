@@ -30,7 +30,7 @@ struct MainView: View {
 
   private var header: some View {
     ZStack {
-      Text(navigator.screen == .main ? "Hinge" : String(localized: "Settings"))
+      Text(navigator.screen == .main ? "Softfold" : String(localized: "Settings"))
         .font(.system(size: 13, weight: .semibold))
       HStack(spacing: 0) {
         if navigator.screen == .settings {
@@ -121,7 +121,7 @@ struct MainView: View {
       title: String(localized: "Open position"),
       footnote: String(
         localized:
-          "Starts at 100°. Set your comfortable open position once, and Hinge remembers it.")
+          "Starts at 100°. Set your comfortable open position once, and Softfold remembers it.")
     ) {
       SettingsRow(
         "angle", tint: .indigo, title: String(localized: "Open position"),
@@ -160,8 +160,8 @@ struct MainView: View {
       return String(localized: "Waiting for the built-in display to turn on.")
     }
     if !desktop.sensorAvailable { return String(localized: "Waiting for the lid angle sensor.") }
-    if desktop.isEnabled { return String(localized: "Hinge is on but not running yet.") }
-    return String(localized: "Turn Hinge on to follow the lid.")
+    if desktop.isEnabled { return String(localized: "Softfold is on but not running yet.") }
+    return String(localized: "Turn Softfold on to follow the lid.")
   }
 }
 

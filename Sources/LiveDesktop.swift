@@ -45,11 +45,11 @@ final class LiveDesktop: NSObject, ObservableObject {
   private static let missingSensorMessage =
     String(
       localized:
-        "This Mac doesn't appear to have a lid angle sensor, so Hinge can't follow the lid.")
+        "This Mac doesn't appear to have a lid angle sensor, so Softfold can't follow the lid.")
   private static let sensorDroppedMessage =
     String(
       localized:
-        "The lid sensor stopped responding. Hinge turns back on as soon as it reconnects.")
+        "The lid sensor stopped responding. Softfold turns back on as soon as it reconnects.")
   private let sensor = LidSensor()
   private var sensorMissing = false
   private let motion: LidMotion
@@ -213,7 +213,7 @@ final class LiveDesktop: NSObject, ObservableObject {
     guard hasScreenAccess else {
       needsPermission = true
       error = String(
-        localized: "Allow Hinge in Screen Recording settings, then quit and reopen it.")
+        localized: "Allow Softfold in Screen Recording settings, then quit and reopen it.")
       return
     }
     guard builtInScreenAvailable else {
@@ -296,7 +296,8 @@ final class LiveDesktop: NSObject, ObservableObject {
           throw DesktopError.message(
             String(
               localized:
-                "No desktop frames arrived. Check Screen Recording permission and reopen Hinge."))
+                "No desktop frames arrived. Check Screen Recording permission and reopen Softfold.")
+          )
         }
         try await Task.sleep(for: .milliseconds(10))
       }
@@ -340,7 +341,7 @@ final class LiveDesktop: NSObject, ObservableObject {
     let stream = SCStream(filter: filter, configuration: configuration, delegate: frames)
     try stream.addStreamOutput(
       frames, type: .screen,
-      sampleHandlerQueue: DispatchQueue(label: "hinge.capture", qos: .userInteractive))
+      sampleHandlerQueue: DispatchQueue(label: "softfold.capture", qos: .userInteractive))
     self.frames = frames
     self.stream = stream
     return stream
@@ -400,7 +401,7 @@ final class LiveDesktop: NSObject, ObservableObject {
     content.windows.filter {
       $0.owningApplication?.processID == ProcessInfo.processInfo.processIdentifier
         && $0.windowID != CGWindowID(overlay?.windowNumber ?? 0)
-        && $0.title != "Hinge Desktop Overlay"
+        && $0.title != "Softfold Desktop Overlay"
     }
   }
 
@@ -463,7 +464,7 @@ final class LiveDesktop: NSObject, ObservableObject {
       defer: false)
     window.isFloatingPanel = true
     window.becomesKeyOnlyIfNeeded = true
-    window.title = "Hinge Desktop Overlay"
+    window.title = "Softfold Desktop Overlay"
     window.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.screenSaverWindow)))
     window.collectionBehavior = [
       .canJoinAllSpaces, .fullScreenAuxiliary, .stationary, .ignoresCycle,
