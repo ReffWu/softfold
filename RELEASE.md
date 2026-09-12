@@ -12,7 +12,14 @@ Bump `CFBundleShortVersionString` and `CFBundleVersion` in `Info.plist` and comm
 make release
 ```
 
-`scripts/release.sh` archives the Release configuration with Xcode, signs it with the Developer ID Application certificate and the hardened runtime, submits it to Apple's notary service through the Xcode account, waits for the notarized app, checks it with `stapler` and `spctl`, and packs it into `dist/Softfold.dmg` with a SHA-256 checksum. The disk image is signed with the same identity.
+`scripts/release.sh` archives the Release configuration with Xcode, signs it with the Developer ID Application certificate and the hardened runtime, submits it to Apple's notary service through the Xcode account, waits for the notarized app, checks it with `stapler` and `spctl`, and packs it into `dist/Softfold.dmg` with a SHA-256 checksum.
+
+The Xcode account can notarize the app but not the disk image, so by default the disk image stays unsigned around the notarized, stapled app. A signed disk image that is not notarized would fail Gatekeeper, which is worse than an unsigned one. To sign, notarize and staple the disk image too, store a notary credential once and pass its name:
+
+```sh
+xcrun notarytool store-credentials Softfold --apple-id <apple-id> --team-id 37V2HFG7YT
+NOTARY_PROFILE=Softfold make release
+```
 
 ## Publish
 

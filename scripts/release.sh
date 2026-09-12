@@ -57,7 +57,11 @@ trap 'rm -rf "$stage"' EXIT
 ditto "$notarized/Softfold.app" "$stage/Softfold.app"
 ln -s /Applications "$stage/Applications"
 hdiutil create -quiet -ov -volname Softfold -srcfolder "$stage" -format UDZO dist/Softfold.dmg
-codesign --force --timestamp --sign "Developer ID Application: XIN SHENG WU ($team)" dist/Softfold.dmg
+if [ -n "${NOTARY_PROFILE:-}" ]; then
+  codesign --force --timestamp --sign "Developer ID Application: XIN SHENG WU ($team)" dist/Softfold.dmg
+  xcrun notarytool submit dist/Softfold.dmg --keychain-profile "$NOTARY_PROFILE" --wait
+  xcrun stapler staple dist/Softfold.dmg
+fi
 (cd dist && shasum -a 256 Softfold.dmg > Softfold.dmg.sha256)
 
 if [ "${1:-}" = "--publish" ]; then
@@ -65,4 +69,4 @@ if [ "${1:-}" = "--publish" ]; then
     --title "Softfold $version" --generate-notes --latest
 fi
 
-echo "dist/Softfold.dmg is signed, notarized and ready"
+echo "dist/Softfold.dmg is ready with a notarized Softfold.app inside"
