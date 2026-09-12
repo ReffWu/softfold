@@ -66,7 +66,8 @@ fi
 
 if [ "${1:-}" = "--publish" ]; then
   gh release create "v$version" dist/Softfold.dmg dist/Softfold.dmg.sha256 \
-    --title "Softfold $version" --generate-notes --latest
+    --title "Softfold $version" --generate-notes --target main --draft
+  gh release edit "v$version" --draft=false --latest
 fi
 
 echo "dist/Softfold.dmg is ready with a notarized Softfold.app inside"
