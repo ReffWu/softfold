@@ -13,7 +13,7 @@ struct MainView: View {
       VStack(spacing: 16) {
         effect
         position
-        PreferencesCard()
+        PreferencesCard(updater: updater)
         MoreAppsCard()
       }
       .padding(.horizontal, 20)

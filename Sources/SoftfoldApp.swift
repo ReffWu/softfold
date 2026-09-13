@@ -158,16 +158,31 @@ struct SoftfoldMenu: View {
 }
 
 @MainActor
-final class Updater: ObservableObject {
-  private let controller = SPUStandardUpdaterController(
-    startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+final class Updater: NSObject, ObservableObject, SPUUpdaterDelegate {
+  private var controller: SPUStandardUpdaterController?
+  @Published var installsAutomatically = true {
+    didSet { controller?.updater.automaticallyDownloadsUpdates = installsAutomatically }
+  }
 
-  init() {
+  override init() {
+    super.init()
+    let controller = SPUStandardUpdaterController(
+      startingUpdater: true, updaterDelegate: self, userDriverDelegate: nil)
     controller.updater.automaticallyChecksForUpdates = true
+    self.controller = controller
+    installsAutomatically = controller.updater.automaticallyDownloadsUpdates
   }
 
   func checkForUpdates() {
     NSApp.activate(ignoringOtherApps: true)
-    controller.checkForUpdates(nil)
+    controller?.checkForUpdates(nil)
+  }
+
+  nonisolated func updater(
+    _ updater: SPUUpdater, willInstallUpdateOnQuit item: SUAppcastItem,
+    immediateInstallationBlock: @escaping () -> Void
+  ) -> Bool {
+    DispatchQueue.main.async { immediateInstallationBlock() }
+    return true
   }
 }

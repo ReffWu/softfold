@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct PreferencesCard: View {
+  @ObservedObject var updater: Updater
   @State private var language = AppLanguage.current
   @State private var iconStyle = AppIconStyle.current
 
@@ -39,6 +40,15 @@ struct PreferencesCard: View {
         .labelsHidden()
         .fixedSize()
         .controlSize(.small)
+      }
+      SettingsDivider()
+      SettingsRow(
+        "arrow.triangle.2.circlepath", tint: .green,
+        title: String(localized: "Install updates automatically")
+      ) {
+        Toggle("Install updates automatically", isOn: $updater.installsAutomatically)
+          .toggleStyle(.switch)
+          .labelsHidden()
       }
     }
   }
