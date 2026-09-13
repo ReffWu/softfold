@@ -45,7 +45,10 @@ def lexer_for(path):
         return get_lexer_by_name("xml")
     if path.suffix == ".metal":
         return get_lexer_by_name("cpp")
-    if path.name == ".swift-format" or path.suffix == ".xcstrings":
+    if (
+        path.name in {".swift-format", "Package.resolved"}
+        or path.suffix == ".xcstrings"
+    ):
         return get_lexer_by_name("json")
     return get_lexer_for_filename(path.name)
 
@@ -127,7 +130,10 @@ def policy():
                     errors.extend(
                         comment_errors(path, block.group(3), code_lexer, first_line)
                     )
-        if path.suffix in {".json", ".xcstrings"} or path.name == ".swift-format":
+        if path.suffix in {".json", ".xcstrings"} or path.name in {
+            ".swift-format",
+            "Package.resolved",
+        }:
             try:
                 json.loads(text)
             except ValueError as error:

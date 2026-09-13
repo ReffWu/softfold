@@ -36,7 +36,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.utilities</string>
 	<key>LSMinimumSystemVersion</key>
@@ -49,6 +49,12 @@
 	<string>AppIcon</string>
 	<key>CFBundleIconName</key>
 	<string>AppIcon</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://github.com/ReffWu/softfold/releases/latest/download/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>wpcSIsJIvvZPj3jAoJuw8wl0+fVXS3K3ChODZ0W8EBI=</string>
 	<key>NSScreenCaptureUsageDescription</key>
 	<string>Softfold reads your display to animate your desktop as the lid closes. Frames stay in memory on your Mac.</string>
 </dict>

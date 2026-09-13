@@ -3,6 +3,7 @@ import SwiftUI
 
 struct SettingsView: View {
   @ObservedObject var desktop: LiveDesktop
+  @ObservedObject var updater: Updater
   @State private var loginItemStatus = SMAppService.mainApp.status
   @State private var loginItemError: String?
   @State private var language = AppLanguage.current
@@ -110,6 +111,22 @@ struct SettingsView: View {
 
   private var about: some View {
     SettingsGroup(title: String(localized: "About")) {
+      SettingsRow(
+        "arrow.triangle.2.circlepath", tint: .green,
+        title: String(localized: "Check for updates automatically")
+      ) {
+        Button("Check Now") { updater.checkForUpdates() }
+          .controlSize(.small)
+        Toggle(
+          "Check for updates automatically",
+          isOn: Binding(
+            get: { updater.checksAutomatically }, set: { updater.setChecksAutomatically($0) })
+        )
+        .toggleStyle(.switch)
+        .controlSize(.small)
+        .labelsHidden()
+      }
+      SettingsDivider()
       SettingsRow("app.badge", tint: .blue, title: String(localized: "App icon")) {
         Picker(
           "App icon",

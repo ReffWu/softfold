@@ -37,6 +37,7 @@ final class Navigator: ObservableObject {
 struct MainView: View {
   @ObservedObject var desktop: LiveDesktop
   @ObservedObject var navigator: Navigator
+  @ObservedObject var updater: Updater
 
   var body: some View {
     HStack(spacing: 0) {
@@ -46,7 +47,7 @@ struct MainView: View {
       Divider().ignoresSafeArea()
       switch navigator.page {
       case .effect: EffectPage(desktop: desktop)
-      case .general: SettingsView(desktop: desktop)
+      case .general: SettingsView(desktop: desktop, updater: updater)
       }
     }
     .frame(width: 640, height: 520)

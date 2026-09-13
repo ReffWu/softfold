@@ -8,13 +8,16 @@ archive="build/Softfold.xcarchive"
 options="build/export-options.plist"
 submitted="build/submitted"
 notarized="build/notarized"
+packages="build/SourcePackages"
+feed="build/feed"
 
-rm -rf "$archive" "$submitted" "$notarized" dist
+rm -rf "$archive" "$submitted" "$notarized" "$feed" dist
 mkdir -p build dist
 
 xcodebuild archive -quiet \
   -project Softfold.xcodeproj -scheme Softfold -configuration Release \
-  -archivePath "$archive" -destination 'generic/platform=macOS'
+  -archivePath "$archive" -destination 'generic/platform=macOS' \
+  -clonedSourcePackagesDirPath "$packages"
 
 cat > "$options" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
@@ -64,10 +67,16 @@ if [ -n "${NOTARY_PROFILE:-}" ]; then
 fi
 (cd dist && shasum -a 256 Softfold.dmg > Softfold.dmg.sha256)
 
+mkdir -p "$feed"
+cp dist/Softfold.dmg "$feed/"
+"$packages/artifacts/sparkle/Sparkle/bin/generate_appcast" "$feed" \
+  --download-url-prefix "https://github.com/ReffWu/softfold/releases/download/v$version/"
+grep -q "sparkle:edSignature" "$feed/appcast.xml"
+
 if [ "${1:-}" = "--publish" ]; then
-  gh release create "v$version" dist/Softfold.dmg dist/Softfold.dmg.sha256 \
+  gh release create "v$version" dist/Softfold.dmg dist/Softfold.dmg.sha256 "$feed/appcast.xml" \
     --title "Softfold $version" --generate-notes --target main --draft
   gh release edit "v$version" --draft=false --latest
 fi
 
-echo "dist/Softfold.dmg is ready with a notarized Softfold.app inside"
+echo "dist/Softfold.dmg and $feed/appcast.xml are ready for Softfold $version"

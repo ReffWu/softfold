@@ -1,5 +1,6 @@
 import AppKit
 import Carbon.HIToolbox
+import Sparkle
 import SwiftUI
 
 @main
@@ -7,10 +8,11 @@ struct SoftfoldApp: App {
   @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
   @StateObject private var desktop = LiveDesktop()
   @StateObject private var navigator = Navigator()
+  @StateObject private var updater = Updater()
 
   var body: some Scene {
     Window("Softfold", id: "main") {
-      MainView(desktop: desktop, navigator: navigator)
+      MainView(desktop: desktop, navigator: navigator, updater: updater)
         .onAppear {
           delegate.onTerminate = { desktop.shutDown() }
           delegate.installToggleHotKey {
@@ -31,11 +33,14 @@ struct SoftfoldApp: App {
           "Softfold \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")"
         )
       }
+      CommandGroup(after: .appInfo) {
+        Button("Check for Updates…") { updater.checkForUpdates() }
+      }
     }
     MenuBarExtra(
       "Softfold", systemImage: desktop.isActive ? "laptopcomputer.and.arrow.down" : "laptopcomputer"
     ) {
-      SoftfoldMenu(desktop: desktop, navigator: navigator)
+      SoftfoldMenu(desktop: desktop, navigator: navigator, updater: updater)
     }
   }
 }
@@ -105,6 +110,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 struct SoftfoldMenu: View {
   @ObservedObject var desktop: LiveDesktop
   @ObservedObject var navigator: Navigator
+  @ObservedObject var updater: Updater
   @Environment(\.openWindow) private var openWindow
 
   var body: some View {
@@ -131,6 +137,28 @@ struct SoftfoldMenu: View {
       openWindow(id: "main")
       NSApp.activate(ignoringOtherApps: true)
     }.keyboardShortcut(",")
+    Button("Check for Updates…") { updater.checkForUpdates() }
     Button("Quit Softfold") { NSApp.terminate(nil) }.keyboardShortcut("q")
+  }
+}
+
+@MainActor
+final class Updater: ObservableObject {
+  private let controller = SPUStandardUpdaterController(
+    startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
+  @Published private(set) var checksAutomatically: Bool
+
+  init() {
+    checksAutomatically = controller.updater.automaticallyChecksForUpdates
+  }
+
+  func setChecksAutomatically(_ enabled: Bool) {
+    controller.updater.automaticallyChecksForUpdates = enabled
+    checksAutomatically = enabled
+  }
+
+  func checkForUpdates() {
+    NSApp.activate(ignoringOtherApps: true)
+    controller.checkForUpdates(nil)
   }
 }

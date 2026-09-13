@@ -10,6 +10,36 @@
 	<string>56</string>
 	<key>objects</key>
 	<dict>
+		<key>5F1A9C2E7B3D4E6F8A0B1C21</key>
+		<dict>
+			<key>isa</key>
+			<string>XCRemoteSwiftPackageReference</string>
+			<key>repositoryURL</key>
+			<string>https://github.com/sparkle-project/Sparkle</string>
+			<key>requirement</key>
+			<dict>
+				<key>kind</key>
+				<string>upToNextMajorVersion</string>
+				<key>minimumVersion</key>
+				<string>2.6.0</string>
+			</dict>
+		</dict>
+		<key>5F1A9C2E7B3D4E6F8A0B1C22</key>
+		<dict>
+			<key>isa</key>
+			<string>XCSwiftPackageProductDependency</string>
+			<key>package</key>
+			<string>5F1A9C2E7B3D4E6F8A0B1C21</string>
+			<key>productName</key>
+			<string>Sparkle</string>
+		</dict>
+		<key>5F1A9C2E7B3D4E6F8A0B1C23</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>productRef</key>
+			<string>5F1A9C2E7B3D4E6F8A0B1C22</string>
+		</dict>
 		<key>D07A26CE17EABF394176C507</key>
 		<dict>
 			<key>isa</key>
@@ -336,7 +366,9 @@
 			<key>buildActionMask</key>
 			<string>2147483647</string>
 			<key>files</key>
-			<array/>
+			<array>
+				<string>5F1A9C2E7B3D4E6F8A0B1C23</string>
+			</array>
 			<key>runOnlyForDeploymentPostprocessing</key>
 			<string>0</string>
 		</dict>
@@ -510,6 +542,10 @@
 			<array/>
 			<key>name</key>
 			<string>Softfold</string>
+			<key>packageProductDependencies</key>
+			<array>
+				<string>5F1A9C2E7B3D4E6F8A0B1C22</string>
+			</array>
 			<key>productName</key>
 			<string>Softfold</string>
 			<key>productReference</key>
@@ -555,6 +591,10 @@
 				<string>vi</string>
 				<string>zh-Hans</string>
 				<string>zh-Hant</string>
+			</array>
+			<key>packageReferences</key>
+			<array>
+				<string>5F1A9C2E7B3D4E6F8A0B1C21</string>
 			</array>
 			<key>mainGroup</key>
 			<string>B28B7AF69320201D1CF206EB</string>

@@ -21,17 +21,23 @@ xcrun notarytool store-credentials Softfold --apple-id <apple-id> --team-id 37V2
 NOTARY_PROFILE=Softfold make release
 ```
 
+## Updates
+
+Softfold updates itself with [Sparkle](https://sparkle-project.org). The app reads `appcast.xml` from the latest GitHub release, so publishing a release is what publishes an update. After notarization, `scripts/release.sh` runs Sparkle's `generate_appcast`, which signs the disk image with the EdDSA private key stored in the login keychain. The matching public key is `SUPublicEDKey` in `Info.plist`. Never replace that key, or every copy already installed will reject new updates.
+
+Every release needs a higher `CFBundleVersion` than the one before, since Sparkle compares build numbers.
+
 ## Publish
 
 ```sh
 scripts/release.sh --publish
 ```
 
-This does everything above and then creates the GitHub release `v<version>` with the disk image and its checksum, marked as latest. The README download links point at `releases/latest`, so they follow the new release automatically.
+This does everything above and then creates the GitHub release `v<version>` with the disk image, its checksum and `appcast.xml`, marked as latest. The README download links point at `releases/latest`, so they follow the new release automatically.
 
 ## Local builds
 
-`make build` compiles `build/Softfold.app` with `swiftc`, signed with an Apple Development identity when one is installed and ad-hoc otherwise. `scripts/package.sh` wraps that build in `dist/Softfold.dmg` without notarization, for quick testing.
+`make build` builds `build/Softfold.app` with Xcode, including the Sparkle package, signed with an Apple Development identity when one is installed and ad-hoc otherwise. `scripts/package.sh` wraps that build in `dist/Softfold.dmg` without notarization, for quick testing.
 
 ## App icon
 
