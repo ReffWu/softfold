@@ -43,6 +43,12 @@ struct PreferencesCard: View {
     }
   }
 
+  private static let iconSize: CGFloat = 46
+  private static let iconDrawn: CGFloat = iconSize * 1024 / 980
+  private static let iconCorner: CGFloat = iconSize * 262 / 980
+  private static let ringGap: CGFloat = 2.5
+  private static let ringWidth: CGFloat = 2.5
+
   private func iconChoice(_ style: AppIconStyle, label: Text) -> some View {
     let selected = iconStyle == style
     return Button {
@@ -52,11 +58,19 @@ struct PreferencesCard: View {
       VStack(spacing: 4) {
         Image(nsImage: NSImage(named: "AppIcon-\(style.rawValue)") ?? NSImage())
           .resizable()
-          .frame(width: 48, height: 48)
-          .padding(3)
+          .frame(width: Self.iconDrawn, height: Self.iconDrawn)
+          .frame(width: Self.iconSize, height: Self.iconSize)
+          .clipShape(RoundedRectangle(cornerRadius: Self.iconCorner, style: .circular))
           .overlay(
-            RoundedRectangle(cornerRadius: 13, style: .continuous)
-              .strokeBorder(selected ? Color.accentColor : .clear, lineWidth: 2.5)
+            RoundedRectangle(cornerRadius: Self.iconCorner, style: .circular)
+              .strokeBorder(Color.primary.opacity(0.1), lineWidth: 1)
+          )
+          .padding(Self.ringGap + Self.ringWidth)
+          .overlay(
+            RoundedRectangle(
+              cornerRadius: Self.iconCorner + Self.ringGap + Self.ringWidth, style: .circular
+            )
+            .strokeBorder(selected ? Color.accentColor : .clear, lineWidth: Self.ringWidth)
           )
         label
           .font(.system(size: 11, weight: selected ? .semibold : .regular))
