@@ -74,9 +74,9 @@ cp dist/Softfold.dmg "$feed/"
 grep -q "sparkle:edSignature" "$feed/appcast.xml"
 
 if [ "${1:-}" = "--publish" ]; then
-  gh release create "v$version" dist/Softfold.dmg dist/Softfold.dmg.sha256 "$feed/appcast.xml" \
+  gh release create -R ReffWu/softfold "v$version" dist/Softfold.dmg dist/Softfold.dmg.sha256 "$feed/appcast.xml" \
     --title "Softfold $version" --generate-notes --target main --draft
-  gh release edit "v$version" --draft=false --latest
+  gh release edit -R ReffWu/softfold "v$version" --draft=false --latest
 fi
 
 echo "dist/Softfold.dmg and $feed/appcast.xml are ready for Softfold $version"
