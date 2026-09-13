@@ -33,10 +33,11 @@ struct SoftfoldApp: App {
         Button("Check for Updates…") { updater.checkForUpdates() }
       }
     }
-    MenuBarExtra(
-      "Softfold", systemImage: desktop.isActive ? "laptopcomputer.and.arrow.down" : "laptopcomputer"
-    ) {
+    MenuBarExtra {
       SoftfoldMenu(desktop: desktop, updater: updater)
+    } label: {
+      Image(desktop.isActive ? "MenuBarIconActive" : "MenuBarIcon")
+        .accessibilityLabel("Softfold")
     }
   }
 }
