@@ -237,7 +237,7 @@ final class MoreApps: ObservableObject {
   }
 
   private static let catalogURL = URL(
-    string: "https://reffwu.github.io/artifacts/apps/catalog.json")
+    string: "https://reffwu.github.io/apps/catalog.json")
   private static let freshFor: TimeInterval = 24 * 60 * 60
 
   @Published private(set) var entries: [Entry] = []

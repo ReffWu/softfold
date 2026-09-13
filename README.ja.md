@@ -6,13 +6,22 @@
 
 **ふたを閉じると、デスクトップがやわらかく折りたたまれる。**
 
+<a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-ja-dark.png">
+    <img src="docs/readme/download-ja-light.png" height="52" alt="Mac 版をダウンロード">
+  </picture>
+</a>
+
+<sub>無料 · Apple シリコン搭載 MacBook · macOS 14 以降 · Apple による公証済み</sub>
+
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · 日本語 · [한국어](README.ko.md)
 
-[![macOS 14+](https://img.shields.io/badge/macOS-14%2B-blue?logo=apple&style=flat-square)](#対応している-macbook)
-[![Apple silicon](https://img.shields.io/badge/Apple%20silicon-arm64-black?style=flat-square)](#対応している-macbook)
-[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
-
 </div>
+
+<p align="center">
+  <img src="docs/readme/hero-ja.png" alt="ふたを閉じると、デスクトップがやわらかく折りたたまれる。">
+</p>
 
 ---
 

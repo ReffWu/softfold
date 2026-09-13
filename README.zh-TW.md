@@ -6,13 +6,22 @@
 
 **闔上螢幕，桌面溫柔地摺疊起來。**
 
+<a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-zh-Hant-dark.png">
+    <img src="docs/readme/download-zh-Hant-light.png" height="52" alt="下載 Mac 版">
+  </picture>
+</a>
+
+<sub>免費 · Apple 晶片 MacBook · macOS 14 或更新版本 · 經 Apple 公證</sub>
+
 [English](README.md) · [简体中文](README.zh-CN.md) · 繁體中文 · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-[![macOS 14+](https://img.shields.io/badge/macOS-14%2B-blue?logo=apple&style=flat-square)](#哪些-macbook-可以使用)
-[![Apple silicon](https://img.shields.io/badge/Apple%20silicon-arm64-black?style=flat-square)](#哪些-macbook-可以使用)
-[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
-
 </div>
+
+<p align="center">
+  <img src="docs/readme/hero-zh-Hant.png" alt="闔上螢幕，桌面溫柔地摺疊起來。">
+</p>
 
 ---
 

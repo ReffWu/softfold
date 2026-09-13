@@ -6,13 +6,22 @@
 
 **合上屏幕，桌面温柔地折叠起来。**
 
+<a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-zh-Hans-dark.png">
+    <img src="docs/readme/download-zh-Hans-light.png" height="52" alt="下载 Mac 版">
+  </picture>
+</a>
+
+<sub>免费 · Apple 芯片 MacBook · macOS 14 或更新版本 · 经 Apple 公证</sub>
+
 [English](README.md) · 简体中文 · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-[![macOS 14+](https://img.shields.io/badge/macOS-14%2B-blue?logo=apple&style=flat-square)](#哪些-macbook-可以用)
-[![Apple silicon](https://img.shields.io/badge/Apple%20silicon-arm64-black?style=flat-square)](#哪些-macbook-可以用)
-[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
-
 </div>
+
+<p align="center">
+  <img src="docs/readme/hero-zh-Hans.png" alt="合上屏幕，桌面温柔地折叠起来。">
+</p>
 
 ---
 

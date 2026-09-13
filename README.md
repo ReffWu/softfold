@@ -6,13 +6,22 @@
 
 **Close the lid, and your desktop folds away softly.**
 
+<a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
+    <img src="docs/readme/download-en-light.png" height="52" alt="Download for Mac">
+  </picture>
+</a>
+
+<sub>Free · MacBook with Apple silicon · macOS 14 or later · Notarized by Apple</sub>
+
 English · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
-[![macOS 14+](https://img.shields.io/badge/macOS-14%2B-blue?logo=apple&style=flat-square)](#which-macbooks-work)
-[![Apple silicon](https://img.shields.io/badge/Apple%20silicon-arm64-black?style=flat-square)](#which-macbooks-work)
-[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
-
 </div>
+
+<p align="center">
+  <img src="docs/readme/hero-en.png" alt="Close the lid, and your desktop folds away softly.">
+</p>
 
 ---
 
