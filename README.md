@@ -22,9 +22,9 @@ Softfold follows your MacBook's hinge. As you lower the screen, your live deskto
 
 [Download Softfold.dmg](https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg), open it and drag Softfold into Applications. The app is signed with a Developer ID and notarized by Apple, so it opens like any other app.
 
-On first launch, allow Screen Recording, reopen Softfold if macOS asks, and turn it on. It turns itself back on the next time you open it.
+On first launch, allow Screen Recording, reopen Softfold if macOS asks, and turn it on. It turns itself back on the next time you open it, and starts with your Mac from then on.
 
-The starting open angle is 100°. Prefer something else? Get comfortable and click **Set open position**. Softfold remembers it. <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd> turns it on or off from anywhere. Prefer a light frame around the icon? Switch it under **General > About > App icon**.
+The starting open angle is 100°. Prefer something else? Get comfortable and click **Set open position**. Softfold remembers it. <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd> turns it on or off from anywhere. Prefer a light frame around the icon? Switch it under **General > Look > App icon**.
 
 ## Which MacBooks work
 

@@ -37,7 +37,6 @@ final class Navigator: ObservableObject {
 struct MainView: View {
   @ObservedObject var desktop: LiveDesktop
   @ObservedObject var navigator: Navigator
-  @ObservedObject var updater: Updater
 
   var body: some View {
     HStack(spacing: 0) {
@@ -47,7 +46,7 @@ struct MainView: View {
       Divider().ignoresSafeArea()
       switch navigator.page {
       case .effect: EffectPage(desktop: desktop)
-      case .general: SettingsView(desktop: desktop, updater: updater)
+      case .general: SettingsView()
       }
     }
     .frame(width: 640, height: 520)
@@ -85,10 +84,16 @@ struct MainView: View {
 
 private struct EffectPage: View {
   @ObservedObject var desktop: LiveDesktop
+  @State private var screenRecordingAllowed = CGPreflightScreenCaptureAccess()
 
   var body: some View {
     SettingsPage {
-      SettingsGroup(title: "Softfold") {
+      SettingsGroup(
+        title: "Softfold",
+        footnote: String(
+          localized:
+            "Softfold reads your display only to draw the fold. Frames stay in memory on your Mac.")
+      ) {
         SettingsRow(
           "power", tint: desktop.isActive ? .green : .gray, title: title, subtitle: subtitle
         ) {
@@ -101,6 +106,17 @@ private struct EffectPage: View {
           .labelsHidden()
           .disabled(desktop.isStarting)
         }
+        if !screenRecordingAllowed, !desktop.needsPermission {
+          SettingsDivider()
+          SettingsRow(
+            "rectangle.dashed.badge.record", tint: .red,
+            title: String(localized: "Screen Recording"),
+            subtitle: String(localized: "Needed to show your live desktop")
+          ) {
+            Button("Open Settings", action: openScreenRecordingSettings)
+              .controlSize(.small)
+          }
+        }
         if let error = desktop.error {
           SettingsDivider()
           SettingsRow("exclamationmark.triangle.fill", tint: .orange, title: error) {
@@ -111,7 +127,6 @@ private struct EffectPage: View {
           }
         }
       }
-      look
       SettingsGroup(
         title: String(localized: "Open position"),
         footnote: String(
@@ -130,87 +145,10 @@ private struct EffectPage: View {
         }
       }
     }
-  }
-
-  private var look: some View {
-    SettingsGroup(title: String(localized: "Look")) {
-      SettingsRow(
-        "slider.horizontal.3", tint: .orange, title: String(localized: "Effect strength"),
-        subtitle: strength
-      ) {
-        HStack(spacing: 8) {
-          Slider(
-            value: Binding(
-              get: { desktop.effectStrength },
-              set: { desktop.setEffectStrength($0) }),
-            in: 0.25...1, step: 0.05
-          )
-          .frame(width: 110)
-          .accessibilityLabel("Effect strength")
-          .accessibilityValue(strength)
-          Button {
-            desktop.setEffectStrength(1)
-          } label: {
-            Image(systemName: "arrow.counterclockwise")
-          }
-          .controlSize(.small)
-          .disabled(desktop.effectStrength == 1)
-          .help(String(localized: "Reset effect strength to 100%"))
-          .accessibilityLabel("Reset effect strength to default")
-        }
-      }
-      SettingsDivider()
-      SettingsRow(
-        "square.lefthalf.filled", tint: .indigo, title: String(localized: "Sides"),
-        subtitle: String(localized: "Beside the folded desktop")
-      ) {
-        Picker(
-          "Sides",
-          selection: Binding(get: { desktop.sideFill }, set: { desktop.setSideFill($0) })
-        ) {
-          Text("Blur").tag(SideFill.blur)
-          Text("Black").tag(SideFill.black)
-        }
-        .pickerStyle(.segmented)
-        .labelsHidden()
-        .fixedSize()
-        .controlSize(.small)
-      }
-      SettingsDivider()
-      SettingsRow(
-        "crop", tint: .teal, title: String(localized: "Crop from the top"),
-        subtitle: String(localized: "The top of the desktop slides out of view as the lid closes.")
-      ) {
-        Toggle(
-          "Crop from the top",
-          isOn: Binding(get: { desktop.cropsTop }, set: { desktop.setCropsTop($0) })
-        )
-        .toggleStyle(.switch)
-        .controlSize(.small)
-        .labelsHidden()
-      }
-      SettingsDivider()
-      SettingsRow(
-        "camera.aperture", tint: .purple, title: String(localized: "Blur by distance"),
-        subtitle: desktop.blursByDistance
-          ? String(
-            localized:
-              "Blur grows with distance from the open screen, so the hinge edge stays sharp.")
-          : String(localized: "Blur builds toward the top and fades out near the hinge.")
-      ) {
-        Toggle(
-          "Blur by distance",
-          isOn: Binding(get: { desktop.blursByDistance }, set: { desktop.setBlursByDistance($0) })
-        )
-        .toggleStyle(.switch)
-        .controlSize(.small)
-        .labelsHidden()
-      }
+    .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification))
+    { _ in
+      screenRecordingAllowed = CGPreflightScreenCaptureAccess()
     }
-  }
-
-  private var strength: String {
-    desktop.effectStrength.formatted(.percent.precision(.fractionLength(0)))
   }
 
   private var title: String {

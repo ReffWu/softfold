@@ -12,7 +12,7 @@ struct SoftfoldApp: App {
 
   var body: some Scene {
     Window("Softfold", id: "main") {
-      MainView(desktop: desktop, navigator: navigator, updater: updater)
+      MainView(desktop: desktop, navigator: navigator)
         .onAppear {
           delegate.onTerminate = { desktop.shutDown() }
           delegate.installToggleHotKey {
@@ -146,15 +146,9 @@ struct SoftfoldMenu: View {
 final class Updater: ObservableObject {
   private let controller = SPUStandardUpdaterController(
     startingUpdater: true, updaterDelegate: nil, userDriverDelegate: nil)
-  @Published private(set) var checksAutomatically: Bool
 
   init() {
-    checksAutomatically = controller.updater.automaticallyChecksForUpdates
-  }
-
-  func setChecksAutomatically(_ enabled: Bool) {
-    controller.updater.automaticallyChecksForUpdates = enabled
-    checksAutomatically = enabled
+    controller.updater.automaticallyChecksForUpdates = true
   }
 
   func checkForUpdates() {

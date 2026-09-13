@@ -1,5 +1,6 @@
 import MetalKit
 import ScreenCaptureKit
+import ServiceManagement
 import SwiftUI
 
 final class ScreenFrames: NSObject, SCStreamOutput, SCStreamDelegate {
@@ -35,10 +36,6 @@ final class LiveDesktop: NSObject, ObservableObject {
   @Published private(set) var isWaitingForDisplay = false
   @Published private(set) var sensorAvailable = false
   @Published private(set) var openAngle: Double
-  @Published private(set) var effectStrength: Double
-  @Published private(set) var sideFill: SideFill
-  @Published private(set) var cropsTop: Bool
-  @Published private(set) var blursByDistance: Bool
   @Published private(set) var error: String?
   @Published private(set) var needsPermission = false
   @Published private(set) var isEnabled = UserDefaults.standard.bool(forKey: "effectEnabled")
@@ -75,14 +72,7 @@ final class LiveDesktop: NSObject, ObservableObject {
   override init() {
     let savedAngle = UserDefaults.standard.object(forKey: "openAngle") as? Double ?? 100
     let openAngle = savedAngle.isFinite && (25...180).contains(savedAngle) ? savedAngle : 100
-    let savedStrength = UserDefaults.standard.object(forKey: "effectStrength") as? Double ?? 1
-    let effectStrength =
-      savedStrength.isFinite && (0.25...1).contains(savedStrength) ? savedStrength : 1
     self.openAngle = openAngle
-    self.effectStrength = effectStrength
-    sideFill = UserDefaults.standard.string(forKey: "sideFill").flatMap(SideFill.init) ?? .blur
-    cropsTop = UserDefaults.standard.object(forKey: "cropsTop") as? Bool ?? true
-    blursByDistance = UserDefaults.standard.object(forKey: "blursByDistance") as? Bool ?? true
     motion = LidMotion(openAngle: openAngle)
     super.init()
     let motion = motion
@@ -157,7 +147,14 @@ final class LiveDesktop: NSObject, ObservableObject {
     isEnabled = enabled
     restoringAtLaunch = false
     UserDefaults.standard.set(enabled, forKey: "effectEnabled")
+    if enabled { addLoginItemOnce() }
     if enabled { Task { await start() } } else { stop() }
+  }
+
+  private func addLoginItemOnce() {
+    guard !UserDefaults.standard.bool(forKey: "addedLoginItem") else { return }
+    UserDefaults.standard.set(true, forKey: "addedLoginItem")
+    try? SMAppService.mainApp.register()
   }
 
   func setOpenPosition() {
@@ -170,33 +167,6 @@ final class LiveDesktop: NSObject, ObservableObject {
     error = nil
     displayLink?.isPaused = true
     metalView?.draw()
-  }
-
-  func setEffectStrength(_ value: Double) {
-    let strength = value.isFinite ? min(max(value, 0.25), 1) : 1
-    guard strength != effectStrength else { return }
-    effectStrength = strength
-    UserDefaults.standard.set(strength, forKey: "effectStrength")
-    renderer?.effectStrength = Float(strength)
-    NSHapticFeedbackManager.defaultPerformer.perform(.levelChange, performanceTime: .now)
-  }
-
-  func setSideFill(_ fill: SideFill) {
-    sideFill = fill
-    UserDefaults.standard.set(fill.rawValue, forKey: "sideFill")
-    renderer?.sideFill = fill
-  }
-
-  func setCropsTop(_ enabled: Bool) {
-    cropsTop = enabled
-    UserDefaults.standard.set(enabled, forKey: "cropsTop")
-    renderer?.cropsTop = enabled
-  }
-
-  func setBlursByDistance(_ enabled: Bool) {
-    blursByDistance = enabled
-    UserDefaults.standard.set(enabled, forKey: "blursByDistance")
-    renderer?.blursByDistance = enabled
   }
 
   func start(promptForPermission: Bool = true) async {
@@ -227,10 +197,6 @@ final class LiveDesktop: NSObject, ObservableObject {
     self.session = session
     do {
       let renderer = try DesktopRenderer(resources: .main, motion: motion)
-      renderer.effectStrength = Float(effectStrength)
-      renderer.sideFill = sideFill
-      renderer.cropsTop = cropsTop
-      renderer.blursByDistance = blursByDistance
       let content = try await SCShareableContent.excludingDesktopWindows(
         false, onScreenWindowsOnly: false)
       guard self.session == session else { return }

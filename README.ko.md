@@ -22,9 +22,9 @@ Softfold는 MacBook의 힌지를 따라 움직입니다. 화면을 내리면 실
 
 [Softfold.dmg 다운로드](https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg) 후 열어서 Softfold를 응용 프로그램 폴더로 드래그하세요. Developer ID로 서명되고 Apple의 공증을 받았기 때문에 다른 앱처럼 바로 열립니다.
 
-처음 실행할 때 화면 기록을 허용하고, macOS가 요청하면 Softfold를 다시 연 뒤 켜세요. 다음에 열 때는 자동으로 다시 켜집니다.
+처음 실행할 때 화면 기록을 허용하고, macOS가 요청하면 Softfold를 다시 연 뒤 켜세요. 이후에는 Mac을 켤 때 자동으로 실행되고 켜진 상태를 유지합니다.
 
-기본 열림 각도는 100°입니다. 다른 각도가 좋다면 편한 자세에서 **열림 위치 설정**을 클릭하세요. Softfold가 기억합니다. <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd>로 어디서든 켜고 끌 수 있습니다. 흰색 테두리 아이콘을 원하면 **일반 > 정보 > 앱 아이콘**에서 바꿀 수 있습니다.
+기본 열림 각도는 100°입니다. 다른 각도가 좋다면 편한 자세에서 **열림 위치 설정**을 클릭하세요. Softfold가 기억합니다. <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd>로 어디서든 켜고 끌 수 있습니다. 흰색 테두리 아이콘을 원하면 **일반 > 모양 > 앱 아이콘**에서 바꿀 수 있습니다.
 
 ## 지원하는 MacBook
 

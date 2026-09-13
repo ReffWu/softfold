@@ -22,9 +22,9 @@ Softfold 会跟着 MacBook 的铰链一起动。你把屏幕往下合，实时�
 
 [下载 Softfold.dmg](https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg)，打开后把 Softfold 拖进「应用程序」。App 使用 Developer ID 签名并经过 Apple 公证，像其他 App 一样双击就能打开。
 
-第一次启动时允许「屏幕录制」，如果 macOS 要求就重新打开 Softfold，然后把它开启。下次打开时它会自动恢复开启状态。
+第一次启动时允许「屏幕录制」，如果 macOS 要求就重新打开 Softfold，然后把它开启。之后它会随 Mac 自动启动，并保持开启状态。
 
-默认的打开角度是 100°。想换一个？调到你舒服的角度，点 **设为打开角度**，Softfold 会记住。在任何地方按 <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd> 都能开启或关闭它。想要白色外框的图标？在 **通用 > 关于 > App 图标** 里切换。
+默认的打开角度是 100°。想换一个？调到你舒服的角度，点 **设为打开角度**，Softfold 会记住。在任何地方按 <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd> 都能开启或关闭它。想要白色外框的图标？在 **通用 > 外观 > App 图标** 里切换。
 
 ## 哪些 MacBook 可以用
 

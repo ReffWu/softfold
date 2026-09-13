@@ -8,13 +8,6 @@ struct FoldParameters {
   var blurInset: Float = 0
   var blurSpan: Float = 1
   var taper = DesktopRenderer.taper
-  var crop: Float = 0
-  var depth: Float = 0
-}
-
-enum SideFill: String {
-  case blur
-  case black
 }
 
 final class DesktopRenderer: NSObject, MTKViewDelegate {
@@ -23,13 +16,9 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
   let queue: MTLCommandQueue
   private let pipeline: MTLRenderPipelineState
   private let scale: MPSImageBilinearScale
-  private let extend: MPSImageBilinearScale
   private var blurKernels = [MPSImageGaussianBlur]()
-  private var flatKernel: MPSImageGaussianBlur?
   private var blurTextures = [MTLTexture]()
   private var smallTexture: MTLTexture?
-  private var tinyTexture: MTLTexture?
-  private var flatTexture: MTLTexture?
   private var sideTexture: MTLTexture?
   private var blurPadding = 0
   private var textureCache: CVMetalTextureCache?
@@ -41,12 +30,6 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
   private var blurredGeneration: UInt64?
   private let motion: LidMotion
   private var wasPresented = false
-  var effectStrength: Float = 1
-  var cropsTop = true
-  var blursByDistance = true
-  var sideFill = SideFill.blur {
-    didSet { if sideFill != oldValue { blurredGeneration = nil } }
-  }
   var presentationTime: CFTimeInterval?
   var onPresentation: ((Error?) -> Void)?
   var onRest: (() -> Void)?
@@ -60,8 +43,6 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
     self.queue = queue
     self.motion = motion
     self.scale = MPSImageBilinearScale(device: device)
-    self.extend = MPSImageBilinearScale(device: device)
-    self.extend.edgeMode = .clamp
     guard let sourceURL = resources.url(forResource: "Fold", withExtension: "metal") else {
       throw DesktopError.message(
         String(localized: "The desktop renderer is missing. Rebuild the app."))
@@ -163,11 +144,6 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
     descriptor.storageMode = .private
     descriptor.usage = [.shaderRead, .shaderWrite]
     guard let small = device.makeTexture(descriptor: descriptor) else { return false }
-    descriptor.width = max(smallWidth / 4, 1)
-    descriptor.height = max(smallHeight / 4, 1)
-    guard let tiny = device.makeTexture(descriptor: descriptor),
-      let flat = device.makeTexture(descriptor: descriptor)
-    else { return false }
     descriptor.width = smallWidth + 2 * padding
     descriptor.height = smallHeight
     descriptor.usage = [.shaderRead, .shaderWrite, .renderTarget]
@@ -177,17 +153,14 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
       textures.append(texture)
     }
     smallTexture = small
-    tinyTexture = tiny
-    flatTexture = flat
     sideTexture = textures.removeLast()
     blurPadding = padding
     blurTextures = textures
-    blurKernels = [6.0, 16.0, 36.0, 9.0].map {
+    blurKernels = [6.0, 16.0, 36.0].map {
       let kernel = MPSImageGaussianBlur(device: device, sigma: Float($0 * Double(smallWidth) / 786))
       kernel.edgeMode = .clamp
       return kernel
     }
-    flatKernel = blurKernels.removeLast()
     blurredGeneration = nil
     return true
   }
@@ -195,26 +168,7 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
   private func encodeBlur(command: MTLCommandBuffer, texture: MTLTexture) -> Bool {
     guard let smallTexture, let sideTexture else { return false }
     scale.encode(commandBuffer: command, sourceTexture: texture, destinationTexture: smallTexture)
-    switch sideFill {
-    case .black:
-      guard encodeClear(command: command, texture: sideTexture) else { return false }
-    case .blur:
-      guard let tinyTexture, let flatTexture, let flatKernel else { return false }
-      scale.encode(
-        commandBuffer: command, sourceTexture: smallTexture, destinationTexture: tinyTexture)
-      flatKernel.encode(
-        commandBuffer: command, sourceTexture: tinyTexture, destinationTexture: flatTexture)
-      let transform = MPSScaleTransform(
-        scaleX: Double(smallTexture.width) / Double(flatTexture.width),
-        scaleY: Double(smallTexture.height) / Double(flatTexture.height),
-        translateX: Double(blurPadding), translateY: 0)
-      withUnsafePointer(to: transform) { transform in
-        extend.scaleTransform = transform
-        extend.encode(
-          commandBuffer: command, sourceTexture: flatTexture, destinationTexture: sideTexture)
-      }
-      extend.scaleTransform = nil
-    }
+    guard encodeClear(command: command, texture: sideTexture) else { return false }
     guard let blit = command.makeBlitCommandEncoder() else { return false }
     blit.copy(
       from: smallTexture, sourceSlice: 0, sourceLevel: 0, sourceOrigin: MTLOrigin(),
@@ -243,7 +197,7 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
   func draw(in view: MTKView) {
     let time = presentationTime ?? CACurrentMediaTime()
     presentationTime = nil
-    let progress = motion.sample(at: time) * effectStrength
+    let progress = motion.sample(at: time)
     guard progress > 0 else {
       clear(view)
       return
@@ -307,8 +261,7 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
     let paddedWidth = Float(sideTexture?.width ?? 1)
     var parameters = FoldParameters(
       progress: progress, opacity: opacity, blurInset: Float(blurPadding) / paddedWidth,
-      blurSpan: (paddedWidth - Float(2 * blurPadding)) / paddedWidth, crop: cropsTop ? 1 : 0,
-      depth: blursByDistance ? 1 : 0)
+      blurSpan: (paddedWidth - Float(2 * blurPadding)) / paddedWidth)
     encoder.setRenderPipelineState(pipeline)
     encoder.setVertexBytes(&parameters, length: MemoryLayout<FoldParameters>.stride, index: 0)
     encoder.setFragmentBytes(&parameters, length: MemoryLayout<FoldParameters>.stride, index: 0)

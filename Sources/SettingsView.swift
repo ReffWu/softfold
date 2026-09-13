@@ -1,188 +1,85 @@
-import ServiceManagement
 import SwiftUI
 
 struct SettingsView: View {
-  @ObservedObject var desktop: LiveDesktop
-  @ObservedObject var updater: Updater
-  @State private var loginItemStatus = SMAppService.mainApp.status
-  @State private var loginItemError: String?
   @State private var language = AppLanguage.current
   @State private var iconStyle = AppIconStyle.current
 
   var body: some View {
     SettingsPage {
-      controls
-      status
-      about
-    }
-    .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification))
-    { _ in
-      loginItemStatus = SMAppService.mainApp.status
-    }
-  }
-
-  private var controls: some View {
-    SettingsGroup(title: String(localized: "Controls")) {
-      SettingsRow(
-        "power", tint: .blue, title: String(localized: "Launch at login"),
-        subtitle: loginItemError ?? loginItemNote
-      ) {
-        if loginItemStatus == .requiresApproval {
-          Button("Open Login Items") { SMAppService.openSystemSettingsLoginItems() }
-            .controlSize(.small)
+      SettingsGroup(title: String(localized: "Look")) {
+        SettingsRow("app.badge", tint: .blue, title: String(localized: "App icon")) {
+          HStack(spacing: 12) {
+            iconChoice(.dark, label: Text("Dark"))
+            iconChoice(.light, label: Text("Light"))
+          }
         }
-        Toggle("Launch at login", isOn: launchAtLogin)
-          .toggleStyle(.switch)
-          .controlSize(.small)
+      }
+      SettingsGroup(title: String(localized: "Controls")) {
+        SettingsRow(
+          "globe", tint: .indigo, title: String(localized: "Language"),
+          subtitle: language == AppLanguage.atLaunch
+            ? nil : String(localized: "Relaunch Softfold to switch languages.")
+        ) {
+          if language != AppLanguage.atLaunch {
+            Button("Relaunch", action: AppLanguage.relaunch)
+              .controlSize(.small)
+          }
+          Picker(
+            "Language",
+            selection: Binding(
+              get: { language },
+              set: {
+                language = $0
+                AppLanguage.choose($0)
+              })
+          ) {
+            Text("System Language").tag("")
+            ForEach(AppLanguage.available, id: \.self) { code in
+              Text(verbatim: AppLanguage.name(of: code)).tag(code)
+            }
+          }
           .labelsHidden()
-      }
-      SettingsDivider()
-      SettingsRow("keyboard", tint: .gray, title: String(localized: "Turn Softfold on or off")) {
-        Text("⌃⌥H")
-          .font(.system(size: 12, weight: .medium))
-          .foregroundStyle(.secondary)
-          .padding(.horizontal, 7)
-          .padding(.vertical, 3)
-          .background(Color.primary.opacity(0.07), in: RoundedRectangle(cornerRadius: 5))
-      }
-      SettingsDivider()
-      SettingsRow(
-        "globe", tint: .indigo, title: String(localized: "Language"),
-        subtitle: language == AppLanguage.atLaunch
-          ? nil : String(localized: "Relaunch Softfold to switch languages.")
-      ) {
-        if language != AppLanguage.atLaunch {
-          Button("Relaunch", action: AppLanguage.relaunch)
-            .controlSize(.small)
-        }
-        Picker(
-          "Language",
-          selection: Binding(
-            get: { language },
-            set: {
-              language = $0
-              AppLanguage.choose($0)
-            })
-        ) {
-          Text("System Language").tag("")
-          ForEach(AppLanguage.available, id: \.self) { code in
-            Text(verbatim: AppLanguage.name(of: code)).tag(code)
-          }
-        }
-        .labelsHidden()
-        .fixedSize()
-        .controlSize(.small)
-      }
-    }
-  }
-
-  private var status: some View {
-    SettingsGroup(
-      title: String(localized: "Status"),
-      footnote: String(
-        localized:
-          "Softfold reads your display only to draw the fold. Frames stay in memory on your Mac.")
-    ) {
-      let allowed = CGPreflightScreenCaptureAccess()
-      SettingsRow(
-        "rectangle.dashed.badge.record", tint: .red, title: String(localized: "Screen Recording"),
-        subtitle: allowed
-          ? String(localized: "Allowed") : String(localized: "Needed to show your live desktop")
-      ) {
-        if allowed {
-          Image(systemName: "checkmark.circle.fill").foregroundStyle(.green)
-        } else {
-          Button("Open Settings", action: openScreenRecordingSettings)
-            .controlSize(.small)
-        }
-      }
-      SettingsDivider()
-      SettingsRow(
-        "laptopcomputer", tint: .teal, title: String(localized: "Lid angle sensor"),
-        subtitle: desktop.sensorAvailable
-          ? String(localized: "Connected") : String(localized: "Not connected")
-      ) {
-        Circle()
-          .fill(desktop.sensorAvailable ? Color.green : Color.orange)
-          .frame(width: 8, height: 8)
-      }
-    }
-  }
-
-  private var about: some View {
-    SettingsGroup(title: String(localized: "About")) {
-      SettingsRow(
-        "arrow.triangle.2.circlepath", tint: .green,
-        title: String(localized: "Check for updates automatically")
-      ) {
-        Button("Check Now") { updater.checkForUpdates() }
+          .fixedSize()
           .controlSize(.small)
-        Toggle(
-          "Check for updates automatically",
-          isOn: Binding(
-            get: { updater.checksAutomatically }, set: { updater.setChecksAutomatically($0) })
-        )
-        .toggleStyle(.switch)
-        .controlSize(.small)
-        .labelsHidden()
-      }
-      SettingsDivider()
-      SettingsRow("app.badge", tint: .blue, title: String(localized: "App icon")) {
-        Picker(
-          "App icon",
-          selection: Binding(
-            get: { iconStyle },
-            set: {
-              iconStyle = $0
-              AppIconStyle.choose($0)
-            })
-        ) {
-          Text("Dark").tag(AppIconStyle.dark)
-          Text("Light").tag(AppIconStyle.light)
         }
-        .pickerStyle(.segmented)
-        .labelsHidden()
-        .fixedSize()
-        .controlSize(.small)
       }
-      SettingsDivider()
-      SettingsRow(
-        title: "Softfold \(version)", subtitle: String(localized: "Your desktop follows your lid."),
-        leading: { Image(nsImage: NSApp.applicationIconImage).resizable() },
-        trailing: {
-          if let project = URL(string: "https://github.com/ReffWu/softfold") {
-            Link("GitHub", destination: project).font(.system(size: 12))
-          }
-        })
+      SettingsGroup(title: String(localized: "About")) {
+        SettingsRow(
+          title: "Softfold \(version)",
+          subtitle: String(localized: "Your desktop follows your lid."),
+          leading: { Image(nsImage: NSApp.applicationIconImage).resizable() },
+          trailing: {
+            if let project = URL(string: "https://github.com/ReffWu/softfold") {
+              Link("GitHub", destination: project).font(.system(size: 12))
+            }
+          })
+      }
     }
   }
 
-  private var loginItemNote: String? {
-    loginItemStatus == .requiresApproval
-      ? String(localized: "Allow Softfold in Login Items to finish.") : nil
-  }
-
-  private var launchAtLogin: Binding<Bool> {
-    Binding(
-      get: {
-        loginItemStatus == .enabled || loginItemStatus == .requiresApproval
-      },
-      set: setLaunchAtLogin)
-  }
-
-  private func setLaunchAtLogin(_ enabled: Bool) {
-    do {
-      if enabled {
-        try SMAppService.mainApp.register()
-      } else {
-        try SMAppService.mainApp.unregister()
+  private func iconChoice(_ style: AppIconStyle, label: Text) -> some View {
+    let selected = iconStyle == style
+    return Button {
+      iconStyle = style
+      AppIconStyle.choose(style)
+    } label: {
+      VStack(spacing: 4) {
+        Image(nsImage: NSImage(named: "AppIcon-\(style.rawValue)") ?? NSImage())
+          .resizable()
+          .frame(width: 56, height: 56)
+          .padding(3)
+          .overlay(
+            RoundedRectangle(cornerRadius: 15, style: .continuous)
+              .strokeBorder(selected ? Color.accentColor : .clear, lineWidth: 2.5)
+          )
+        label
+          .font(.system(size: 11, weight: selected ? .semibold : .regular))
+          .foregroundStyle(selected ? .primary : .secondary)
       }
-      loginItemError = nil
-    } catch {
-      loginItemError = String(
-        localized: "Could not update Launch at Login: \(error.localizedDescription)")
+      .contentShape(Rectangle())
     }
-    loginItemStatus = SMAppService.mainApp.status
+    .buttonStyle(.plain)
+    .accessibilityAddTraits(selected ? .isSelected : [])
   }
 
   private var version: String {
