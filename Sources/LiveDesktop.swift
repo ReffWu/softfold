@@ -160,14 +160,15 @@ final class LiveDesktop: NSObject, ObservableObject {
     isEnabled = enabled
     restoringAtLaunch = false
     UserDefaults.standard.set(enabled, forKey: "effectEnabled")
-    if enabled { addLoginItemOnce() }
+    if enabled { setUpOnFirstEnable() }
     if enabled { Task { await start() } } else { stop() }
   }
 
-  private func addLoginItemOnce() {
-    guard !UserDefaults.standard.bool(forKey: "addedLoginItem") else { return }
-    UserDefaults.standard.set(true, forKey: "addedLoginItem")
+  private func setUpOnFirstEnable() {
+    guard !UserDefaults.standard.bool(forKey: "setUpOnFirstEnable") else { return }
+    UserDefaults.standard.set(true, forKey: "setUpOnFirstEnable")
     try? SMAppService.mainApp.register()
+    if let angle = lid.degrees, (80...140).contains(angle) { setOpenPosition() }
   }
 
   func setOpenPosition() {

@@ -87,7 +87,8 @@ struct MainView: View {
     SettingsGroup(
       footnote: String(
         localized:
-          "Starts at 100°. Set your comfortable open position once, and Softfold remembers it.")
+          "Folding begins below this angle. Softfold takes it from your lid the first time you turn it on."
+      )
     ) {
       SettingsRow(
         "angle", tint: .indigo, title: String(localized: "Open position"),
@@ -156,7 +157,7 @@ private struct LidPicture: View {
 
   private static let hinge = CGPoint(x: 46, y: 102)
   private static let length: CGFloat = 108
-  private static let thickness: CGFloat = 7
+  private static let thickness: CGFloat = 4.5
 
   var body: some View {
     let live = available ? lid.degrees : nil
@@ -197,11 +198,11 @@ private struct LidPicture: View {
 
   private var lidBar: some View {
     ZStack(alignment: .bottom) {
-      RoundedRectangle(cornerRadius: 3.5, style: .continuous)
+      RoundedRectangle(cornerRadius: 2.25, style: .continuous)
         .fill(Color(nsColor: .labelColor).opacity(0.88))
       Capsule()
         .fill(active ? Color.accentColor : Color(nsColor: .tertiaryLabelColor))
-        .frame(height: 2.5)
+        .frame(height: 1.5)
         .padding(.horizontal, 7)
         .padding(.bottom, 0.5)
         .shadow(color: active ? Color.accentColor.opacity(0.9) : .clear, radius: 5)
@@ -210,7 +211,7 @@ private struct LidPicture: View {
   }
 
   private func guide(angle: Double) -> some View {
-    let radians = angle * .pi / 180
+    let radians = CGFloat(angle) * .pi / 180
     let tip = CGPoint(
       x: Self.hinge.x + cos(radians) * (Self.length + 16),
       y: Self.hinge.y - sin(radians) * (Self.length + 16))

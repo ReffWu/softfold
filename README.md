@@ -24,7 +24,7 @@ Softfold follows your MacBook's hinge. As you lower the screen, your live deskto
 
 On first launch, allow Screen Recording, reopen Softfold if macOS asks, and turn it on. It turns itself back on the next time you open it, and starts with your Mac from then on.
 
-The starting open angle is 100°. Prefer something else? Get comfortable and click **Use Current Angle**. Softfold remembers it. <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd> turns it on or off from anywhere. Prefer a light frame around the icon? Pick it in the Softfold window.
+The first time you turn Softfold on, it takes the open angle from your lid. To change it later, hold the lid where you like it and click **Use Current Angle**. <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd> turns it on or off from anywhere. Prefer a light frame around the icon? Pick it in the Softfold window.
 
 ## Which MacBooks work
 

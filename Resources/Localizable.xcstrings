@@ -941,6 +941,100 @@
         }
       }
     },
+    "Folding begins below this angle. Softfold takes it from your lid the first time you turn it on." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يبدأ الطي تحت هذه الزاوية. يأخذها Softfold من الغطاء في أول مرة تشغّله فيها."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unterhalb dieses Winkels beginnt das Falten. Softfold übernimmt ihn von deinem Deckel, wenn du es zum ersten Mal einschaltest."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El plegado empieza por debajo de este ángulo. Softfold lo toma de tu tapa la primera vez que lo activas."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Le pliage commence sous cet angle. Softfold le reprend de votre écran la première fois que vous l’activez."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La piega inizia sotto questo angolo. Softfold lo prende dal coperchio la prima volta che lo attivi."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この角度より閉じると折りたたみが始まります。初めてオンにしたときのふたの角度が設定されます。"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 각도보다 닫으면 접히기 시작합니다. 처음 켤 때 덮개 각도로 자동 설정됩니다."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het vouwen begint onder deze hoek. Softfold neemt hem over van je scherm wanneer je het voor het eerst inschakelt."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Składanie zaczyna się poniżej tego kąta. Softfold ustawia go według pokrywy przy pierwszym włączeniu."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A dobra começa abaixo deste ângulo. O Softfold usa o ângulo da tampa na primeira vez que você o ativa."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Складывание начинается ниже этого угла. Softfold берёт его от крышки при первом включении."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Katlanma bu açının altında başlar. Softfold, ilk açtığınızda kapağınızın açısını kullanır."
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiệu ứng gập bắt đầu khi màn hình thấp hơn góc này. Softfold lấy góc này từ màn hình của bạn lần đầu tiên bạn bật."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "屏幕合到这个角度以下时开始折叠。第一次开启 Softfold 时，会自动取你当时的屏幕角度。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "螢幕闔到這個角度以下時開始摺疊。第一次開啟 Softfold 時，會自動取你當時的螢幕角度。"
+          }
+        }
+      }
+    },
     "Getting the desktop and the sensor ready." : {
       "localizations" : {
         "ar" : {
@@ -3202,100 +3296,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "正在啟動⋯"
-          }
-        }
-      }
-    },
-    "Starts at 100°. Set your comfortable open position once, and Softfold remembers it." : {
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "يبدأ عند 100°. اضبط وضع الفتح المريح لك مرة واحدة، وسيتذكره Softfold."
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Standard ist 100°. Lege einmal deine bevorzugte Öffnungsposition fest, Softfold merkt sie sich."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Empieza en 100°. Ajusta una vez tu posición de apertura cómoda y Softfold la recordará."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "100° par défaut. Réglez une fois votre position d’ouverture préférée, Softfold s’en souviendra."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Parte da 100°. Imposta una volta la tua posizione di apertura preferita e Softfold la ricorderà."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "初期値は100°です。見やすい開き具合を一度設定すると、Softfoldが記憶します。"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "기본값은 100°입니다. 편한 열림 위치를 한 번 설정하면 Softfold가 기억합니다."
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Begint bij 100°. Stel één keer je favoriete openstand in en Softfold onthoudt die."
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Domyślnie 100°. Ustaw raz wygodną pozycję otwarcia, a Softfold ją zapamięta."
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Começa em 100°. Defina uma vez sua posição de abertura preferida, e o Softfold vai lembrar dela."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "По умолчанию 100°. Задайте удобное положение открытия один раз, и Softfold его запомнит."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "100° ile başlar. Rahat açık konumunuzu bir kez ayarlayın, Softfold onu hatırlar."
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mặc định là 100°. Đặt vị trí mở thoải mái của bạn một lần, Softfold sẽ ghi nhớ."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "默认 100°。设定一次你习惯的打开角度，Softfold 会记住它。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "預設為 100°。設定一次你習慣的開啟角度，Softfold 會記住它。"
           }
         }
       }
