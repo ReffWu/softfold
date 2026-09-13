@@ -14,6 +14,7 @@ struct MainView: View {
         effect
         position
         PreferencesCard()
+        MoreAppsCard()
       }
       .padding(.horizontal, 20)
       footer
@@ -21,6 +22,7 @@ struct MainView: View {
     .frame(width: 440)
     .fixedSize()
     .background(Color(nsColor: .windowBackgroundColor).ignoresSafeArea())
+    .onAppear { MoreApps.shared.refreshIfStale() }
     .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification))
     { _ in
       screenRecordingAllowed = CGPreflightScreenCaptureAccess()
