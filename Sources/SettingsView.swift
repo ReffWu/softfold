@@ -143,3 +143,60 @@ private enum AppLanguage {
     NSApp.terminate(nil)
   }
 }
+
+struct AboutView: View {
+  @State private var style = AppIconStyle.current
+
+  private static let icon: CGFloat = 240
+
+  var body: some View {
+    VStack(spacing: 0) {
+      Image(nsImage: NSImage(named: "AppIcon-\(style.rawValue)") ?? NSImage())
+        .resizable()
+        .interpolation(.high)
+        .frame(width: Self.icon * 1024 / 980, height: Self.icon * 1024 / 980)
+        .frame(width: Self.icon, height: Self.icon)
+        .clipShape(RoundedRectangle(cornerRadius: Self.icon * 262 / 980, style: .circular))
+        .shadow(color: .black.opacity(0.22), radius: 16, y: 8)
+        .padding(.top, 40)
+        .padding(.bottom, 6)
+        .accessibilityHidden(true)
+      Text(verbatim: "Softfold")
+        .font(.system(size: 24, weight: .semibold))
+        .padding(.top, 8)
+      Text("Your desktop follows your lid.")
+        .font(.system(size: 13))
+        .foregroundStyle(.secondary)
+        .multilineTextAlignment(.center)
+        .fixedSize(horizontal: false, vertical: true)
+        .padding(.horizontal, 36)
+        .padding(.top, 6)
+      HStack(spacing: 6) {
+        Text("Version \(versionLabel)")
+        if let project = URL(string: "https://github.com/ReffWu/softfold") {
+          Text(verbatim: "·")
+          Link(destination: project) { Text(verbatim: "GitHub") }
+            .buttonStyle(.plain)
+        }
+      }
+      .font(.system(size: 11))
+      .foregroundStyle(.secondary)
+      .padding(.top, 20)
+      Text(verbatim: "© 2026 Reff Wu")
+        .font(.system(size: 11))
+        .foregroundStyle(.tertiary)
+        .padding(.top, 4)
+        .padding(.bottom, 28)
+    }
+    .frame(width: 360)
+    .background(Color(nsColor: .windowBackgroundColor).ignoresSafeArea())
+    .onAppear { style = AppIconStyle.current }
+  }
+
+  private var versionLabel: String {
+    let info = Bundle.main.infoDictionary
+    let version = info?["CFBundleShortVersionString"] as? String ?? ""
+    guard let build = info?["CFBundleVersion"] as? String, !build.isEmpty else { return version }
+    return "\(version) (\(build))"
+  }
+}

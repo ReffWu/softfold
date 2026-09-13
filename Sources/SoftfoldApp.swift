@@ -24,15 +24,16 @@ struct SoftfoldApp: App {
     .defaultPosition(.center)
     .commands {
       WindowCommands()
-      CommandGroup(replacing: .appInfo) {
-        Text(
-          "Softfold \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")"
-        )
-      }
       CommandGroup(after: .appInfo) {
         Button("Check for Updates…") { updater.checkForUpdates() }
       }
     }
+    Window("About Softfold", id: "about") {
+      AboutView()
+    }
+    .windowStyle(.hiddenTitleBar)
+    .windowResizability(.contentSize)
+    .defaultPosition(.center)
     MenuBarExtra {
       SoftfoldMenu(desktop: desktop, updater: updater)
     } label: {
@@ -108,6 +109,12 @@ struct WindowCommands: Commands {
   @Environment(\.openWindow) private var openWindow
 
   var body: some Commands {
+    CommandGroup(replacing: .appInfo) {
+      Button("About Softfold") {
+        openWindow(id: "about")
+        NSApp.activate(ignoringOtherApps: true)
+      }
+    }
     CommandGroup(replacing: .appSettings) {
       Button("Settings…") {
         openWindow(id: "main")
@@ -137,6 +144,10 @@ struct SoftfoldMenu: View {
     Button("Set open position") { desktop.setOpenPosition() }
       .disabled(!desktop.sensorAvailable || desktop.isStarting)
     Divider()
+    Button("About Softfold") {
+      openWindow(id: "about")
+      NSApp.activate(ignoringOtherApps: true)
+    }
     Button("Open Softfold") {
       openWindow(id: "main")
       NSApp.activate(ignoringOtherApps: true)

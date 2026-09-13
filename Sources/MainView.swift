@@ -5,6 +5,7 @@ struct MainView: View {
   @ObservedObject var desktop: LiveDesktop
   @ObservedObject var updater: Updater
   @State private var screenRecordingAllowed = CGPreflightScreenCaptureAccess()
+  @Environment(\.openWindow) private var openWindow
 
   var body: some View {
     VStack(spacing: 0) {
@@ -106,7 +107,13 @@ struct MainView: View {
 
   private var footer: some View {
     HStack(spacing: 6) {
-      Text(verbatim: "Softfold \(version)")
+      Button {
+        openWindow(id: "about")
+      } label: {
+        Text(verbatim: "Softfold \(version)")
+      }
+      .buttonStyle(.plain)
+      .help("About Softfold")
       Text(verbatim: "·")
       Button("Check for Updates…") { updater.checkForUpdates() }
         .buttonStyle(.plain)
