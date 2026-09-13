@@ -30,6 +30,7 @@ BACK = (470, 1578)
 FRONT_Y = 1580
 FRONT = (242, 1806)
 THICKNESS = 20
+BEZEL = 22
 LID = [(300, LID_TOP), (1748, LID_TOP), (BACK[1], HINGE_Y), (BACK[0], HINGE_Y)]
 SCREEN = (BACK[0] + 40, LID_TOP + 34, BACK[1] - 40, HINGE_Y - 22)
 DECK = [
@@ -137,27 +138,53 @@ def wallpaper(width, height):
     return image
 
 
-def progressive_blur(image, radius, fade, start, end):
-    steps = [0, 0.06, 0.15, 0.3, 0.55, 1.0]
+def progressive_blur(image, radius, start, end):
+    radii = [0, 3, 6, 10, 16, 24, 34, 46, 60, 76, 94, 114, 136]
+    radii = [value for value in radii if value < radius] + [radius]
     levels = [
         np.asarray(
-            image
-            if step == 0
-            else image.filter(ImageFilter.GaussianBlur(radius * step))
+            image if value == 0 else image.filter(ImageFilter.GaussianBlur(value))
         ).astype(float)
-        for step in steps
+        for value in radii
     ]
     result = levels[0].copy()
     for row in range(start, end):
         progress = (row - start) / (end - start)
-        strength = np.clip(1 - progress / fade, 0, 1) ** 1.3 * (len(steps) - 1)
-        level = int(strength)
-        if level >= len(steps) - 1:
-            result[row] = levels[-1][row]
-            continue
-        blend = strength - level
-        result[row] = levels[level][row] * (1 - blend) + levels[level + 1][row] * blend
+        target = radius * (1 - progress) ** 1.25
+        upper = next(index for index, value in enumerate(radii) if value >= target)
+        lower = max(upper - 1, 0)
+        span = radii[upper] - radii[lower]
+        blend = 0 if span == 0 else (target - radii[lower]) / span
+        result[row] = levels[lower][row] * (1 - blend) + levels[upper][row] * blend
     return Image.fromarray(result.astype(np.uint8))
+
+
+def inset(points, distance):
+    lines = []
+    for index, start in enumerate(points):
+        end = points[(index + 1) % len(points)]
+        dx, dy = end[0] - start[0], end[1] - start[1]
+        length = math.hypot(dx, dy)
+        nx, ny = -dy / length, dx / length
+        lines.append(
+            (
+                (start[0] + nx * distance, start[1] + ny * distance),
+                (end[0] + nx * distance, end[1] + ny * distance),
+            )
+        )
+    corners = []
+    for index, (first, second) in enumerate(zip(lines[-1:] + lines[:-1], lines)):
+        (x1, y1), (x2, y2) = first
+        (x3, y3), (x4, y4) = second
+        denominator = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
+        cross = x1 * y2 - y1 * x2, x3 * y4 - y3 * x4
+        corners.append(
+            (
+                (cross[0] * (x3 - x4) - (x1 - x2) * cross[1]) / denominator,
+                (cross[0] * (y3 - y4) - (y1 - y2) * cross[1]) / denominator,
+            )
+        )
+    return corners
 
 
 def laptop():
@@ -211,13 +238,16 @@ def laptop():
 
     lid = Image.new("RGBA", (SIZE, SIZE), (20, 22, 30, 255))
     lid.paste(wallpaper(SCREEN[2] - SCREEN[0], SCREEN[3] - SCREEN[1]), SCREEN[:2])
-    lid = progressive_blur(lid.convert("RGB"), 115, 0.9, LID_TOP, HINGE_Y)
-    lid_shape = rounded(LID, [22, 22, 6, 6])
-    canvas = Image.alpha_composite(canvas, fill(lid, polygon_mask(lid_shape)))
-    edge = blank()
-    top_edge = [point for point in lid_shape if point[1] < HINGE_Y - 8]
-    ImageDraw.Draw(edge).line(top_edge, fill=(150, 156, 172, 120), width=5)
-    return Image.alpha_composite(canvas, edge)
+    lid = progressive_blur(lid.convert("RGB"), 120, LID_TOP, HINGE_Y)
+    lid_mask = polygon_mask(rounded(LID, [22, 22, 6, 6]))
+    canvas = Image.alpha_composite(canvas, fill(lid, lid_mask))
+    glass = polygon_mask(rounded(inset(LID, BEZEL), [12, 12, 4, 4]))
+    ring = Image.fromarray(
+        (np.asarray(lid_mask, int) * (255 - np.asarray(glass, int)) // 255).astype(
+            np.uint8
+        )
+    )
+    return Image.alpha_composite(canvas, fill((6, 6, 8, 255), ring))
 
 
 def ring_point(distance, box, radius):
