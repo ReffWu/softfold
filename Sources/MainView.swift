@@ -3,12 +3,35 @@ import SwiftUI
 
 @MainActor
 final class Navigator: ObservableObject {
-  enum Screen {
-    case main
-    case settings
+  enum Page: String, CaseIterable, Identifiable {
+    case effect
+    case general
+
+    var id: String { rawValue }
+
+    var title: String {
+      switch self {
+      case .effect: String(localized: "Effect")
+      case .general: String(localized: "General")
+      }
+    }
+
+    var symbol: String {
+      switch self {
+      case .effect: "laptopcomputer"
+      case .general: "gearshape.fill"
+      }
+    }
+
+    var tint: Color {
+      switch self {
+      case .effect: .blue
+      case .general: .gray
+      }
+    }
   }
 
-  @Published var screen = Screen.main
+  @Published var page = Page.effect
 }
 
 struct MainView: View {
@@ -16,135 +39,177 @@ struct MainView: View {
   @ObservedObject var navigator: Navigator
 
   var body: some View {
-    GeometryReader { proxy in
-      VStack(spacing: 0) {
-        header
-          .frame(height: proxy.safeAreaInsets.top)
-        Divider().opacity(0.6)
-        content
+    HStack(spacing: 0) {
+      sidebar
+        .frame(width: 180)
+        .background(SidebarMaterial().ignoresSafeArea())
+      Divider().ignoresSafeArea()
+      switch navigator.page {
+      case .effect: EffectPage(desktop: desktop)
+      case .general: SettingsView(desktop: desktop)
       }
-      .ignoresSafeArea(.container, edges: .top)
     }
-    .frame(width: 460, height: 580)
+    .frame(width: 640, height: 520)
   }
 
-  private var header: some View {
-    ZStack {
-      Text(navigator.screen == .main ? "Softfold" : String(localized: "Settings"))
-        .font(.system(size: 13, weight: .semibold))
-      HStack(spacing: 0) {
-        if navigator.screen == .settings {
-          HeaderButton(symbol: "chevron.left", help: String(localized: "Back")) {
-            navigator.screen = .main
+  private var sidebar: some View {
+    VStack(alignment: .leading, spacing: 2) {
+      Color.clear.frame(height: 10)
+      ForEach(Navigator.Page.allCases) { item in
+        Button {
+          navigator.page = item
+        } label: {
+          HStack(spacing: 10) {
+            SettingsIcon(symbol: item.symbol, tint: item.tint)
+            Text(item.title)
+              .font(.system(size: 13))
+              .foregroundStyle(navigator.page == item ? Color.white : Color.primary)
+            Spacer(minLength: 0)
           }
-          .keyboardShortcut(.escape, modifiers: [])
-        }
-        Spacer(minLength: 0)
-        if navigator.screen == .main {
-          HeaderButton(symbol: "gearshape.fill", help: String(localized: "Settings")) {
-            navigator.screen = .settings
-          }
-          .keyboardShortcut(",", modifiers: .command)
-        }
-      }
-      .padding(.leading, 76)
-      .padding(.trailing, 12)
-    }
-    .frame(maxHeight: .infinity)
-    .background(HeaderMaterial().ignoresSafeArea())
-  }
-
-  private var content: some View {
-    ZStack {
-      switch navigator.screen {
-      case .main:
-        home
-          .transition(.move(edge: .leading).combined(with: .opacity))
-      case .settings:
-        SettingsView(desktop: desktop)
-          .transition(.move(edge: .trailing).combined(with: .opacity))
-      }
-    }
-    .animation(.easeInOut(duration: 0.22), value: navigator.screen)
-    .background(Color(nsColor: .windowBackgroundColor).ignoresSafeArea())
-  }
-
-  private var home: some View {
-    VStack(spacing: 20) {
-      Spacer(minLength: 8)
-      hero
-      if let error = desktop.error { errorCard(error) }
-      Spacer(minLength: 8)
-      positionCard
-    }
-    .padding(EdgeInsets(top: 20, leading: 20, bottom: 22, trailing: 20))
-  }
-
-  private var hero: some View {
-    VStack(spacing: 14) {
-      RoundedRectangle(cornerRadius: 22, style: .continuous)
-        .fill((desktop.isActive ? Color.accentColor : Color.gray).gradient)
-        .frame(width: 84, height: 84)
-        .overlay(
-          Image(
-            systemName: desktop.isActive ? "laptopcomputer.and.arrow.down" : "laptopcomputer"
+          .padding(.horizontal, 8)
+          .padding(.vertical, 6)
+          .background(
+            RoundedRectangle(cornerRadius: 7, style: .continuous)
+              .fill(navigator.page == item ? Color.accentColor : .clear)
           )
-          .font(.system(size: 36, weight: .medium))
-          .foregroundStyle(.white)
-        )
-        .shadow(color: .black.opacity(0.16), radius: 10, y: 4)
-        .animation(.easeOut(duration: 0.2), value: desktop.isActive)
-      VStack(spacing: 4) {
-        Text(title)
-          .font(.system(size: 20, weight: .semibold))
-        Text(subtitle)
-          .font(.system(size: 12))
-          .foregroundStyle(.secondary)
-          .multilineTextAlignment(.center)
-          .fixedSize(horizontal: false, vertical: true)
+          .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
       }
-      Button(desktop.isEnabled ? String(localized: "Turn off") : String(localized: "Turn on")) {
-        desktop.setEnabled(!desktop.isEnabled)
-      }
-      .buttonStyle(.borderedProminent)
-      .controlSize(.large)
-      .disabled(desktop.isStarting)
-      Text("⌃⌥H anywhere")
-        .font(.system(size: 11))
-        .foregroundStyle(.tertiary)
+      Spacer(minLength: 0)
     }
-    .frame(maxWidth: .infinity)
+    .padding(.horizontal, 9)
   }
+}
 
-  private var positionCard: some View {
-    SettingsGroup(
-      title: String(localized: "Open position"),
-      footnote: String(
-        localized:
-          "Starts at 100°. Set your comfortable open position once, and Softfold remembers it.")
-    ) {
-      SettingsRow(
-        "angle", tint: .indigo, title: String(localized: "Open position"),
-        subtitle: Measurement(value: desktop.openAngle, unit: UnitAngle.degrees).formatted(
-          .measurement(width: .narrow, numberFormatStyle: .number.precision(.fractionLength(0))))
-      ) {
-        Button("Set") { desktop.setOpenPosition() }
+private struct EffectPage: View {
+  @ObservedObject var desktop: LiveDesktop
+
+  var body: some View {
+    SettingsPage {
+      SettingsGroup(title: "Softfold") {
+        SettingsRow(
+          "power", tint: desktop.isActive ? .green : .gray, title: title, subtitle: subtitle
+        ) {
+          Toggle(
+            "Turn Softfold on or off",
+            isOn: Binding(get: { desktop.isEnabled }, set: { desktop.setEnabled($0) })
+          )
+          .toggleStyle(.switch)
           .controlSize(.small)
-          .disabled(!desktop.sensorAvailable || desktop.isStarting)
-          .help("Save the lid angle you are viewing at right now")
+          .labelsHidden()
+          .disabled(desktop.isStarting)
+        }
+        if let error = desktop.error {
+          SettingsDivider()
+          SettingsRow("exclamationmark.triangle.fill", tint: .orange, title: error) {
+            if desktop.needsPermission {
+              Button("Open Settings", action: openScreenRecordingSettings)
+                .controlSize(.small)
+            }
+          }
+        }
       }
-    }
-  }
-
-  private func errorCard(_ message: String) -> some View {
-    SettingsGroup(title: String(localized: "Attention")) {
-      SettingsRow("exclamationmark.triangle.fill", tint: .orange, title: message) {
-        if desktop.needsPermission {
-          Button("Open Settings", action: openScreenRecordingSettings)
+      look
+      SettingsGroup(
+        title: String(localized: "Open position"),
+        footnote: String(
+          localized:
+            "Starts at 100°. Set your comfortable open position once, and Softfold remembers it.")
+      ) {
+        SettingsRow(
+          "angle", tint: .indigo, title: String(localized: "Open position"),
+          subtitle: Measurement(value: desktop.openAngle, unit: UnitAngle.degrees).formatted(
+            .measurement(width: .narrow, numberFormatStyle: .number.precision(.fractionLength(0))))
+        ) {
+          Button("Set") { desktop.setOpenPosition() }
             .controlSize(.small)
+            .disabled(!desktop.sensorAvailable || desktop.isStarting)
+            .help("Save the lid angle you are viewing at right now")
         }
       }
     }
+  }
+
+  private var look: some View {
+    SettingsGroup(title: String(localized: "Look")) {
+      SettingsRow(
+        "slider.horizontal.3", tint: .orange, title: String(localized: "Effect strength"),
+        subtitle: strength
+      ) {
+        HStack(spacing: 8) {
+          Slider(
+            value: Binding(
+              get: { desktop.effectStrength },
+              set: { desktop.setEffectStrength($0) }),
+            in: 0.25...1, step: 0.05
+          )
+          .frame(width: 110)
+          .accessibilityLabel("Effect strength")
+          .accessibilityValue(strength)
+          Button {
+            desktop.setEffectStrength(1)
+          } label: {
+            Image(systemName: "arrow.counterclockwise")
+          }
+          .controlSize(.small)
+          .disabled(desktop.effectStrength == 1)
+          .help(String(localized: "Reset effect strength to 100%"))
+          .accessibilityLabel("Reset effect strength to default")
+        }
+      }
+      SettingsDivider()
+      SettingsRow(
+        "square.lefthalf.filled", tint: .indigo, title: String(localized: "Sides"),
+        subtitle: String(localized: "Beside the folded desktop")
+      ) {
+        Picker(
+          "Sides",
+          selection: Binding(get: { desktop.sideFill }, set: { desktop.setSideFill($0) })
+        ) {
+          Text("Blur").tag(SideFill.blur)
+          Text("Black").tag(SideFill.black)
+        }
+        .pickerStyle(.segmented)
+        .labelsHidden()
+        .fixedSize()
+        .controlSize(.small)
+      }
+      SettingsDivider()
+      SettingsRow(
+        "crop", tint: .teal, title: String(localized: "Crop from the top"),
+        subtitle: String(localized: "The top of the desktop slides out of view as the lid closes.")
+      ) {
+        Toggle(
+          "Crop from the top",
+          isOn: Binding(get: { desktop.cropsTop }, set: { desktop.setCropsTop($0) })
+        )
+        .toggleStyle(.switch)
+        .controlSize(.small)
+        .labelsHidden()
+      }
+      SettingsDivider()
+      SettingsRow(
+        "camera.aperture", tint: .purple, title: String(localized: "Blur by distance"),
+        subtitle: desktop.blursByDistance
+          ? String(
+            localized:
+              "Blur grows with distance from the open screen, so the hinge edge stays sharp.")
+          : String(localized: "Blur builds toward the top and fades out near the hinge.")
+      ) {
+        Toggle(
+          "Blur by distance",
+          isOn: Binding(get: { desktop.blursByDistance }, set: { desktop.setBlursByDistance($0) })
+        )
+        .toggleStyle(.switch)
+        .controlSize(.small)
+        .labelsHidden()
+      }
+    }
+  }
+
+  private var strength: String {
+    desktop.effectStrength.formatted(.percent.precision(.fractionLength(0)))
   }
 
   private var title: String {
@@ -165,36 +230,11 @@ struct MainView: View {
   }
 }
 
-private struct HeaderButton: View {
-  let symbol: String
-  let help: String
-  let action: () -> Void
-  @State private var hovering = false
-
-  var body: some View {
-    Button(action: action) {
-      Image(systemName: symbol)
-        .font(.system(size: 13, weight: .semibold))
-        .foregroundStyle(.secondary)
-        .frame(width: 26, height: 26)
-        .background(
-          RoundedRectangle(cornerRadius: 7, style: .continuous)
-            .fill(Color.primary.opacity(hovering ? 0.09 : 0))
-        )
-        .contentShape(Rectangle())
-    }
-    .buttonStyle(.plain)
-    .onHover { hovering = $0 }
-    .help(help)
-    .accessibilityLabel(help)
-  }
-}
-
-private struct HeaderMaterial: NSViewRepresentable {
+private struct SidebarMaterial: NSViewRepresentable {
   func makeNSView(context: Context) -> NSVisualEffectView {
     let view = NSVisualEffectView()
-    view.material = .titlebar
-    view.blendingMode = .withinWindow
+    view.material = .sidebar
+    view.blendingMode = .behindWindow
     view.state = .followsWindowActiveState
     return view
   }

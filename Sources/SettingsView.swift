@@ -6,10 +6,10 @@ struct SettingsView: View {
   @State private var loginItemStatus = SMAppService.mainApp.status
   @State private var loginItemError: String?
   @State private var language = AppLanguage.current
+  @State private var iconStyle = AppIconStyle.current
 
   var body: some View {
     SettingsPage {
-      look
       controls
       status
       about
@@ -17,83 +17,6 @@ struct SettingsView: View {
     .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification))
     { _ in
       loginItemStatus = SMAppService.mainApp.status
-    }
-  }
-
-  private var look: some View {
-    SettingsGroup(title: String(localized: "Look")) {
-      SettingsRow(
-        "slider.horizontal.3", tint: .orange, title: String(localized: "Effect strength"),
-        subtitle: strength
-      ) {
-        HStack(spacing: 8) {
-          Slider(
-            value: Binding(
-              get: { desktop.effectStrength },
-              set: { desktop.setEffectStrength($0) }),
-            in: 0.25...1, step: 0.05
-          )
-          .frame(width: 110)
-          .accessibilityLabel("Effect strength")
-          .accessibilityValue(strength)
-          Button {
-            desktop.setEffectStrength(1)
-          } label: {
-            Image(systemName: "arrow.counterclockwise")
-          }
-          .controlSize(.small)
-          .disabled(desktop.effectStrength == 1)
-          .help(String(localized: "Reset effect strength to 100%"))
-          .accessibilityLabel("Reset effect strength to default")
-        }
-      }
-      SettingsDivider()
-      SettingsRow(
-        "square.lefthalf.filled", tint: .indigo, title: String(localized: "Sides"),
-        subtitle: String(localized: "Beside the folded desktop")
-      ) {
-        Picker(
-          "Sides",
-          selection: Binding(get: { desktop.sideFill }, set: { desktop.setSideFill($0) })
-        ) {
-          Text("Blur").tag(SideFill.blur)
-          Text("Black").tag(SideFill.black)
-        }
-        .pickerStyle(.segmented)
-        .labelsHidden()
-        .fixedSize()
-        .controlSize(.small)
-      }
-      SettingsDivider()
-      SettingsRow(
-        "crop", tint: .teal, title: String(localized: "Crop from the top"),
-        subtitle: String(localized: "The top of the desktop slides out of view as the lid closes.")
-      ) {
-        Toggle(
-          "Crop from the top",
-          isOn: Binding(get: { desktop.cropsTop }, set: { desktop.setCropsTop($0) })
-        )
-        .toggleStyle(.switch)
-        .controlSize(.small)
-        .labelsHidden()
-      }
-      SettingsDivider()
-      SettingsRow(
-        "camera.aperture", tint: .purple, title: String(localized: "Blur by distance"),
-        subtitle: desktop.blursByDistance
-          ? String(
-            localized:
-              "Blur grows with distance from the open screen, so the hinge edge stays sharp.")
-          : String(localized: "Blur builds toward the top and fades out near the hinge.")
-      ) {
-        Toggle(
-          "Blur by distance",
-          isOn: Binding(get: { desktop.blursByDistance }, set: { desktop.setBlursByDistance($0) })
-        )
-        .toggleStyle(.switch)
-        .controlSize(.small)
-        .labelsHidden()
-      }
     }
   }
 
@@ -187,6 +110,25 @@ struct SettingsView: View {
 
   private var about: some View {
     SettingsGroup(title: String(localized: "About")) {
+      SettingsRow("app.badge", tint: .blue, title: String(localized: "App icon")) {
+        Picker(
+          "App icon",
+          selection: Binding(
+            get: { iconStyle },
+            set: {
+              iconStyle = $0
+              AppIconStyle.choose($0)
+            })
+        ) {
+          Text("Dark").tag(AppIconStyle.dark)
+          Text("Light").tag(AppIconStyle.light)
+        }
+        .pickerStyle(.segmented)
+        .labelsHidden()
+        .fixedSize()
+        .controlSize(.small)
+      }
+      SettingsDivider()
       SettingsRow(
         title: "Softfold \(version)", subtitle: String(localized: "Your desktop follows your lid."),
         leading: { Image(nsImage: NSApp.applicationIconImage).resizable() },
@@ -226,12 +168,34 @@ struct SettingsView: View {
     loginItemStatus = SMAppService.mainApp.status
   }
 
-  private var strength: String {
-    desktop.effectStrength.formatted(.percent.precision(.fractionLength(0)))
-  }
-
   private var version: String {
     Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+  }
+}
+
+enum AppIconStyle: String {
+  case dark
+  case light
+
+  private static let key = "AppIconStyle"
+
+  static var current: AppIconStyle {
+    AppIconStyle(rawValue: UserDefaults.standard.string(forKey: key) ?? "") ?? .dark
+  }
+
+  static func choose(_ style: AppIconStyle) {
+    UserDefaults.standard.set(style.rawValue, forKey: key)
+    apply(style)
+  }
+
+  static func restore() {
+    if current != .dark { apply(current) }
+  }
+
+  private static func apply(_ style: AppIconStyle) {
+    let image = style == .dark ? nil : NSImage(named: "AppIcon-\(style.rawValue)")
+    NSApp.applicationIconImage = image
+    NSWorkspace.shared.setIcon(image, forFile: Bundle.main.bundlePath, options: [])
   }
 }
 

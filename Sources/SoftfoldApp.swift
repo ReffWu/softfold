@@ -22,6 +22,10 @@ struct SoftfoldApp: App {
     .windowResizability(.contentSize)
     .defaultPosition(.center)
     .commands {
+      CommandGroup(replacing: .appSettings) {
+        Button("Settings…") { navigator.page = .general }
+          .keyboardShortcut(",")
+      }
       CommandGroup(replacing: .appInfo) {
         Text(
           "Softfold \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")"
@@ -43,6 +47,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   private var hotKeyHandler: EventHandlerRef?
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
+
+  func applicationDidFinishLaunching(_ notification: Notification) {
+    AppIconStyle.restore()
+  }
 
   func applicationWillTerminate(_ notification: Notification) {
     if let toggleHotKey { UnregisterEventHotKey(toggleHotKey) }
@@ -114,12 +122,12 @@ struct SoftfoldMenu: View {
       .disabled(!desktop.sensorAvailable || desktop.isStarting)
     Divider()
     Button("Open Softfold") {
-      navigator.screen = .main
+      navigator.page = .effect
       openWindow(id: "main")
       NSApp.activate(ignoringOtherApps: true)
     }
     Button("Settings…") {
-      navigator.screen = .settings
+      navigator.page = .general
       openWindow(id: "main")
       NSApp.activate(ignoringOtherApps: true)
     }.keyboardShortcut(",")
