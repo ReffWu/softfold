@@ -12,16 +12,18 @@ enum SettingsMetrics {
 }
 
 struct SettingsGroup<Content: View>: View {
-  let title: String
+  var title: String?
   var footnote: String?
   @ViewBuilder let content: Content
 
   var body: some View {
     VStack(alignment: .leading, spacing: 7) {
-      Text(title)
-        .font(.system(size: 12, weight: .semibold))
-        .foregroundStyle(.secondary)
-        .padding(.leading, 2)
+      if let title {
+        Text(title)
+          .font(.system(size: 12, weight: .semibold))
+          .foregroundStyle(.secondary)
+          .padding(.leading, 2)
+      }
       VStack(spacing: 0) { content }
         .background(Color(nsColor: .controlBackgroundColor))
         .clipShape(RoundedRectangle(cornerRadius: SettingsMetrics.cardCorner, style: .continuous))
@@ -104,22 +106,6 @@ struct SettingsDivider: View {
     Divider()
       .opacity(0.5)
       .padding(.leading, inset)
-  }
-}
-
-struct SettingsPage<Content: View>: View {
-  @ViewBuilder let content: Content
-
-  var body: some View {
-    ScrollView {
-      VStack(alignment: .leading, spacing: SettingsMetrics.groupSpacing) {
-        content
-      }
-      .padding(EdgeInsets(top: 4, leading: 20, bottom: 24, trailing: 20))
-      .frame(maxWidth: .infinity, alignment: .leading)
-    }
-    .contentMargins(.top, 8, for: .scrollContent)
-    .background(Color(nsColor: .windowBackgroundColor).ignoresSafeArea())
   }
 }
 

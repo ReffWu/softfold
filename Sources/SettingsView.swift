@@ -1,58 +1,44 @@
 import SwiftUI
 
-struct SettingsView: View {
+struct PreferencesCard: View {
   @State private var language = AppLanguage.current
   @State private var iconStyle = AppIconStyle.current
 
   var body: some View {
-    SettingsPage {
-      SettingsGroup(title: String(localized: "Look")) {
-        SettingsRow("app.badge", tint: .blue, title: String(localized: "App icon")) {
-          HStack(spacing: 12) {
-            iconChoice(.dark, label: Text("Dark"))
-            iconChoice(.light, label: Text("Light"))
-          }
+    SettingsGroup {
+      SettingsRow("app.badge", tint: .blue, title: String(localized: "App icon")) {
+        HStack(spacing: 10) {
+          iconChoice(.dark, label: Text("Dark"))
+          iconChoice(.light, label: Text("Light"))
         }
       }
-      SettingsGroup(title: String(localized: "Controls")) {
-        SettingsRow(
-          "globe", tint: .indigo, title: String(localized: "Language"),
-          subtitle: language == AppLanguage.atLaunch
-            ? nil : String(localized: "Relaunch Softfold to switch languages.")
+      SettingsDivider()
+      SettingsRow(
+        "globe", tint: .indigo, title: String(localized: "Language"),
+        subtitle: language == AppLanguage.atLaunch
+          ? nil : String(localized: "Relaunch Softfold to switch languages.")
+      ) {
+        if language != AppLanguage.atLaunch {
+          Button("Relaunch", action: AppLanguage.relaunch)
+            .controlSize(.small)
+        }
+        Picker(
+          "Language",
+          selection: Binding(
+            get: { language },
+            set: {
+              language = $0
+              AppLanguage.choose($0)
+            })
         ) {
-          if language != AppLanguage.atLaunch {
-            Button("Relaunch", action: AppLanguage.relaunch)
-              .controlSize(.small)
+          Text("System Language").tag("")
+          ForEach(AppLanguage.available, id: \.self) { code in
+            Text(verbatim: AppLanguage.name(of: code)).tag(code)
           }
-          Picker(
-            "Language",
-            selection: Binding(
-              get: { language },
-              set: {
-                language = $0
-                AppLanguage.choose($0)
-              })
-          ) {
-            Text("System Language").tag("")
-            ForEach(AppLanguage.available, id: \.self) { code in
-              Text(verbatim: AppLanguage.name(of: code)).tag(code)
-            }
-          }
-          .labelsHidden()
-          .fixedSize()
-          .controlSize(.small)
         }
-      }
-      SettingsGroup(title: String(localized: "About")) {
-        SettingsRow(
-          title: "Softfold \(version)",
-          subtitle: String(localized: "Your desktop follows your lid."),
-          leading: { Image(nsImage: NSApp.applicationIconImage).resizable() },
-          trailing: {
-            if let project = URL(string: "https://github.com/ReffWu/softfold") {
-              Link("GitHub", destination: project).font(.system(size: 12))
-            }
-          })
+        .labelsHidden()
+        .fixedSize()
+        .controlSize(.small)
       }
     }
   }
@@ -66,10 +52,10 @@ struct SettingsView: View {
       VStack(spacing: 4) {
         Image(nsImage: NSImage(named: "AppIcon-\(style.rawValue)") ?? NSImage())
           .resizable()
-          .frame(width: 56, height: 56)
+          .frame(width: 48, height: 48)
           .padding(3)
           .overlay(
-            RoundedRectangle(cornerRadius: 15, style: .continuous)
+            RoundedRectangle(cornerRadius: 13, style: .continuous)
               .strokeBorder(selected ? Color.accentColor : .clear, lineWidth: 2.5)
           )
         label
@@ -82,9 +68,6 @@ struct SettingsView: View {
     .accessibilityAddTraits(selected ? .isSelected : [])
   }
 
-  private var version: String {
-    Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
-  }
 }
 
 enum AppIconStyle: String {

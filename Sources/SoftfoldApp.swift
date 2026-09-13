@@ -7,12 +7,11 @@ import SwiftUI
 struct SoftfoldApp: App {
   @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
   @StateObject private var desktop = LiveDesktop()
-  @StateObject private var navigator = Navigator()
   @StateObject private var updater = Updater()
 
   var body: some Scene {
     Window("Softfold", id: "main") {
-      MainView(desktop: desktop, navigator: navigator)
+      MainView(desktop: desktop, updater: updater)
         .onAppear {
           delegate.onTerminate = { desktop.shutDown() }
           delegate.installToggleHotKey {
@@ -24,10 +23,7 @@ struct SoftfoldApp: App {
     .windowResizability(.contentSize)
     .defaultPosition(.center)
     .commands {
-      CommandGroup(replacing: .appSettings) {
-        Button("Settings…") { navigator.page = .general }
-          .keyboardShortcut(",")
-      }
+      WindowCommands()
       CommandGroup(replacing: .appInfo) {
         Text(
           "Softfold \(Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "")"
@@ -40,7 +36,7 @@ struct SoftfoldApp: App {
     MenuBarExtra(
       "Softfold", systemImage: desktop.isActive ? "laptopcomputer.and.arrow.down" : "laptopcomputer"
     ) {
-      SoftfoldMenu(desktop: desktop, navigator: navigator, updater: updater)
+      SoftfoldMenu(desktop: desktop, updater: updater)
     }
   }
 }
@@ -107,9 +103,22 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   }
 }
 
+struct WindowCommands: Commands {
+  @Environment(\.openWindow) private var openWindow
+
+  var body: some Commands {
+    CommandGroup(replacing: .appSettings) {
+      Button("Settings…") {
+        openWindow(id: "main")
+        NSApp.activate(ignoringOtherApps: true)
+      }
+      .keyboardShortcut(",")
+    }
+  }
+}
+
 struct SoftfoldMenu: View {
   @ObservedObject var desktop: LiveDesktop
-  @ObservedObject var navigator: Navigator
   @ObservedObject var updater: Updater
   @Environment(\.openWindow) private var openWindow
 
@@ -128,15 +137,9 @@ struct SoftfoldMenu: View {
       .disabled(!desktop.sensorAvailable || desktop.isStarting)
     Divider()
     Button("Open Softfold") {
-      navigator.page = .effect
       openWindow(id: "main")
       NSApp.activate(ignoringOtherApps: true)
     }
-    Button("Settings…") {
-      navigator.page = .general
-      openWindow(id: "main")
-      NSApp.activate(ignoringOtherApps: true)
-    }.keyboardShortcut(",")
     Button("Check for Updates…") { updater.checkForUpdates() }
     Button("Quit Softfold") { NSApp.terminate(nil) }.keyboardShortcut("q")
   }

@@ -30,7 +30,13 @@ final class DesktopPanel: NSPanel {
 }
 
 @MainActor
+final class LidReading: ObservableObject {
+  @Published fileprivate(set) var degrees: Double?
+}
+
+@MainActor
 final class LiveDesktop: NSObject, ObservableObject {
+  let lid = LidReading()
   @Published private(set) var isActive = false
   @Published private(set) var isStarting = false
   @Published private(set) var isWaitingForDisplay = false
@@ -76,7 +82,14 @@ final class LiveDesktop: NSObject, ObservableObject {
     motion = LidMotion(openAngle: openAngle)
     super.init()
     let motion = motion
+    let lid = lid
+    var shownDegree: Int?
     sensor.onAngle = { [weak self] angle in
+      let degree = angle.map { Int($0.rounded()) }
+      if degree != shownDegree {
+        shownDegree = degree
+        Task { @MainActor in lid.degrees = degree.map(Double.init) }
+      }
       let update = motion.receive(angle)
       guard update.availabilityChanged || update.beganClosing else { return }
       Task { @MainActor [weak self] in

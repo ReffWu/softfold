@@ -24,7 +24,7 @@ Softfold follows your MacBook's hinge. As you lower the screen, your live deskto
 
 On first launch, allow Screen Recording, reopen Softfold if macOS asks, and turn it on. It turns itself back on the next time you open it, and starts with your Mac from then on.
 
-The starting open angle is 100°. Prefer something else? Get comfortable and click **Set open position**. Softfold remembers it. <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd> turns it on or off from anywhere. Prefer a light frame around the icon? Switch it under **General > Look > App icon**.
+The starting open angle is 100°. Prefer something else? Get comfortable and click **Use Current Angle**. Softfold remembers it. <kbd>⌃</kbd> <kbd>⌥</kbd> <kbd>H</kbd> turns it on or off from anywhere. Prefer a light frame around the icon? Pick it in the Softfold window.
 
 ## Which MacBooks work
 
@@ -56,7 +56,7 @@ The full motion design is in [MOTION.md](MOTION.md).
 
 ## Languages
 
-English, Simplified Chinese, Traditional Chinese, Japanese, Korean, German, French, Spanish, Italian, Brazilian Portuguese, Russian, Dutch, Turkish, Polish, Arabic and Vietnamese. Softfold follows your Mac's language, or pick one under **General > Controls > Language**.
+English, Simplified Chinese, Traditional Chinese, Japanese, Korean, German, French, Spanish, Italian, Brazilian Portuguese, Russian, Dutch, Turkish, Polish, Arabic and Vietnamese. Softfold follows your Mac's language, or pick one in the Softfold window.
 
 ## Build from source
 
