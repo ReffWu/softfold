@@ -14,6 +14,11 @@ final class LidMotion {
   private var displayVelocity = 0.0
   private var lastFrame = 0.0
   private var lastSample = 0.0
+  private var focusesWhenHeld = true
+  private var anchor: Double?
+  private var movedAt = 0.0
+  private var held = false
+  private var focus = 0.0
 
   init(openAngle: Double = 100) {
     baseline = openAngle
@@ -29,7 +34,7 @@ final class LidMotion {
     lock.lock()
     defer { lock.unlock() }
     let changed = (angle == nil) != (value == nil)
-    let previous = target
+    let wasResting = resting
     angle = value
     if let value, let trackedAngle, lastSample > 0, time >= lastSample {
       let delta = max(time - lastSample, 0.001)
@@ -49,9 +54,29 @@ final class LidMotion {
     }
     lastSample = time
     updateTarget(at: time)
+    if held, focus >= 1 {
+      displayed = target
+      displayVelocity = 0
+      if target == 0 {
+        held = false
+        focus = 0
+      }
+    }
+    if let trackedAngle, anchor.map({ abs(trackedAngle - $0) >= 1 }) ?? true {
+      if held, let anchor, trackedAngle < anchor { held = false }
+      anchor = trackedAngle
+      movedAt = time
+    }
     return Update(
       availabilityChanged: changed, available: value != nil,
-      beganClosing: previous == 0 && target > 0)
+      beganClosing: wasResting && !resting)
+  }
+
+  func setFocusesWhenHeld(_ value: Bool) {
+    lock.lock()
+    defer { lock.unlock() }
+    focusesWhenHeld = value
+    if !value { held = false }
   }
 
   @discardableResult
@@ -80,6 +105,10 @@ final class LidMotion {
     displayed = 0
     displayVelocity = 0
     lastFrame = 0
+    anchor = angle
+    movedAt = CACurrentMediaTime()
+    held = false
+    focus = 0
   }
 
   private func updateTarget(at time: Double = CACurrentMediaTime()) {
@@ -98,6 +127,8 @@ final class LidMotion {
     guard enabled, angle != nil else {
       displayed = 0
       displayVelocity = 0
+      held = false
+      focus = 0
       return 0
     }
     updateTarget(at: time)
@@ -126,7 +157,9 @@ final class LidMotion {
       displayed = min(max(displayed, 0), 1)
       displayVelocity = 0
     }
-    return Float(displayed)
+    if focusesWhenHeld, !held, target > 0, time - movedAt >= 1 { held = true }
+    focus = held ? min(focus + delta / 0.35, 1) : max(focus - delta / 0.18, 0)
+    return Float(displayed * (1 - focus * focus * (3 - 2 * focus)))
   }
 
   private func velocity(at time: Double) -> Double {
@@ -136,6 +169,10 @@ final class LidMotion {
   var isClosing: Bool {
     lock.lock()
     defer { lock.unlock() }
-    return target > 0
+    return !resting
+  }
+
+  private var resting: Bool {
+    target == 0 || (held && focus >= 1)
   }
 }

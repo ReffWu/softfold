@@ -42,6 +42,8 @@ final class LiveDesktop: NSObject, ObservableObject {
   @Published private(set) var isWaitingForDisplay = false
   @Published private(set) var sensorAvailable = false
   @Published private(set) var openAngle: Double
+  @Published private(set) var focusesWhenHeld =
+    UserDefaults.standard.object(forKey: "focusesWhenHeld") as? Bool ?? true
   @Published private(set) var error: String?
   @Published private(set) var needsPermission = false
   @Published private(set) var isEnabled = UserDefaults.standard.bool(forKey: "effectEnabled")
@@ -81,6 +83,7 @@ final class LiveDesktop: NSObject, ObservableObject {
     self.openAngle = openAngle
     motion = LidMotion(openAngle: openAngle)
     super.init()
+    motion.setFocusesWhenHeld(focusesWhenHeld)
     let motion = motion
     let lid = lid
     var shownDegree: Int?
@@ -169,6 +172,13 @@ final class LiveDesktop: NSObject, ObservableObject {
     UserDefaults.standard.set(true, forKey: "setUpOnFirstEnable")
     try? SMAppService.mainApp.register()
     if let angle = lid.degrees, (80...140).contains(angle) { setOpenPosition() }
+  }
+
+  func setFocusesWhenHeld(_ value: Bool) {
+    focusesWhenHeld = value
+    UserDefaults.standard.set(value, forKey: "focusesWhenHeld")
+    motion.setFocusesWhenHeld(value)
+    beginRendering()
   }
 
   func setOpenPosition() {

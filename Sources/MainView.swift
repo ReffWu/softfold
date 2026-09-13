@@ -13,6 +13,7 @@ struct MainView: View {
       VStack(spacing: 16) {
         effect
         position
+        focus
         PreferencesCard(updater: updater)
         MoreAppsCard()
       }
@@ -103,6 +104,22 @@ struct MainView: View {
         .controlSize(.small)
         .disabled(!desktop.sensorAvailable || desktop.isStarting)
         .help("Save the lid angle you are viewing at right now")
+      }
+    }
+  }
+
+  private var focus: some View {
+    SettingsGroup {
+      SettingsRow(
+        "camera.aperture", tint: .teal, title: String(localized: "Sharpen when you stop"),
+        subtitle: String(localized: "Pause partway and the desktop comes back into focus.")
+      ) {
+        Toggle(
+          "Sharpen when you stop",
+          isOn: Binding(get: { desktop.focusesWhenHeld }, set: { desktop.setFocusesWhenHeld($0) })
+        )
+        .toggleStyle(.switch)
+        .labelsHidden()
       }
     }
   }
