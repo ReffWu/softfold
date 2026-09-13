@@ -190,6 +190,7 @@ struct AboutView: View {
     }
     .frame(width: 360)
     .background(Color(nsColor: .windowBackgroundColor).ignoresSafeArea())
+    .background(AboutWindowChrome())
     .onAppear { style = AppIconStyle.current }
   }
 
@@ -199,4 +200,16 @@ struct AboutView: View {
     guard let build = info?["CFBundleVersion"] as? String, !build.isEmpty else { return version }
     return "\(version) (\(build))"
   }
+}
+
+private struct AboutWindowChrome: NSViewRepresentable {
+  func makeNSView(context: Context) -> NSView {
+    let view = NSView()
+    DispatchQueue.main.async {
+      view.window?.styleMask.remove([.miniaturizable, .resizable])
+    }
+    return view
+  }
+
+  func updateNSView(_ view: NSView, context: Context) {}
 }
