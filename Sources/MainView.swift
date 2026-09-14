@@ -650,7 +650,7 @@ struct LidPicture: View {
       .shadow(color: Color.accentColor.opacity(0.9), radius: 5)
       .offset(
         x: length - points(look.chassis.topBezel + look.chassis.displayHeight),
-        y: lidThickness - 1.6
+        y: lidThickness - 0.3
       )
       .frame(width: length, height: lidThickness + hingeGap, alignment: .topLeading)
       .opacity(active ? 1 : 0)
