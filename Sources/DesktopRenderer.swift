@@ -58,12 +58,6 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
     CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, device, nil, &textureCache)
   }
 
-  var hasFrame: Bool {
-    lock.lock()
-    defer { lock.unlock() }
-    return frame != nil
-  }
-
   func receive(_ frame: CVPixelBuffer) {
     lock.lock()
     if self.frame == nil { arrivedAt = CACurrentMediaTime() }

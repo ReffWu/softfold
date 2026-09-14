@@ -161,6 +161,17 @@ struct MenuBarPanel: View {
           "angle", tint: .indigo, title: String(localized: "Open position"),
           subtitle: degrees(desktop.openAngle)
         ) {
+          if !desktop.isDefaultOpenAngle {
+            Button {
+              withAnimation(.smooth(duration: 0.4)) { desktop.restoreDefaultOpenPosition() }
+            } label: {
+              Image(systemName: "arrow.counterclockwise")
+            }
+            .accessibilityLabel(Text("Restore Default"))
+            .controlSize(.small)
+            .fixedSize()
+            .help(Text("Go back to \(degrees(LiveDesktop.defaultOpenAngle))"))
+          }
           Button("Use Current Angle") {
             withAnimation(.smooth(duration: 0.4)) { desktop.setOpenPosition() }
           }

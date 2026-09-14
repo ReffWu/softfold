@@ -282,8 +282,6 @@ final class LiveDesktop: NSObject, ObservableObject {
       self.renderer = renderer
       self.filter = filter
       self.configuration = configuration
-      let stream = try makeStream(
-        filter: filter, configuration: configuration, renderer: renderer, session: session)
       renderer.onPresentation = { [weak self] failure in
         guard let self, self.session == session else { return }
         if let failure {
@@ -293,30 +291,11 @@ final class LiveDesktop: NSObject, ObservableObject {
         }
       }
       renderer.onRest = { [weak self] in self?.restOverlay() }
-      try await stream.startCapture()
-      guard self.session == session else {
-        try? await stream.stopCapture()
-        return
-      }
-      let deadline = CACurrentMediaTime() + 5
-      while !renderer.hasFrame {
-        guard self.session == session else { return }
-        guard CACurrentMediaTime() < deadline else {
-          needsPermission = true
-          throw DesktopError.message(
-            String(
-              localized:
-                "No desktop frames arrived. Check Screen Recording permission and reopen Softfold.")
-          )
-        }
-        try await Task.sleep(for: .milliseconds(10))
-      }
-      guard self.session == session else { return }
       guard sensorAvailable else { throw DesktopError.message(Self.sensorDroppedMessage) }
       motion.setEnabled(true)
       isActive = true
       isStarting = false
-      if motion.isClosing { beginRendering() } else { pauseCapture() }
+      if motion.isClosing { beginRendering() }
     } catch {
       guard self.session == session else { return }
       stop()
