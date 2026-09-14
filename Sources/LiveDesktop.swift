@@ -92,7 +92,9 @@ final class LiveDesktop: NSObject, ObservableObject {
     let lid = lid
     var shownDegree: Int?
     sensor.onAngle = { [weak self] angle in
-      let degree = angle.map { Int($0.rounded()) }
+      let degree = angle.map { value in
+        shownDegree.flatMap { abs(value - Double($0)) < 0.8 ? $0 : nil } ?? Int(value.rounded())
+      }
       if degree != shownDegree {
         shownDegree = degree
         Task { @MainActor in lid.degrees = degree.map(Double.init) }

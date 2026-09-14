@@ -395,6 +395,7 @@ struct LidPicture: View {
   private var length: CGFloat { points(look.chassis.depth) }
   private var baseHeight: CGFloat { points(look.chassis.baseHeight) }
   private var lidThickness: CGFloat { points(look.chassis.lidThickness) }
+  private var glowWidth: CGFloat { min(1.6, lidThickness * 0.5) }
   private var hingeDrop: CGFloat { points(look.chassis.hingeDrop) }
   private var hingeGap: CGFloat { points(look.chassis.hingeGap) }
   private var pivot: CGPoint {
@@ -647,11 +648,11 @@ struct LidPicture: View {
   private var screenGlow: some View {
     Rectangle()
       .fill(Color.accentColor)
-      .frame(width: points(look.chassis.displayHeight), height: 1.6)
+      .frame(width: points(look.chassis.displayHeight), height: glowWidth)
       .shadow(color: Color.accentColor.opacity(0.9), radius: 5)
       .offset(
         x: length - points(look.chassis.topBezel + look.chassis.displayHeight),
-        y: lidThickness - 1.6
+        y: lidThickness - glowWidth
       )
       .frame(width: length, height: lidThickness + hingeGap, alignment: .topLeading)
       .opacity(active ? 1 : 0)
