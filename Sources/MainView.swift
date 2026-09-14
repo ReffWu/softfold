@@ -383,6 +383,9 @@ struct LidPicture: View {
   var body: some View {
     let live = available ? lid.degrees : nil
     let angle = min(max(live ?? openAngle, 0), 180)
+    let lidAnchor = UnitPoint(
+      x: pivot.x / length, y: (lidThickness + pivot.y) / (lidThickness + hingeGap))
+    let screenAngle = max(angle, min(max(openAngle, 0), 180))
     ZStack(alignment: .topLeading) {
       Ellipse()
         .fill(Color.black.opacity(0.12))
@@ -391,13 +394,12 @@ struct LidPicture: View {
         .offset(x: Self.hinge.x - 11, y: Self.hinge.y + baseHeight)
       guide(angle: openAngle)
       lidBar
-        .rotationEffect(
-          .degrees(-angle),
-          anchor: UnitPoint(
-            x: pivot.x / length, y: (lidThickness + pivot.y) / (lidThickness + hingeGap))
-        )
+        .rotationEffect(.degrees(-angle), anchor: lidAnchor)
         .offset(x: Self.hinge.x, y: Self.hinge.y - lidThickness)
         .opacity(live == nil ? 0.35 : 1)
+      screenGlow
+        .rotationEffect(.degrees(-screenAngle), anchor: lidAnchor)
+        .offset(x: Self.hinge.x, y: Self.hinge.y - lidThickness)
       base
         .offset(x: Self.hinge.x, y: Self.hinge.y)
     }
@@ -599,17 +601,19 @@ struct LidPicture: View {
         with: .color(look.shade(0.45)))
     }
     .frame(width: length, height: lidThickness + hingeGap, alignment: .topLeading)
-    .overlay(alignment: .topLeading) {
-      Rectangle()
-        .fill(Color.accentColor)
-        .frame(width: points(look.chassis.displayHeight), height: 0.6)
-        .shadow(color: Color.accentColor.opacity(0.9), radius: 5)
-        .offset(
-          x: length - points(look.chassis.topBezel + look.chassis.displayHeight),
-          y: lidThickness - 0.6
-        )
-        .opacity(active ? 1 : 0)
-    }
+  }
+
+  private var screenGlow: some View {
+    Rectangle()
+      .fill(Color.accentColor)
+      .frame(width: points(look.chassis.displayHeight), height: 0.6)
+      .shadow(color: Color.accentColor.opacity(0.9), radius: 5)
+      .offset(
+        x: length - points(look.chassis.topBezel + look.chassis.displayHeight),
+        y: lidThickness - 0.6
+      )
+      .frame(width: length, height: lidThickness + hingeGap, alignment: .topLeading)
+      .opacity(active ? 1 : 0)
   }
 
   private func guide(angle: Double) -> some View {
