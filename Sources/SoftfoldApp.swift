@@ -35,11 +35,12 @@ struct SoftfoldApp: App {
     .windowResizability(.contentSize)
     .defaultPosition(.center)
     MenuBarExtra {
-      SoftfoldMenu(desktop: desktop, updater: updater)
+      MenuBarPanel(desktop: desktop, updater: updater)
     } label: {
       Image(desktop.isActive ? "MenuBarIconActive" : "MenuBarIcon")
         .accessibilityLabel("Softfold")
     }
+    .menuBarExtraStyle(.window)
   }
 }
 
@@ -50,6 +51,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   private var hotKeyHandler: EventHandlerRef?
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
+
+  func applicationWillFinishLaunching(_ notification: Notification) {
+    DockIcon.apply()
+  }
 
   func applicationDidFinishLaunching(_ notification: Notification) {
     AppIconStyle.restore()
@@ -125,35 +130,138 @@ struct WindowCommands: Commands {
   }
 }
 
-struct SoftfoldMenu: View {
+struct MenuBarPanel: View {
   @ObservedObject var desktop: LiveDesktop
   @ObservedObject var updater: Updater
   @Environment(\.openWindow) private var openWindow
 
   var body: some View {
-    Button {
-      desktop.setEnabled(!desktop.isEnabled)
-    } label: {
-      HStack {
-        Text(desktop.isEnabled ? String(localized: "Turn off") : String(localized: "Turn on"))
-        Spacer()
-        Text("⌃⌥H").foregroundStyle(.secondary)
+    VStack(spacing: 12) {
+      LidPicture(
+        lid: desktop.lid, openAngle: desktop.openAngle, active: desktop.isActive,
+        available: desktop.sensorAvailable
+      )
+      .padding(.top, 26)
+      VStack(spacing: 0) {
+        SettingsRow(
+          title: desktop.statusTitle, subtitle: desktop.statusSubtitle,
+          leading: { SettingsIcon(symbol: "power", tint: desktop.isActive ? .green : .gray) }
+        ) {
+          Toggle(
+            "Turn Softfold on or off",
+            isOn: Binding(get: { desktop.isEnabled }, set: { desktop.setEnabled($0) })
+          )
+          .toggleStyle(.switch)
+          .labelsHidden()
+          .disabled(desktop.isStarting)
+          .help(Text("⌃⌥H"))
+        }
+        SettingsDivider()
+        SettingsRow(
+          "angle", tint: .indigo, title: String(localized: "Open position"),
+          subtitle: degrees(desktop.openAngle)
+        ) {
+          Button("Use Current Angle") {
+            withAnimation(.smooth(duration: 0.4)) { desktop.setOpenPosition() }
+          }
+          .controlSize(.small)
+          .fixedSize()
+          .disabled(!desktop.sensorAvailable || desktop.isStarting)
+          .help("Save the lid angle you are viewing at right now")
+        }
+      }
+      .panelCard()
+      if let error = desktop.error {
+        HStack(alignment: .top, spacing: 8) {
+          Image(systemName: "exclamationmark.triangle.fill")
+            .foregroundStyle(.orange)
+          Text(error)
+            .font(.system(size: 11))
+            .fixedSize(horizontal: false, vertical: true)
+          Spacer(minLength: 4)
+          if desktop.needsPermission {
+            Button("Open Settings", action: openScreenRecordingSettings)
+              .controlSize(.small)
+          }
+        }
+        .padding(10)
+        .panelCard()
+      }
+      Divider().padding(.horizontal, 6)
+      VStack(spacing: 0) {
+        PanelAction(symbol: "gearshape", title: String(localized: "Open Softfold"), shortcut: "⌘,")
+        {
+          openWindow(id: "main")
+          NSApp.activate(ignoringOtherApps: true)
+        }
+        .keyboardShortcut(",")
+        PanelAction(
+          symbol: "arrow.triangle.2.circlepath", title: String(localized: "Check for Updates…")
+        ) {
+          updater.checkForUpdates()
+        }
+        PanelAction(symbol: "power", title: String(localized: "Quit Softfold"), shortcut: "⌘Q") {
+          NSApp.terminate(nil)
+        }
+        .keyboardShortcut("q")
       }
     }
-    .disabled(desktop.isStarting)
-    Button("Set open position") { desktop.setOpenPosition() }
-      .disabled(!desktop.sensorAvailable || desktop.isStarting)
-    Divider()
-    Button("About Softfold") {
-      openWindow(id: "about")
-      NSApp.activate(ignoringOtherApps: true)
+    .padding(.horizontal, 12)
+    .padding(.top, 8)
+    .padding(.bottom, 6)
+    .frame(width: 330)
+    .background(.regularMaterial)
+  }
+}
+
+private struct PanelAction: View {
+  let symbol: String
+  let title: String
+  var shortcut: String?
+  let action: () -> Void
+
+  @State private var hovering = false
+
+  var body: some View {
+    Button(action: action) {
+      HStack(spacing: 8) {
+        Image(systemName: symbol)
+          .font(.system(size: 12))
+          .foregroundStyle(.secondary)
+          .frame(width: 18)
+        Text(verbatim: title)
+          .font(.system(size: 13))
+          .lineLimit(1)
+        Spacer(minLength: 8)
+        if let shortcut {
+          Text(verbatim: shortcut)
+            .font(.system(size: 12))
+            .foregroundStyle(.tertiary)
+        }
+      }
+      .padding(.horizontal, 8)
+      .frame(height: 26)
+      .background(
+        RoundedRectangle(cornerRadius: 6, style: .continuous)
+          .fill(Color.primary.opacity(hovering ? 0.09 : 0))
+      )
+      .contentShape(Rectangle())
     }
-    Button("Open Softfold") {
-      openWindow(id: "main")
-      NSApp.activate(ignoringOtherApps: true)
-    }
-    Button("Check for Updates…") { updater.checkForUpdates() }
-    Button("Quit Softfold") { NSApp.terminate(nil) }.keyboardShortcut("q")
+    .buttonStyle(.plain)
+    .onHover { hovering = $0 }
+  }
+}
+
+extension View {
+  fileprivate func panelCard() -> some View {
+    background(
+      RoundedRectangle(cornerRadius: 10, style: .continuous)
+        .fill(Color.primary.opacity(0.05))
+    )
+    .overlay(
+      RoundedRectangle(cornerRadius: 10, style: .continuous)
+        .strokeBorder(Color.primary.opacity(0.06), lineWidth: 1)
+    )
   }
 }
 

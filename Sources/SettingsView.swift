@@ -4,6 +4,7 @@ struct PreferencesCard: View {
   @ObservedObject var updater: Updater
   @State private var language = AppLanguage.current
   @State private var iconStyle = AppIconStyle.current
+  @AppStorage(DockIcon.key) private var showsInDock = false
 
   var body: some View {
     SettingsGroup {
@@ -12,6 +13,13 @@ struct PreferencesCard: View {
           iconChoice(.dark, label: Text("Dark"))
           iconChoice(.light, label: Text("Light"))
         }
+      }
+      SettingsDivider()
+      SettingsRow("dock.rectangle", tint: .gray, title: String(localized: "Show in Dock")) {
+        Toggle("Show in Dock", isOn: $showsInDock)
+          .toggleStyle(.switch)
+          .labelsHidden()
+          .onChange(of: showsInDock) { DockIcon.apply() }
       }
       SettingsDivider()
       SettingsRow(
@@ -92,6 +100,21 @@ struct PreferencesCard: View {
     .accessibilityAddTraits(selected ? .isSelected : [])
   }
 
+}
+
+enum DockIcon {
+  static let key = "showsInDock"
+
+  static func apply() {
+    let policy: NSApplication.ActivationPolicy =
+      UserDefaults.standard.bool(forKey: key) ? .regular : .accessory
+    guard NSApp.activationPolicy() != policy else { return }
+    NSApp.setActivationPolicy(policy)
+    DispatchQueue.main.async {
+      NSApp.activate(ignoringOtherApps: true)
+      NSApp.windows.first { $0.isVisible && $0.canBecomeMain }?.makeKeyAndOrderFront(nil)
+    }
+  }
 }
 
 enum AppIconStyle: String {
