@@ -75,7 +75,7 @@ final class LiveDesktop: NSObject, ObservableObject {
   private var configuration: SCStreamConfiguration?
   private var lastCaptureRecovery = 0.0
   private var capturedDisplayID: CGDirectDisplayID?
-  private var includedWindowIDs = Set<CGWindowID>()
+  private var excludedWindowIDs = Set<CGWindowID>()
 
   override init() {
     let savedAngle = UserDefaults.standard.object(forKey: "openAngle") as? Double ?? 100
@@ -155,7 +155,7 @@ final class LiveDesktop: NSObject, ObservableObject {
       NotificationCenter.default.addObserver(
         forName: NSWindow.didBecomeKeyNotification, object: nil, queue: .main
       ) { [weak self] _ in
-        Task { @MainActor in await self?.refreshIncludedWindows() }
+        Task { @MainActor in await self?.refreshExcludedWindows() }
       })
   }
 
@@ -234,15 +234,19 @@ final class LiveDesktop: NSObject, ObservableObject {
         isWaitingForDisplay = true
         return
       }
-      let ownApplications = content.applications.filter {
-        $0.processID == ProcessInfo.processInfo.processIdentifier
-      }
-      let ownWindows = includedWindows(in: content)
-      let filter = SCContentFilter(
-        display: display, excludingApplications: ownApplications, exceptingWindows: ownWindows)
-      capturedDisplayID = display.displayID
-      includedWindowIDs = Set(ownWindows.map(\.windowID))
       let area = screen.frame
+      makeOverlay(screen: screen, area: area, renderer: renderer)
+      let withOverlay = try await SCShareableContent.excludingDesktopWindows(
+        false, onScreenWindowsOnly: false)
+      guard self.session == session else { return }
+      let hidden = excludedWindows(in: withOverlay)
+      guard hidden.contains(where: { $0.windowID == CGWindowID(overlay?.windowNumber ?? 0) })
+      else {
+        throw DesktopError.message(String(localized: "Could not prepare the desktop renderer."))
+      }
+      let filter = SCContentFilter(display: display, excludingWindows: hidden)
+      capturedDisplayID = display.displayID
+      excludedWindowIDs = Set(hidden.map(\.windowID))
       let configuration = SCStreamConfiguration()
       configuration.sourceRect = CGRect(
         x: area.minX - screen.frame.minX, y: screen.frame.maxY - area.maxY, width: area.width,
@@ -272,7 +276,6 @@ final class LiveDesktop: NSObject, ObservableObject {
         }
       }
       renderer.onRest = { [weak self] in self?.restOverlay() }
-      makeOverlay(screen: screen, area: area, renderer: renderer)
       try await stream.startCapture()
       guard self.session == session else {
         try? await stream.stopCapture()
@@ -387,15 +390,15 @@ final class LiveDesktop: NSObject, ObservableObject {
     }
   }
 
-  private func includedWindows(in content: SCShareableContent) -> [SCWindow] {
+  private func excludedWindows(in content: SCShareableContent) -> [SCWindow] {
     content.windows.filter {
       $0.owningApplication?.processID == ProcessInfo.processInfo.processIdentifier
-        && $0.windowID != CGWindowID(overlay?.windowNumber ?? 0)
-        && $0.title != "Softfold Desktop Overlay"
+        && ($0.windowID == CGWindowID(overlay?.windowNumber ?? 0)
+          || $0.title == "Softfold Desktop Overlay" || $0.windowLayer != 0)
     }
   }
 
-  private func refreshIncludedWindows() async {
+  private func refreshExcludedWindows() async {
     guard isActive, let capturedDisplayID else { return }
     let currentSession = session
     do {
@@ -404,17 +407,15 @@ final class LiveDesktop: NSObject, ObservableObject {
       guard session == currentSession,
         let display = content.displays.first(where: { $0.displayID == capturedDisplayID })
       else { return }
-      let windows = includedWindows(in: content)
+      let windows = excludedWindows(in: content)
       let windowIDs = Set(windows.map(\.windowID))
-      guard windowIDs != includedWindowIDs else { return }
-      let applications = content.applications.filter {
-        $0.processID == ProcessInfo.processInfo.processIdentifier
-      }
-      let filter = SCContentFilter(
-        display: display, excludingApplications: applications, exceptingWindows: windows)
+      guard windowIDs != excludedWindowIDs,
+        windowIDs.contains(CGWindowID(overlay?.windowNumber ?? 0))
+      else { return }
+      let filter = SCContentFilter(display: display, excludingWindows: windows)
       self.filter = filter
       try await stream?.updateContentFilter(filter)
-      if session == currentSession { includedWindowIDs = windowIDs }
+      if session == currentSession { excludedWindowIDs = windowIDs }
     } catch {
       guard session == currentSession else { return }
       stop()
@@ -584,7 +585,7 @@ final class LiveDesktop: NSObject, ObservableObject {
     frames = nil
     renderer = nil
     capturedDisplayID = nil
-    includedWindowIDs = []
+    excludedWindowIDs = []
     isActive = false
     isStarting = false
     isWaitingForDisplay = false
