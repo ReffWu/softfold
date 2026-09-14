@@ -36,7 +36,7 @@ struct MainView: View {
     VStack(spacing: 4) {
       LidPicture(
         lid: desktop.lid, openAngle: desktop.openAngle, active: desktop.isActive,
-        available: desktop.sensorAvailable
+        available: desktop.sensorAvailable, folding: desktop.isFolding
       )
       .padding(.bottom, 14)
       Text(verbatim: "Softfold")
@@ -46,7 +46,7 @@ struct MainView: View {
         .foregroundStyle(.secondary)
     }
     .frame(maxWidth: .infinity)
-    .padding(.top, 38)
+    .padding(.top, 34)
     .padding(.bottom, 24)
   }
 
@@ -363,9 +363,10 @@ struct LidPicture: View {
   let openAngle: Double
   let active: Bool
   let available: Bool
+  var folding = false
   var look = MacLook.current
 
-  private static let hinge = CGPoint(x: 46, y: 102)
+  private static let hinge = CGPoint(x: 46, y: 146)
 
   private func points(_ centimeters: Double) -> CGFloat {
     CGFloat(centimeters) * MacLook.pointsPerCentimeter
@@ -385,7 +386,7 @@ struct LidPicture: View {
     let angle = min(max(live ?? openAngle, 0), 180)
     let lidAnchor = UnitPoint(
       x: pivot.x / length, y: (lidThickness + pivot.y) / (lidThickness + hingeGap))
-    let screenAngle = max(angle, min(max(openAngle, 0), 180))
+    let screenAngle = folding ? max(angle, min(max(openAngle, 0), 180)) : angle
     ZStack(alignment: .topLeading) {
       Ellipse()
         .fill(Color.black.opacity(0.12))
@@ -403,10 +404,11 @@ struct LidPicture: View {
       base
         .offset(x: Self.hinge.x, y: Self.hinge.y)
     }
-    .frame(width: 200, height: 116, alignment: .topLeading)
+    .frame(width: 200, height: 160, alignment: .topLeading)
     .animation(.smooth(duration: 0.2), value: angle)
     .animation(.smooth(duration: 0.4), value: openAngle)
     .animation(.easeInOut(duration: 0.3), value: active)
+    .animation(.smooth(duration: 0.35), value: folding)
     .accessibilityElement()
     .accessibilityLabel(Text("Lid angle"))
     .accessibilityValue(Text(verbatim: degrees(angle)))
@@ -637,7 +639,7 @@ struct LidPicture: View {
         .fixedSize()
         .position(tip)
     }
-    .frame(width: 200, height: 116, alignment: .topLeading)
+    .frame(width: 200, height: 160, alignment: .topLeading)
   }
 
 }

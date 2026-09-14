@@ -139,9 +139,9 @@ struct MenuBarPanel: View {
     VStack(spacing: 12) {
       LidPicture(
         lid: desktop.lid, openAngle: desktop.openAngle, active: desktop.isActive,
-        available: desktop.sensorAvailable
+        available: desktop.sensorAvailable, folding: desktop.isFolding
       )
-      .padding(.top, 26)
+      .padding(.top, 8)
       VStack(spacing: 0) {
         SettingsRow(
           title: desktop.statusTitle, subtitle: desktop.statusSubtitle,

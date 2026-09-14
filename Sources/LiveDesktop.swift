@@ -38,6 +38,7 @@ final class LidReading: ObservableObject {
 final class LiveDesktop: NSObject, ObservableObject {
   let lid = LidReading()
   @Published private(set) var isActive = false
+  @Published private(set) var isFolding = false
   @Published private(set) var isStarting = false
   @Published private(set) var isWaitingForDisplay = false
   @Published private(set) var sensorAvailable = false
@@ -495,6 +496,7 @@ final class LiveDesktop: NSObject, ObservableObject {
 
   private func beginRendering() {
     guard isActive, motion.isClosing else { return }
+    isFolding = true
     resumeCapture()
     displayLink?.isPaused = false
   }
@@ -507,6 +509,7 @@ final class LiveDesktop: NSObject, ObservableObject {
 
   private func restOverlay() {
     guard !motion.isClosing else { return }
+    isFolding = false
     displayLink?.isPaused = true
     pauseCapture()
   }
@@ -587,6 +590,7 @@ final class LiveDesktop: NSObject, ObservableObject {
     capturedDisplayID = nil
     excludedWindowIDs = []
     isActive = false
+    isFolding = false
     isStarting = false
     isWaitingForDisplay = false
   }
