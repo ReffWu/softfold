@@ -20,7 +20,7 @@ final class LidMotion {
   private var held = false
   private var focus = 0.0
 
-  init(openAngle: Double = 100) {
+  init(openAngle: Double = LiveDesktop.defaultOpenAngle) {
     baseline = openAngle
   }
 
@@ -77,6 +77,13 @@ final class LidMotion {
     defer { lock.unlock() }
     focusesWhenHeld = value
     if !value { held = false }
+  }
+
+  func setBaseline(_ value: Double) {
+    lock.lock()
+    defer { lock.unlock() }
+    baseline = value
+    reset()
   }
 
   @discardableResult

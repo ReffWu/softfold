@@ -33,21 +33,25 @@ struct MainView: View {
   }
 
   private var hero: some View {
-    VStack(spacing: 4) {
+    HStack(alignment: .center, spacing: 8) {
       LidPicture(
         lid: desktop.lid, openAngle: desktop.openAngle, active: desktop.isActive,
-        available: desktop.sensorAvailable, folding: desktop.isFolding
+        available: desktop.sensorAvailable, folding: desktop.isFolding, scale: 5.6
       )
-      .padding(.bottom, 14)
-      Text(verbatim: "Softfold")
-        .font(.system(size: 22, weight: .semibold))
-      Text("Your desktop follows your lid.")
-        .font(.system(size: 13))
-        .foregroundStyle(.secondary)
+      VStack(alignment: .leading, spacing: 4) {
+        Text(verbatim: "Softfold")
+          .font(.system(size: 22, weight: .semibold))
+        Text("Your desktop follows your lid.")
+          .font(.system(size: 13))
+          .foregroundStyle(.secondary)
+          .fixedSize(horizontal: false, vertical: true)
+      }
+      Spacer(minLength: 0)
     }
-    .frame(maxWidth: .infinity)
-    .padding(.top, 34)
-    .padding(.bottom, 24)
+    .padding(.leading, 12)
+    .padding(.trailing, 16)
+    .padding(.top, -14)
+    .padding(.bottom, 10)
   }
 
   private var effect: some View {
@@ -101,10 +105,19 @@ struct MainView: View {
         "angle", tint: .indigo, title: String(localized: "Open position"),
         subtitle: degrees(desktop.openAngle)
       ) {
+        if !desktop.isDefaultOpenAngle {
+          Button("Restore Default") {
+            withAnimation(.smooth(duration: 0.4)) { desktop.restoreDefaultOpenPosition() }
+          }
+          .controlSize(.small)
+          .fixedSize()
+          .help(Text("Go back to \(degrees(LiveDesktop.defaultOpenAngle))"))
+        }
         Button("Use Current Angle") {
           withAnimation(.smooth(duration: 0.4)) { desktop.setOpenPosition() }
         }
         .controlSize(.small)
+        .fixedSize()
         .disabled(!desktop.sensorAvailable || desktop.isStarting)
         .help("Save the lid angle you are viewing at right now")
       }
@@ -364,12 +377,19 @@ struct LidPicture: View {
   let active: Bool
   let available: Bool
   var folding = false
+  var scale = MacLook.pointsPerCentimeter
+  var centered = false
   var look = MacLook.current
 
-  private static let hinge = CGPoint(x: 46, y: 146)
+  private var hinge: CGPoint { CGPoint(x: length * 0.55 + 10, y: length + 32) }
+  private var canvas: CGSize {
+    CGSize(
+      width: centered ? 2 * hinge.x + length : hinge.x + length + 4,
+      height: hinge.y + baseHeight + points(look.chassis.footHeight) + 10)
+  }
 
   private func points(_ centimeters: Double) -> CGFloat {
-    CGFloat(centimeters) * MacLook.pointsPerCentimeter
+    CGFloat(centimeters) * scale
   }
 
   private var length: CGFloat { points(look.chassis.depth) }
@@ -392,19 +412,37 @@ struct LidPicture: View {
         .fill(Color.black.opacity(0.12))
         .frame(width: length + 22, height: 10)
         .blur(radius: 5)
-        .offset(x: Self.hinge.x - 11, y: Self.hinge.y + baseHeight)
+        .offset(x: hinge.x - 11, y: hinge.y + baseHeight)
       guide(angle: openAngle)
+      ZStack(alignment: .topLeading) {
+        screenLight
+          .rotationEffect(.degrees(-screenAngle), anchor: lidAnchor)
+          .offset(x: hinge.x, y: hinge.y - lidThickness)
+      }
+      .frame(width: canvas.width, height: canvas.height, alignment: .topLeading)
+      .mask(alignment: .topLeading) {
+        LinearGradient(
+          stops: [
+            .init(color: .clear, location: 2 * length / (hinge.y + 2 * length + 1)),
+            .init(color: .black, location: (2 * length + 24) / (hinge.y + 2 * length + 1)),
+            .init(color: .black, location: (hinge.y + 2 * length - 3) / (hinge.y + 2 * length + 1)),
+            .init(color: .clear, location: 1),
+          ], startPoint: .top, endPoint: .bottom
+        )
+        .frame(width: canvas.width + 2 * length, height: hinge.y + 2 * length + 1)
+        .offset(x: -length, y: -2 * length)
+      }
       lidBar
         .rotationEffect(.degrees(-angle), anchor: lidAnchor)
-        .offset(x: Self.hinge.x, y: Self.hinge.y - lidThickness)
+        .offset(x: hinge.x, y: hinge.y - lidThickness)
         .opacity(live == nil ? 0.35 : 1)
       screenGlow
         .rotationEffect(.degrees(-screenAngle), anchor: lidAnchor)
-        .offset(x: Self.hinge.x, y: Self.hinge.y - lidThickness)
+        .offset(x: hinge.x, y: hinge.y - lidThickness)
       base
-        .offset(x: Self.hinge.x, y: Self.hinge.y)
+        .offset(x: hinge.x, y: hinge.y)
     }
-    .frame(width: 200, height: 160, alignment: .topLeading)
+    .frame(width: canvas.width, height: canvas.height, alignment: .topLeading)
     .animation(.smooth(duration: 0.2), value: angle)
     .animation(.smooth(duration: 0.4), value: openAngle)
     .animation(.easeInOut(duration: 0.3), value: active)
@@ -608,22 +646,73 @@ struct LidPicture: View {
   private var screenGlow: some View {
     Rectangle()
       .fill(Color.accentColor)
-      .frame(width: points(look.chassis.displayHeight), height: 0.6)
+      .frame(width: points(look.chassis.displayHeight), height: 1.6)
       .shadow(color: Color.accentColor.opacity(0.9), radius: 5)
       .offset(
         x: length - points(look.chassis.topBezel + look.chassis.displayHeight),
-        y: lidThickness - 0.6
+        y: lidThickness - 1.6
       )
       .frame(width: length, height: lidThickness + hingeGap, alignment: .topLeading)
       .opacity(active ? 1 : 0)
+  }
+
+  private var screenLight: some View {
+    let width = points(look.chassis.displayHeight)
+    let start = length - points(look.chassis.topBezel + look.chassis.displayHeight)
+    let layers = (1...8).map {
+      index -> (reach: CGFloat, spread: CGFloat, strength: Double, softness: CGFloat) in
+      let step = Double(index) / 8
+      return (
+        CGFloat(0.04 + 0.72 * pow(step, 1.5)), CGFloat(0.5 * pow(step, 1.6)),
+        0.22 * pow(1 - step, 1.3) + 0.02, CGFloat(1 + 22 * step)
+      )
+    }
+    return ZStack(alignment: .topLeading) {
+      ForEach(Array(layers.enumerated()), id: \.offset) { _, layer in
+        let reach = width * layer.reach
+        let spread = width * layer.spread
+        Path { path in
+          path.move(to: CGPoint(x: spread, y: 0))
+          path.addLine(to: CGPoint(x: spread + width, y: 0))
+          path.addLine(to: CGPoint(x: width + 2 * spread, y: reach))
+          path.addLine(to: CGPoint(x: 0, y: reach))
+          path.closeSubpath()
+        }
+        .fill(
+          LinearGradient(
+            colors: [
+              Color.accentColor.opacity(layer.strength), Color.accentColor.opacity(0),
+            ],
+            startPoint: .top, endPoint: .bottom)
+        )
+        .frame(width: width + 2 * spread, height: reach)
+        .blur(radius: layer.softness)
+        .offset(x: start - spread, y: lidThickness)
+      }
+    }
+    .frame(width: length, height: lidThickness + hingeGap, alignment: .topLeading)
+    .mask(alignment: .topLeading) {
+      let reach = width * 0.3
+      LinearGradient(
+        stops: [
+          .init(color: .clear, location: 0),
+          .init(color: .black, location: reach / (width + 2 * reach)),
+          .init(color: .black, location: (reach + width) / (width + 2 * reach)),
+          .init(color: .clear, location: 1),
+        ], startPoint: .leading, endPoint: .trailing
+      )
+      .frame(width: width + 2 * reach, height: width * 3)
+      .offset(x: start - reach, y: lidThickness)
+    }
+    .opacity(active ? 1 : 0)
   }
 
   private func guide(angle: Double) -> some View {
     let radians = CGFloat(angle) * .pi / 180
     let direction = CGVector(dx: cos(radians), dy: -sin(radians))
     let start = CGPoint(
-      x: Self.hinge.x + pivot.x - pivot.x * cos(radians) - pivot.y * sin(radians),
-      y: Self.hinge.y + pivot.y + pivot.x * sin(radians) - pivot.y * cos(radians))
+      x: hinge.x + pivot.x - pivot.x * cos(radians) - pivot.y * sin(radians),
+      y: hinge.y + pivot.y + pivot.x * sin(radians) - pivot.y * cos(radians))
     let tip = CGPoint(
       x: start.x + direction.dx * (length + 16), y: start.y + direction.dy * (length + 16))
     return ZStack(alignment: .topLeading) {
@@ -639,7 +728,7 @@ struct LidPicture: View {
         .fixedSize()
         .position(tip)
     }
-    .frame(width: 200, height: 160, alignment: .topLeading)
+    .frame(width: canvas.width, height: canvas.height, alignment: .topLeading)
   }
 
 }

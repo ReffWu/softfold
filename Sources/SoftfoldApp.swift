@@ -139,7 +139,7 @@ struct MenuBarPanel: View {
     VStack(spacing: 12) {
       LidPicture(
         lid: desktop.lid, openAngle: desktop.openAngle, active: desktop.isActive,
-        available: desktop.sensorAvailable, folding: desktop.isFolding
+        available: desktop.sensorAvailable, folding: desktop.isFolding, centered: true
       )
       .padding(.top, 8)
       VStack(spacing: 0) {

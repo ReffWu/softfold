@@ -43,6 +43,7 @@ final class LiveDesktop: NSObject, ObservableObject {
   @Published private(set) var isWaitingForDisplay = false
   @Published private(set) var sensorAvailable = false
   @Published private(set) var openAngle: Double
+  nonisolated static let defaultOpenAngle = 95.0
   @Published private(set) var focusesWhenHeld =
     UserDefaults.standard.object(forKey: "focusesWhenHeld") as? Bool ?? true
   @Published private(set) var error: String?
@@ -79,8 +80,10 @@ final class LiveDesktop: NSObject, ObservableObject {
   private var excludedWindowIDs = Set<CGWindowID>()
 
   override init() {
-    let savedAngle = UserDefaults.standard.object(forKey: "openAngle") as? Double ?? 100
-    let openAngle = savedAngle.isFinite && (25...180).contains(savedAngle) ? savedAngle : 100
+    let savedAngle =
+      UserDefaults.standard.object(forKey: "openAngle") as? Double ?? Self.defaultOpenAngle
+    let openAngle =
+      savedAngle.isFinite && (25...180).contains(savedAngle) ? savedAngle : Self.defaultOpenAngle
     self.openAngle = openAngle
     motion = LidMotion(openAngle: openAngle)
     super.init()
@@ -180,6 +183,17 @@ final class LiveDesktop: NSObject, ObservableObject {
     UserDefaults.standard.set(value, forKey: "focusesWhenHeld")
     motion.setFocusesWhenHeld(value)
     beginRendering()
+  }
+
+  var isDefaultOpenAngle: Bool { abs(openAngle - Self.defaultOpenAngle) < 0.5 }
+
+  func restoreDefaultOpenPosition() {
+    motion.setBaseline(Self.defaultOpenAngle)
+    openAngle = Self.defaultOpenAngle
+    UserDefaults.standard.removeObject(forKey: "openAngle")
+    error = nil
+    displayLink?.isPaused = true
+    metalView?.draw()
   }
 
   func setOpenPosition() {
