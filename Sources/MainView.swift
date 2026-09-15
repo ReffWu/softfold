@@ -160,7 +160,7 @@ struct MainView: View {
             Text("Star on GitHub")
           }
         }
-          .buttonStyle(.plain)
+        .buttonStyle(.plain)
       }
     }
     .font(.system(size: 11))

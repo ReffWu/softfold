@@ -201,8 +201,7 @@ struct MenuBarPanel: View {
       }
       Divider().padding(.horizontal, 6)
       VStack(spacing: 0) {
-        PanelAction(symbol: "gearshape", title: String(localized: "Settings…"), shortcut: "⌘,")
-        {
+        PanelAction(symbol: "gearshape", title: String(localized: "Settings…"), shortcut: "⌘,") {
           openWindow(id: "main")
           NSApp.activate(ignoringOtherApps: true)
         }

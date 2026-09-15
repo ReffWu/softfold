@@ -18,7 +18,8 @@ struct PreferencesCard: View {
       SettingsDivider()
       SettingsRow(
         "menubar.rectangle", tint: .gray, title: String(localized: "Show in menu bar"),
-        subtitle: showsMenuBarIcon ? nil : String(localized: "Open Softfold again to come back here.")
+        subtitle: showsMenuBarIcon
+          ? nil : String(localized: "Open Softfold again to come back here.")
       ) {
         Toggle("Show in menu bar", isOn: $showsMenuBarIcon)
           .toggleStyle(.switch)
