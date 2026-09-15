@@ -8,6 +8,7 @@ struct SoftfoldApp: App {
   @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
   @StateObject private var desktop = LiveDesktop()
   @StateObject private var updater = Updater()
+  @AppStorage("showsMenuBarIcon") private var showsMenuBarIcon = true
 
   var body: some Scene {
     Window("Softfold", id: "main") {
@@ -34,7 +35,7 @@ struct SoftfoldApp: App {
     .windowStyle(.hiddenTitleBar)
     .windowResizability(.contentSize)
     .defaultPosition(.center)
-    MenuBarExtra {
+    MenuBarExtra(isInserted: $showsMenuBarIcon) {
       MenuBarPanel(desktop: desktop, updater: updater)
     } label: {
       Image(desktop.isActive ? "MenuBarIconActive" : "MenuBarIcon")
@@ -200,7 +201,7 @@ struct MenuBarPanel: View {
       }
       Divider().padding(.horizontal, 6)
       VStack(spacing: 0) {
-        PanelAction(symbol: "gearshape", title: String(localized: "Open Softfold"), shortcut: "⌘,")
+        PanelAction(symbol: "gearshape", title: String(localized: "Settings…"), shortcut: "⌘,")
         {
           openWindow(id: "main")
           NSApp.activate(ignoringOtherApps: true)

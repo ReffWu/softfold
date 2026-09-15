@@ -154,7 +154,12 @@ struct MainView: View {
         .buttonStyle(.plain)
       if let project = URL(string: "https://github.com/ReffWu/softfold") {
         Text(verbatim: "·")
-        Link(destination: project) { Text(verbatim: "GitHub") }
+        Link(destination: project) {
+          HStack(spacing: 3) {
+            Image(systemName: "star")
+            Text("Star on GitHub")
+          }
+        }
           .buttonStyle(.plain)
       }
     }
