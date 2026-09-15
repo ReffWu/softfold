@@ -100,7 +100,7 @@ final class LiveDesktop: NSObject, ObservableObject {
         Task { @MainActor in lid.degrees = degree.map(Double.init) }
       }
       let update = motion.receive(angle)
-      guard update.availabilityChanged || update.beganClosing else { return }
+      guard update.availabilityChanged || update.beganClosing || update.approaching else { return }
       Task { @MainActor [weak self] in
         guard let self else { return }
         if update.availabilityChanged {
@@ -114,6 +114,7 @@ final class LiveDesktop: NSObject, ObservableObject {
             self.error = Self.sensorDroppedMessage
           }
         }
+        if update.approaching { self.prewarmCapture() }
         if update.beganClosing { self.beginRendering() }
         if update.available, self.isEnabled, !self.isActive, !self.isStarting,
           !self.resumeAfterWake
@@ -487,6 +488,12 @@ final class LiveDesktop: NSObject, ObservableObject {
     link.isPaused = true
     link.add(to: .main, forMode: .common)
     displayLink = link
+  }
+
+  private func prewarmCapture() {
+    guard isActive, !motion.isClosing, stream == nil else { return }
+    resumeCapture()
+    pauseCapture()
   }
 
   private func beginRendering() {

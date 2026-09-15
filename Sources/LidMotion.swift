@@ -19,6 +19,8 @@ final class LidMotion {
   private var movedAt = 0.0
   private var held = false
   private var focus = 0.0
+  private var restAngle: Double?
+  private var prewarmed = false
 
   init(openAngle: Double = LiveDesktop.defaultOpenAngle) {
     baseline = openAngle
@@ -28,6 +30,7 @@ final class LidMotion {
     let availabilityChanged: Bool
     let available: Bool
     let beganClosing: Bool
+    let approaching: Bool
   }
 
   func receive(_ value: Double?, at time: Double = CACurrentMediaTime()) -> Update {
@@ -35,6 +38,21 @@ final class LidMotion {
     defer { lock.unlock() }
     let changed = (angle == nil) != (value == nil)
     let wasResting = resting
+    var approaching = false
+    if let value {
+      let rest = restAngle ?? value
+      let step = lastSample > 0 ? max(time - lastSample, 0.001) : 0
+      restAngle = value > rest ? value : rest + (value - rest) * (1 - exp(-step / 1.5))
+      if enabled, target == 0, !prewarmed, value < baseline + 4, value <= rest - 0.45 {
+        prewarmed = true
+        approaching = true
+      } else if prewarmed, target == 0, abs(value - rest) < 0.15 {
+        prewarmed = false
+      }
+    } else {
+      restAngle = nil
+      prewarmed = false
+    }
     angle = value
     if let value, let trackedAngle, lastSample > 0, time >= lastSample {
       let delta = max(time - lastSample, 0.001)
@@ -69,7 +87,7 @@ final class LidMotion {
     }
     return Update(
       availabilityChanged: changed, available: value != nil,
-      beganClosing: wasResting && !resting)
+      beganClosing: wasResting && !resting, approaching: approaching)
   }
 
   func setFocusesWhenHeld(_ value: Bool) {

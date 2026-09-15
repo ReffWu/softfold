@@ -199,7 +199,7 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
     lock.lock()
     let buffer = frame
     let generation = generation
-    let appear = Float(min(max((time - arrivedAt) / 0.06, 0), 1))
+    let appear = Float(min(max((time - arrivedAt) / 0.02, 0), 1))
     lock.unlock()
     guard let buffer, let textureCache else { return }
     guard inFlight.wait(timeout: .now()) == .success else { return }
