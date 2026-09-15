@@ -57,10 +57,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     DockIcon.apply()
   }
 
-  func applicationDidFinishLaunching(_ notification: Notification) {
-    AppIconStyle.restore()
-  }
-
   func applicationWillTerminate(_ notification: Notification) {
     if let toggleHotKey { UnregisterEventHotKey(toggleHotKey) }
     if let hotKeyHandler { RemoveEventHandler(hotKeyHandler) }

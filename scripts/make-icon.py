@@ -22,7 +22,6 @@ OUTER = (INNER[0] - FRAME, INNER[1] - FRAME, INNER[2] + FRAME, INNER[3] + FRAME)
 OUTER_RADIUS = INNER_RADIUS + FRAME
 FRAMES = {
     "dark": ((26, 26, 28), (128, 128, 134, 255), 60),
-    "light": ((233, 233, 235), (150, 150, 156, 255), 95),
 }
 HINGE_Y = 1058
 LID_TOP = 350
@@ -357,16 +356,8 @@ def main():
                 }
             )
     write_json(appicon / "Contents.json", {"images": images, "info": info})
-    for style, icon in icons.items():
-        folder = ASSETS / f"AppIcon-{style}.imageset"
-        folder.mkdir(exist_ok=True)
-        icon.resize((1024, 1024), Image.LANCZOS).save(folder / "icon.png")
-        images = [{"filename": "icon.png", "idiom": "universal"}]
-        write_json(folder / "Contents.json", {"images": images, "info": info})
     DOCS.mkdir(exist_ok=True)
-    for style, icon in icons.items():
-        suffix = "" if style == "dark" else "-light"
-        icon.resize((512, 512), Image.LANCZOS).save(DOCS / f"icon{suffix}.png")
+    icons["dark"].resize((512, 512), Image.LANCZOS).save(DOCS / "icon.png")
 
 
 if __name__ == "__main__":

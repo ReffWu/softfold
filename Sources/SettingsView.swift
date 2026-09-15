@@ -3,19 +3,11 @@ import SwiftUI
 struct PreferencesCard: View {
   @ObservedObject var updater: Updater
   @State private var language = AppLanguage.current
-  @State private var iconStyle = AppIconStyle.current
   @AppStorage(DockIcon.key) private var showsInDock = false
   @AppStorage("showsMenuBarIcon") private var showsMenuBarIcon = true
 
   var body: some View {
     SettingsGroup {
-      SettingsRow("app.badge", tint: .blue, title: String(localized: "App icon")) {
-        HStack(spacing: 10) {
-          iconChoice(.dark, label: Text("Dark"))
-          iconChoice(.light, label: Text("Light"))
-        }
-      }
-      SettingsDivider()
       SettingsRow(
         "menubar.rectangle", tint: .gray, title: String(localized: "Show in menu bar"),
         subtitle: showsMenuBarIcon
@@ -71,46 +63,6 @@ struct PreferencesCard: View {
       }
     }
   }
-
-  private static let iconSize: CGFloat = 46
-  private static let iconDrawn: CGFloat = iconSize * 1024 / 980
-  private static let iconCorner: CGFloat = iconSize * 262 / 980
-  private static let ringGap: CGFloat = 2.5
-  private static let ringWidth: CGFloat = 2.5
-
-  private func iconChoice(_ style: AppIconStyle, label: Text) -> some View {
-    let selected = iconStyle == style
-    return Button {
-      iconStyle = style
-      AppIconStyle.choose(style)
-    } label: {
-      VStack(spacing: 4) {
-        Image(nsImage: NSImage(named: "AppIcon-\(style.rawValue)") ?? NSImage())
-          .resizable()
-          .frame(width: Self.iconDrawn, height: Self.iconDrawn)
-          .frame(width: Self.iconSize, height: Self.iconSize)
-          .clipShape(RoundedRectangle(cornerRadius: Self.iconCorner, style: .circular))
-          .overlay(
-            RoundedRectangle(cornerRadius: Self.iconCorner, style: .circular)
-              .strokeBorder(Color.primary.opacity(0.1), lineWidth: 1)
-          )
-          .padding(Self.ringGap + Self.ringWidth)
-          .overlay(
-            RoundedRectangle(
-              cornerRadius: Self.iconCorner + Self.ringGap + Self.ringWidth, style: .circular
-            )
-            .strokeBorder(selected ? Color.accentColor : .clear, lineWidth: Self.ringWidth)
-          )
-        label
-          .font(.system(size: 11, weight: selected ? .semibold : .regular))
-          .foregroundStyle(selected ? .primary : .secondary)
-      }
-      .contentShape(Rectangle())
-    }
-    .buttonStyle(.plain)
-    .accessibilityAddTraits(selected ? .isSelected : [])
-  }
-
 }
 
 enum DockIcon {
@@ -125,32 +77,6 @@ enum DockIcon {
       NSApp.activate(ignoringOtherApps: true)
       NSApp.windows.first { $0.isVisible && $0.canBecomeMain }?.makeKeyAndOrderFront(nil)
     }
-  }
-}
-
-enum AppIconStyle: String {
-  case dark
-  case light
-
-  private static let key = "AppIconStyle"
-
-  static var current: AppIconStyle {
-    AppIconStyle(rawValue: UserDefaults.standard.string(forKey: key) ?? "") ?? .dark
-  }
-
-  static func choose(_ style: AppIconStyle) {
-    UserDefaults.standard.set(style.rawValue, forKey: key)
-    apply(style)
-  }
-
-  static func restore() {
-    if current != .dark { apply(current) }
-  }
-
-  private static func apply(_ style: AppIconStyle) {
-    let image = style == .dark ? nil : NSImage(named: "AppIcon-\(style.rawValue)")
-    NSApp.applicationIconImage = image
-    NSWorkspace.shared.setIcon(image, forFile: Bundle.main.bundlePath, options: [])
   }
 }
 
@@ -189,13 +115,11 @@ private enum AppLanguage {
 }
 
 struct AboutView: View {
-  @State private var style = AppIconStyle.current
-
   private static let icon: CGFloat = 240
 
   var body: some View {
     VStack(spacing: 0) {
-      Image(nsImage: NSImage(named: "AppIcon-\(style.rawValue)") ?? NSImage())
+      Image(nsImage: NSImage(named: "AppIcon") ?? NSImage())
         .resizable()
         .interpolation(.high)
         .frame(width: Self.icon * 1024 / 980, height: Self.icon * 1024 / 980)
@@ -235,7 +159,6 @@ struct AboutView: View {
     .frame(width: 360)
     .background(Color(nsColor: .windowBackgroundColor).ignoresSafeArea())
     .background(AboutWindowChrome())
-    .onAppear { style = AppIconStyle.current }
   }
 
   private var versionLabel: String {
