@@ -19,7 +19,7 @@ The file list comes from `git ls-files`, not a source-folder glob. Unknown file 
 
 Comments in Markdown code fences and workflow shell blocks are checked too. Executable shebangs and compiler preprocessor directives remain allowed because they affect execution. Prose documentation and string literals are not code comments.
 
-The link checker excludes historical X posts that require interactive access, release download links that only exist after a release is published, and the Apple plist DTD identifier. The exact exclusions are in `.lychee.toml`.
+The link checker excludes historical X posts that require interactive access, release download links that only exist after a release is published, the Apple plist DTD identifier, and the usage heartbeat endpoint, which only accepts POST requests. The exact exclusions are in `.lychee.toml`.
 
 ## Run locally
 
