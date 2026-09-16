@@ -35,7 +35,8 @@ fragment float4 foldFragment(FoldVertex in [[stage_in]],
     float taper = p.taper * p.progress;
     float q = (1.0 + taper) / (1.0 + taper * in.uv.y);
     float2 fold = float2((in.uv.x - 0.5) * q + 0.5, in.uv.y * q);
-    float2 uv = float2(fold.x, 1.0 - cos(turn * 0.65) * (1.0 - fold.y));
+    float rise = 1.0 - fold.y;
+    float2 uv = float2(fold.x, 1.0 - rise / (1.0 + (1.0 / cos(turn * 0.85) - 1.0) * rise));
     float edge = min(uv.x, 1.0 - uv.x);
     float2 blurUV = float2(p.blurInset + uv.x * p.blurSpan, uv.y);
     float feather = smoothstep(0.0, max(0.0001, p.progress * 0.012 * (1.0 - fold.y)), edge);
