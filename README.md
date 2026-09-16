@@ -59,7 +59,7 @@ Tried it on a model in the middle row? [Tell us how it went](https://github.com/
 
 Softfold reads the lid angle over IOKit HID in hundredths of a degree where the sensor reports them, following the sensor's own refresh cadence instead of polling blindly. A critically damped filter turns those readings into continuous motion. Slow tilt, slow fold. Quick tilt, quick fold. Stop partway for a second and the desktop eases back into focus, then folds again as soon as you keep closing.
 
-ScreenCaptureKit supplies the live desktop, and Metal renders the perspective, the progressive blur and the side fill at 60 fps. Capture only runs while the lid is closing or folded and stops a few seconds after it opens again, which also clears the screen recording indicator. Frames stay in memory on your Mac. No recordings, no uploads, no analytics.
+ScreenCaptureKit supplies the live desktop, and Metal renders the perspective, the progressive blur and the side fill at 60 fps. Capture only runs while the lid is closing or folded and stops a few seconds after it opens again, which also clears the screen recording indicator. Frames stay in memory on your Mac and are never recorded or uploaded. Once a day Softfold sends an anonymous heartbeat with a random install ID, the app and macOS versions, the Mac model and whether the fold was used that day, so we can count active Macs. No screen content, files, IP addresses or personal information are stored. Turn off Share anonymous usage statistics in the Softfold window to stop it.
 
 The full motion design is in [MOTION.md](MOTION.md).
 

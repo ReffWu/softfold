@@ -5,6 +5,7 @@ struct PreferencesCard: View {
   @State private var language = AppLanguage.current
   @AppStorage(DockIcon.key) private var showsInDock = false
   @AppStorage("showsMenuBarIcon") private var showsMenuBarIcon = true
+  @AppStorage(Heartbeat.key) private var sharesUsageStatistics = true
 
   var body: some View {
     SettingsGroup {
@@ -58,6 +59,16 @@ struct PreferencesCard: View {
         title: String(localized: "Install updates automatically")
       ) {
         Toggle("Install updates automatically", isOn: $updater.installsAutomatically)
+          .toggleStyle(.switch)
+          .labelsHidden()
+      }
+      SettingsDivider()
+      SettingsRow(
+        "chart.bar.fill", tint: .blue, title: String(localized: "Share anonymous usage statistics"),
+        subtitle: String(
+          localized: "Counts active Macs once a day. Nothing from your screen is sent.")
+      ) {
+        Toggle("Share anonymous usage statistics", isOn: $sharesUsageStatistics)
           .toggleStyle(.switch)
           .labelsHidden()
       }

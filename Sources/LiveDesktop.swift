@@ -499,6 +499,7 @@ final class LiveDesktop: NSObject, ObservableObject {
   private func beginRendering() {
     guard isActive, motion.isClosing else { return }
     isFolding = true
+    Heartbeat.recordFold()
     resumeCapture()
     displayLink?.isPaused = false
   }

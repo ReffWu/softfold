@@ -1,0 +1,9 @@
+name = "softfold-telemetry"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "softfold-telemetry"
+database_id = "673fd1a5-d6f9-4ce8-8afe-1590287fdcce"

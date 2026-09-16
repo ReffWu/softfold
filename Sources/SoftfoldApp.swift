@@ -57,6 +57,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     DockIcon.apply()
   }
 
+  func applicationDidFinishLaunching(_ notification: Notification) {
+    Heartbeat.start()
+  }
+
   func applicationWillTerminate(_ notification: Notification) {
     if let toggleHotKey { UnregisterEventHotKey(toggleHotKey) }
     if let hotKeyHandler { RemoveEventHandler(hotKeyHandler) }
@@ -299,5 +303,74 @@ final class Updater: NSObject, ObservableObject, SPUUpdaterDelegate {
   ) -> Bool {
     DispatchQueue.main.async { immediateInstallationBlock() }
     return true
+  }
+}
+
+@MainActor
+enum Heartbeat {
+  static let key = "sharesUsageStatistics"
+  private static let endpoint = URL(
+    string: "https://softfold-telemetry.reffwu.workers.dev/heartbeat")!
+  private static var sending = false
+
+  static func start() {
+    UserDefaults.standard.register(defaults: [key: true])
+    send()
+    Task {
+      while true {
+        try? await Task.sleep(for: .seconds(3600))
+        send()
+      }
+    }
+  }
+
+  static func recordFold() {
+    UserDefaults.standard.set(today, forKey: "foldDay")
+    send()
+  }
+
+  private static var today: String {
+    Date().ISO8601Format(.iso8601Date(timeZone: TimeZone(identifier: "UTC")!))
+  }
+
+  private static func send() {
+    let defaults = UserDefaults.standard
+    let day = today
+    let folded = defaults.string(forKey: "foldDay") == day
+    guard defaults.bool(forKey: key), !sending,
+      defaults.string(forKey: "heartbeatDay") != day
+        || (folded && defaults.string(forKey: "heartbeatFoldDay") != day)
+    else { return }
+    let install = defaults.string(forKey: "installID") ?? UUID().uuidString
+    defaults.set(install, forKey: "installID")
+    let system = ProcessInfo.processInfo.operatingSystemVersion
+    let body: [String: Any] = [
+      "install_id": install,
+      "app_version": Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "",
+      "os_version": "\(system.majorVersion).\(system.minorVersion).\(system.patchVersion)",
+      "model": model,
+      "folded": folded,
+    ]
+    var request = URLRequest(url: endpoint)
+    request.httpMethod = "POST"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+    sending = true
+    Task {
+      defer { sending = false }
+      guard let (_, response) = try? await URLSession.shared.data(for: request),
+        (response as? HTTPURLResponse)?.statusCode == 204
+      else { return }
+      defaults.set(day, forKey: "heartbeatDay")
+      if folded { defaults.set(day, forKey: "heartbeatFoldDay") }
+    }
+  }
+
+  private static var model: String {
+    var size = 0
+    sysctlbyname("hw.model", nil, &size, nil, 0)
+    var value = [CChar](repeating: 0, count: max(size, 1))
+    sysctlbyname("hw.model", &value, &size, nil, 0)
+    return String(cString: value)
   }
 }
