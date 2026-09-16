@@ -154,8 +154,13 @@ struct AboutView: View {
         Text("Version \(versionLabel)")
         if let project = URL(string: "https://github.com/ReffWu/softfold") {
           Text(verbatim: "·")
-          Link(destination: project) { Text(verbatim: "GitHub") }
-            .buttonStyle(.plain)
+          Link(destination: project) {
+            HStack(spacing: 3) {
+              Image(systemName: "star")
+              Text("Star on GitHub")
+            }
+          }
+          .buttonStyle(.plain)
         }
       }
       .font(.system(size: 11))
@@ -275,6 +280,71 @@ final class MoreApps: ObservableObject {
       uniqueKeysWithValues: others.compactMap { entry in
         NSImage(contentsOf: iconFile(for: entry)).map { (entry.id, $0) }
       })
+  }
+}
+
+@MainActor
+final class StarRequest: ObservableObject {
+  static let shared = StarRequest()
+  @Published private(set) var isVisible = false
+  private let defaults = UserDefaults.standard
+
+  private init() { update() }
+
+  func recordFold() {
+    guard !defaults.bool(forKey: "starAnswered") else { return }
+    defaults.set(defaults.integer(forKey: "foldCount") + 1, forKey: "foldCount")
+    let day = Date().ISO8601Format(.iso8601Date(timeZone: .current))
+    var days = defaults.stringArray(forKey: "foldDays") ?? []
+    if !days.contains(day), days.count < 2 {
+      days.append(day)
+      defaults.set(days, forKey: "foldDays")
+    }
+    update()
+  }
+
+  func star() {
+    if let project = URL(string: "https://github.com/ReffWu/softfold") {
+      NSWorkspace.shared.open(project)
+    }
+    close()
+  }
+
+  func close() {
+    defaults.set(true, forKey: "starAnswered")
+    withAnimation(.smooth(duration: 0.3)) { update() }
+  }
+
+  private func update() {
+    isVisible =
+      !defaults.bool(forKey: "starAnswered") && defaults.integer(forKey: "foldCount") >= 5
+      && (defaults.stringArray(forKey: "foldDays") ?? []).count >= 2
+  }
+}
+
+struct StarRow: View {
+  @ObservedObject private var request = StarRequest.shared
+
+  var body: some View {
+    SettingsRow(
+      "star.fill", tint: .yellow, title: String(localized: "Enjoying Softfold?"),
+      subtitle: String(
+        localized: "It’s free and open source. A star on GitHub helps more people find it.")
+    ) {
+      Button("Star") { request.star() }
+        .controlSize(.small)
+        .fixedSize()
+      Button {
+        request.close()
+      } label: {
+        Image(systemName: "xmark")
+          .font(.system(size: 10, weight: .semibold))
+      }
+      .buttonStyle(.plain)
+      .foregroundStyle(.secondary)
+      .accessibilityLabel(Text("Close"))
+      .help(Text("Close"))
+    }
   }
 }
 

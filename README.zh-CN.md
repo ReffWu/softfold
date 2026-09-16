@@ -15,6 +15,8 @@
 
 <sub>免费 · Apple 芯片 MacBook · macOS 14 或更新版本 · 经 Apple 公证</sub>
 
+<sub>喜欢 Softfold 的话，在 GitHub 上点个 ⭐，能让更多人发现它。</sub>
+
 [English](README.md) · 简体中文 · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
 </div>

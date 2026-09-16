@@ -134,6 +134,7 @@ struct WindowCommands: Commands {
 struct MenuBarPanel: View {
   @ObservedObject var desktop: LiveDesktop
   @ObservedObject var updater: Updater
+  @ObservedObject private var starRequest = StarRequest.shared
   @Environment(\.openWindow) private var openWindow
 
   var body: some View {
@@ -143,6 +144,11 @@ struct MenuBarPanel: View {
         available: desktop.sensorAvailable, folding: desktop.isFolding, centered: true
       )
       .padding(.top, 8)
+      if starRequest.isVisible {
+        StarRow()
+          .panelCard()
+          .transition(.opacity)
+      }
       VStack(spacing: 0) {
         SettingsRow(
           title: desktop.statusTitle, subtitle: desktop.statusSubtitle,

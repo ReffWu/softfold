@@ -15,6 +15,8 @@
 
 <sub>무료 · Apple 실리콘 MacBook · macOS 14 이상 · Apple 공증 완료</sub>
 
+<sub>Softfold가 마음에 드신다면 GitHub에서 ⭐를 눌러 주세요. 더 많은 사람이 찾을 수 있습니다.</sub>
+
 [English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · 한국어
 
 </div>

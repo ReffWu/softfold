@@ -500,6 +500,7 @@ final class LiveDesktop: NSObject, ObservableObject {
     guard isActive, motion.isClosing else { return }
     isFolding = true
     Heartbeat.recordFold()
+    StarRequest.shared.recordFold()
     resumeCapture()
     displayLink?.isPaused = false
   }

@@ -15,6 +15,8 @@
 
 <sub>Free · MacBook with Apple silicon · macOS 14 or later · Notarized by Apple</sub>
 
+<sub>If you like Softfold, a ⭐ on GitHub helps more people discover it.</sub>
+
 English · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md)
 
 </div>

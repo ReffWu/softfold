@@ -6,6 +6,7 @@ import UniformTypeIdentifiers
 struct MainView: View {
   @ObservedObject var desktop: LiveDesktop
   @ObservedObject var updater: Updater
+  @ObservedObject private var starRequest = StarRequest.shared
   @State private var screenRecordingAllowed = CGPreflightScreenCaptureAccess()
   @Environment(\.openWindow) private var openWindow
 
@@ -13,6 +14,10 @@ struct MainView: View {
     VStack(spacing: 0) {
       hero
       VStack(spacing: 16) {
+        if starRequest.isVisible {
+          SettingsGroup { StarRow() }
+            .transition(.opacity)
+        }
         effect
         position
         focus
