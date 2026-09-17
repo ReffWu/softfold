@@ -22,7 +22,10 @@
 </div>
 
 <p align="center">
-  <img src="docs/readme/hero-ja.png" alt="ふたを閉じると、デスクトップがやわらかく折りたたまれる。">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-ja-dark.webp">
+    <img src="docs/readme/hero-ja-light.webp" alt="ふたを閉じると、デスクトップがやわらかく折りたたまれる。">
+  </picture>
 </p>
 
 ---

@@ -22,7 +22,10 @@ English · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) ·
 </div>
 
 <p align="center">
-  <img src="docs/readme/hero-en.png" alt="Close the lid, and your desktop folds away softly.">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
+    <img src="docs/readme/hero-en-light.webp" alt="Close the lid, and your desktop folds away softly.">
+  </picture>
 </p>
 
 ---

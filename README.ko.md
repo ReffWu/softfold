@@ -22,7 +22,10 @@
 </div>
 
 <p align="center">
-  <img src="docs/readme/hero-ko.png" alt="덮개를 닫으면, 데스크톱이 부드럽게 접힙니다.">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-ko-dark.webp">
+    <img src="docs/readme/hero-ko-light.webp" alt="덮개를 닫으면, 데스크톱이 부드럽게 접힙니다.">
+  </picture>
 </p>
 
 ---

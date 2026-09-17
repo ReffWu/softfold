@@ -22,7 +22,10 @@
 </div>
 
 <p align="center">
-  <img src="docs/readme/hero-zh-Hans.png" alt="合上屏幕，桌面温柔地折叠起来。">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-zh-Hans-dark.webp">
+    <img src="docs/readme/hero-zh-Hans-light.webp" alt="合上屏幕，桌面温柔地折叠起来。">
+  </picture>
 </p>
 
 ---
