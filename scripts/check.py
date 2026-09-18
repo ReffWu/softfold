@@ -64,6 +64,12 @@ def text_files():
             if not data.startswith(b"\x89PNG\r\n\x1a\n"):
                 raise ValueError(f"{path}: invalid image signature")
             continue
+        if path.suffix == ".webp":
+            if not (
+                data.startswith(b"RIFF") and len(data) >= 12 and data[8:12] == b"WEBP"
+            ):
+                raise ValueError(f"{path}: invalid image signature")
+            continue
         try:
             yield path, data.decode("utf-8")
         except UnicodeDecodeError as error:
