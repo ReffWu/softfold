@@ -11,25 +11,27 @@ struct MainView: View {
   @Environment(\.openWindow) private var openWindow
 
   var body: some View {
-    VStack(spacing: 0) {
-      hero
-      VStack(spacing: 16) {
-        if starRequest.isVisible {
-          SettingsGroup { StarRow() }
-            .transition(.opacity)
+    ScrollView {
+      VStack(spacing: 0) {
+        hero
+        VStack(spacing: 16) {
+          if starRequest.isVisible {
+            SettingsGroup { StarRow() }
+              .transition(.opacity)
+          }
+          foldingCard
+          PreferencesCard(updater: updater)
+          MoreAppsCard()
         }
-        effect
-        position
-        focus
-        PreferencesCard(updater: updater)
-        MoreAppsCard()
+        .padding(.horizontal, 20)
+        footer
       }
-      .padding(.horizontal, 20)
-      footer
+      .frame(maxWidth: .infinity)
     }
     .frame(width: 440)
-    .fixedSize()
+    .frame(minHeight: 480, idealHeight: 680)
     .background(Color(nsColor: .windowBackgroundColor).ignoresSafeArea())
+    .background(MainWindowChrome())
     .onAppear { MoreApps.shared.refreshIfStale() }
     .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification))
     { _ in
@@ -41,11 +43,11 @@ struct MainView: View {
     HStack(alignment: .center, spacing: 8) {
       LidPicture(
         lid: desktop.lid, openAngle: desktop.openAngle, active: desktop.isActive,
-        available: desktop.sensorAvailable, folding: desktop.isFolding, scale: 5.6
+        available: desktop.sensorAvailable, folding: desktop.isFolding, scale: 3.6
       )
       VStack(alignment: .leading, spacing: 4) {
         Text(verbatim: "Softfold")
-          .font(.system(size: 22, weight: .semibold))
+          .font(.system(size: 20, weight: .semibold))
         Text("Your desktop follows your lid.")
           .font(.system(size: 13))
           .foregroundStyle(.secondary)
@@ -55,12 +57,17 @@ struct MainView: View {
     }
     .padding(.leading, 12)
     .padding(.trailing, 16)
-    .padding(.top, -14)
-    .padding(.bottom, 10)
+    .padding(.top, 4)
+    .padding(.bottom, 6)
   }
 
-  private var effect: some View {
-    SettingsGroup {
+  private var foldingCard: some View {
+    SettingsGroup(
+      footnote: String(
+        localized:
+          "Folding begins below this angle. Softfold takes it from your lid the first time you turn it on."
+      )
+    ) {
       SettingsRow(
         "power", tint: desktop.isActive ? .green : .gray, title: desktop.statusTitle,
         subtitle: desktop.statusSubtitle
@@ -96,16 +103,7 @@ struct MainView: View {
           }
         }
       }
-    }
-  }
-
-  private var position: some View {
-    SettingsGroup(
-      footnote: String(
-        localized:
-          "Folding begins below this angle. Softfold takes it from your lid the first time you turn it on."
-      )
-    ) {
+      SettingsDivider()
       SettingsRow(
         "angle", tint: .indigo, title: String(localized: "Open position"),
         subtitle: degrees(desktop.openAngle)
@@ -126,11 +124,7 @@ struct MainView: View {
         .disabled(!desktop.sensorAvailable || desktop.isStarting)
         .help("Save the lid angle you are viewing at right now")
       }
-    }
-  }
-
-  private var focus: some View {
-    SettingsGroup {
+      SettingsDivider()
       SettingsRow(
         "camera.aperture", tint: .teal, title: String(localized: "Sharpen when you stop"),
         subtitle: String(localized: "Pause partway and the desktop comes back into focus.")
@@ -742,5 +736,23 @@ struct LidPicture: View {
     }
     .frame(width: canvas.width, height: canvas.height, alignment: .topLeading)
   }
+}
 
+private struct MainWindowChrome: NSViewRepresentable {
+  func makeNSView(context: Context) -> NSView {
+    let view = NSView()
+    DispatchQueue.main.async {
+      guard let window = view.window else { return }
+      window.minSize = NSSize(width: 440, height: 480)
+      window.maxSize = NSSize(width: 440, height: CGFloat.greatestFiniteMagnitude)
+      if window.frame.width != 440 {
+        var frame = window.frame
+        frame.size.width = 440
+        window.setFrame(frame, display: true)
+      }
+    }
+    return view
+  }
+
+  func updateNSView(_ view: NSView, context: Context) {}
 }
