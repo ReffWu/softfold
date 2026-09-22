@@ -11,8 +11,8 @@ DOCS = ROOT / "docs"
 NAME = "SOFTFOLD"
 SIGNATURE = "REFFWU"
 FONT_PATH = "/System/Library/Fonts/Optima.ttc"
-FONT_SIZE = 46
-TRACKING = 16
+FONT_SIZE = 125
+TRACKING = 20
 SIZE = 2048
 SCALE = 2
 INNER = (176, 176, 1872, 1872)
@@ -21,7 +21,7 @@ FRAME = 132
 OUTER = (INNER[0] - FRAME, INNER[1] - FRAME, INNER[2] + FRAME, INNER[3] + FRAME)
 OUTER_RADIUS = INNER_RADIUS + FRAME
 FRAMES = {
-    "dark": ((26, 26, 28), (128, 128, 134, 255), 60),
+    "dark": ((26, 26, 28), (225, 225, 235, 255), 60),
 }
 HINGE_Y = 1058
 LID_TOP = 350
@@ -281,7 +281,7 @@ def ring_point(distance, box, radius):
 
 
 def engrave(canvas, text, position, color, upright):
-    font = ImageFont.truetype(FONT_PATH, FONT_SIZE * SCALE)
+    font = ImageFont.truetype(FONT_PATH, FONT_SIZE * SCALE, index=1)
     inset = FRAME / 2
     box = (OUTER[0] + inset, OUTER[1] + inset, OUTER[2] - inset, OUTER[3] - inset)
     radius = (OUTER_RADIUS + INNER_RADIUS) / 2
@@ -299,7 +299,7 @@ def engrave(canvas, text, position, color, upright):
         x, y, angle = ring_point(cursor + direction * width / 2, box, radius)
         if upright:
             angle += 180
-        side = FONT_SIZE * 2 * SCALE
+        side = int(FONT_SIZE * 2.5 * SCALE)
         glyph = Image.new("RGBA", (side, side), (0, 0, 0, 0))
         ImageDraw.Draw(glyph).text(
             (side / 2, side / 2), letter, font=font, fill=color, anchor="mm"
