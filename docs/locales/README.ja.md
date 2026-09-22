@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-ja-dark.png">
-    <img src="docs/readme/download-ja-light.png" height="52" alt="Mac 版をダウンロード">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-ja-dark.png">
+    <img src="../readme/download-ja-light.png" height="52" alt="Mac 版をダウンロード">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Softfold を気に入ったら GitHub で ⭐ を付けてください。より多くの人が見つけやすくなります。</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · 日本語 · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 全 39 言語を見る](docs/locales/README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · 日本語 · [한국어](README.ko.md) · [🌍 全 39 言語を見る](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-ja-dark.webp">
-    <img src="docs/readme/hero-ja-light.webp" alt="ふたを閉じると、デスクトップがやわらかく折りたたまれる。">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-ja-dark.webp">
+    <img src="../readme/hero-ja-light.webp" alt="ふたを閉じると、デスクトップがやわらかく折りたたまれる。">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold は IOKit HID でふたの角度を読み取ります。センサーが
 
 ScreenCaptureKit がライブのデスクトップを取り込み、Metal が遠近、段階的なぼかし、両側の塗りを 60 fps で描画します。画面の取り込みはふたを閉じている間と折りたたまれている間だけ行い、開いてから数秒で止まるので、画面収録のインジケーターも消えます。映像は Mac のメモリ内にだけ置かれ、録画やアップロードは一切しません。使用中の Mac の台数を数えるため、Softfold は1日に1回匿名のハートビートを送ります。内容はランダムなインストール ID、App と macOS のバージョン、Mac のモデル、その日に折りたたみを使ったかどうかだけです。画面の内容、ファイル、IP アドレス、個人情報は保存しません。Softfold のウインドウで「匿名の使用状況統計を共有」をオフにすると止まります。
 
-動きの設計の詳細は [MOTION.md](MOTION.md) にあります。
+動きの設計の詳細は [MOTION.md](../../MOTION.md) にあります。
 
 ## 言語
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-開発用のチェックは [CHECKS.md](CHECKS.md)、署名付きリリースの手順は [RELEASE.md](RELEASE.md) を参照してください。
+開発用のチェックは [CHECKS.md](../../CHECKS.md)、署名付きリリースの手順は [RELEASE.md](../../RELEASE.md) を参照してください。
 
 ## コントリビュート
 
@@ -99,4 +99,4 @@ Softfold は Noveum.ai の [Hinge](https://github.com/Noveum/hinge)（MIT ライ
 
 ## ライセンス
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

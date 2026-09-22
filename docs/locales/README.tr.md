@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
-    <img src="docs/readme/download-en-light.png" height="52" alt="Mac için Softfold İndir">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-en-dark.png">
+    <img src="../readme/download-en-light.png" height="52" alt="Mac için Softfold İndir">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Softfold'u beğendiyseniz, GitHub'da vereceğiniz bir ⭐ daha fazla kişinin keşfetmesine yardımcı olur.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · Türkçe · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 Tüm 39 Dil](docs/locales/README.md)
+[English](../../README.md) · Türkçe · [Deutsch](README.de.md) · [🌍 Tüm 39 Dil](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
-    <img src="docs/readme/hero-en-light.webp" alt="Kapağı indirin, masaüstünüz usulca katlansın.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-en-dark.webp">
+    <img src="../readme/hero-en-light.webp" alt="Kapağı indirin, masaüstünüz usulca katlansın.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold, kapak açısını IOKit HID üzerinden derecenin yüzde biri hassasiye
 
 ScreenCaptureKit canlı masaüstü akışını iletir ve Metal motoru; perspektif derinliğini, aşamalı bulanıklığı ve ortam kenar dolgusunu akıcı 60 fps hızında işler. Ekran yakalama yalnızca kapak kapanırken veya katlanmış durumdayken çalışır, kapak açıldıktan birkaç saniye sonra tamamen durur ve böylece macOS turuncu kayıt göstergesi de söner. Kareler yalnızca Mac'inizin RAM belleğinde işlenir; diske asla kaydedilmez ve internete yüklenmez. Softfold, aktif Mac sayısını belirleyebilmek için günde bir kez rastgele bir kurulum kimliği, uygulama ve macOS sürümü, Mac modeli ve o gün katlama efektinin kullanılıp kullanılmadığını içeren anonim bir sinyal gönderir. Hiçbir ekran görüntüsü, dosya, IP adresi veya kişisel veri toplanmaz. Softfold penceresindeki «Anonim kullanım istatistiklerini paylaş» ayarını kapatarak bunu dilediğiniz an durdurabilirsiniz.
 
-Hareket tasarımının tüm ayrıntılarına [MOTION.md](MOTION.md) dosyasından ulaşabilirsiniz.
+Hareket tasarımının tüm ayrıntılarına [MOTION.md](../../MOTION.md) dosyasından ulaşabilirsiniz.
 
 ## Desteklenen Diller
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-Geliştirme kontrolleri [CHECKS.md](CHECKS.md), imzalı sürüm adımları ise [RELEASE.md](RELEASE.md) dosyasında açıklanmıştır.
+Geliştirme kontrolleri [CHECKS.md](../../CHECKS.md), imzalı sürüm adımları ise [RELEASE.md](../../RELEASE.md) dosyasında açıklanmıştır.
 
 ## Katkıda Bulunma
 
@@ -99,4 +99,4 @@ Softfold, Noveum.ai tarafından MIT Lisansı altında geliştirilen [Hinge](http
 
 ## Lisans
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
-    <img src="docs/readme/download-en-light.png" height="52" alt="Softfold voor Mac downloaden">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-en-dark.png">
+    <img src="../readme/download-en-light.png" height="52" alt="Softfold voor Mac downloaden">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Vind je Softfold prettig werken? Een ⭐ op GitHub helpt meer mensen het te ontdekken.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · Nederlands · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 Alle 39 talen](docs/locales/README.md)
+[English](../../README.md) · Nederlands · [Deutsch](README.de.md) · [Français](README.fr.md) · [🌍 Alle 39 talen](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
-    <img src="docs/readme/hero-en-light.webp" alt="Klap het scherm dicht, en je bureaublad vouwt zich zachtjes weg.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-en-dark.webp">
+    <img src="../readme/hero-en-light.webp" alt="Klap het scherm dicht, en je bureaublad vouwt zich zachtjes weg.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold leest de dekselhoek via IOKit HID tot op honderdsten van een graad nauw
 
 ScreenCaptureKit levert het live bureaublad en Metal berekent het perspectief, de progressieve vervaging en de randvulling met stabiele 60 fps. De schermopname draait alleen tijdens het bewegen of in gevouwen toestand en stopt enkele seconden na het openen, waardoor ook de oranje opname-indicator in macOS dooft. Beelden blijven uitsluitend in het werkgeheugen en worden nooit opgeslagen of verzonden. Eén keer per dag stuurt Softfold een anonieme heartbeat met een willekeurige installatie-ID, app- en macOS-versie, het Mac-model en of het effect die dag is gebruikt, louter om actieve Macs in te schatten. Er worden geen scherminhalten, bestanden, IP-adressen of persoonlijke gegevens opgeslagen. Schakel «Deel anonieme gebruiksstatistieken» in het Softfold-venster uit om dit te deactiveren.
 
-Het volledige bewegingsontwerp vind je in [MOTION.md](MOTION.md).
+Het volledige bewegingsontwerp vind je in [MOTION.md](../../MOTION.md).
 
 ## Ondersteunde talen
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-Ontwikkelcontroles staan beschreven in [CHECKS.md](CHECKS.md), en ondertekende releases in [RELEASE.md](RELEASE.md).
+Ontwikkelcontroles staan beschreven in [CHECKS.md](../../CHECKS.md), en ondertekende releases in [RELEASE.md](../../RELEASE.md).
 
 ## Bijdragen
 
@@ -99,4 +99,4 @@ Softfold begon als een fork van [Hinge](https://github.com/Noveum/hinge) door No
 
 ## Licentie
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

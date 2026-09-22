@@ -21,7 +21,7 @@
 
 <sub>اگر Softfold را دوست دارید، یک ⭐ در GitHub به دیگران کمک می‌کند این پروژه را پیدا کنند.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · فارسی · [🌍 همه زبان‌ها](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · فارسی · [🌍 همه زبان‌ها](README.md)
 
 </div>
 

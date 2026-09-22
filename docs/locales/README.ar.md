@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
-    <img src="docs/readme/download-en-light.png" height="52" alt="تنزيل Softfold لأجهزة Mac">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-en-dark.png">
+    <img src="../readme/download-en-light.png" height="52" alt="تنزيل Softfold لأجهزة Mac">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>إذا أعجبك Softfold، فإن وضع ⭐ على GitHub يساعد المزيد من الأشخاص على اكتشافه.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · العربية · [Tiếng Việt](README.vi.md) · [🌍 جميع اللغات الـ 39](docs/locales/README.md)
+[English](../../README.md) · العربية · [Français](README.fr.md) · [🌍 جميع اللغات الـ 39](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
-    <img src="docs/readme/hero-en-light.webp" alt="أغلق الشاشة، وسيطوى سطح مكتبك برقة وهدوء.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-en-dark.webp">
+    <img src="../readme/hero-en-light.webp" alt="أغلق الشاشة، وسيطوى سطح مكتبك برقة وهدوء.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ hidutil list --matching '{"VendorID":0x5ac,"PrimaryUsagePage":32,"PrimaryUsage":
 
 يوفر ScreenCaptureKit بثاً مباشراً لسطح المكتب، ويتولى محرك Metal معالجة المنظور والتمويه التدريجي والتعبئة الجانبية بمعدل 60 إطاراً في الثانية. لا يعمل التقاط الشاشة إلا أثناء حركة الشاشة أو عندما تكون مطوية، ويتوقف تماماً بعد ثوانٍ من إعادة فتحها، مما يؤدي أيضاً إلى إخفاء مؤشر التسجيل البرتقالي في macOS. تبقى الإطارات في الذاكرة العشوائية للجهاز فقط ولا يتم تسجيلها أو حفظها على القرص أو رفعها إطلاقاً. يرسل Softfold نبضة دورية مجهولة الهوية بمعرّف تثبيت عشوائي وإصدار التطبيق ونظام macOS وطراز الجهاز وما إذا تم استخدام التأثير في ذلك اليوم، وذلك لتقدير عدد الأجهزة النشطة فقط. لا يتم تخزين أي محتوى للشاشة أو ملفات أو عناوين IP أو بيانات شخصية. يمكنك إيقاف ذلك عبر إلغاء تفعيل «مشاركة إحصاءات الاستخدام المجهولة» من نافذة التطبيق في أي وقت.
 
-تفاصيل التصميم الحركي كاملة متاحة في [MOTION.md](MOTION.md).
+تفاصيل التصميم الحركي كاملة متاحة في [MOTION.md](../../MOTION.md).
 
 ## اللغات المدعومة
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-تم توثيق اختبارات التطوير في [CHECKS.md](CHECKS.md)، وإجراءات الإصدارات الموقعة في [RELEASE.md](RELEASE.md).
+تم توثيق اختبارات التطوير في [CHECKS.md](../../CHECKS.md)، وإجراءات الإصدارات الموقعة في [RELEASE.md](../../RELEASE.md).
 
 ## المساهمة في المشروع
 
@@ -99,4 +99,4 @@ open build/Softfold.app
 
 ## الترخيص
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

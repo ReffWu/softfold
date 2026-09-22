@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
-    <img src="docs/readme/download-en-light.png" height="52" alt="Baixar o Softfold para Mac">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-en-dark.png">
+    <img src="../readme/download-en-light.png" height="52" alt="Baixar o Softfold para Mac">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Se você gostou do Softfold, uma ⭐ no GitHub ajuda mais pessoas a descobri-lo.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · Português · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 Todos os 39 idiomas](docs/locales/README.md)
+[English](../../README.md) · [Español](README.es.md) · Português · [🌍 Todos os 39 idiomas](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
-    <img src="docs/readme/hero-en-light.webp" alt="Abaixe a tela, e sua mesa de trabalho se dobra suavemente.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-en-dark.webp">
+    <img src="../readme/hero-en-light.webp" alt="Abaixe a tela, e sua mesa de trabalho se dobra suavemente.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ O Softfold lê a inclinação da tampa via IOKit HID em centésimos de grau dire
 
 O ScreenCaptureKit captura a mesa em tempo real e o Metal renderiza a perspectiva tridimensional, o desfoque progressivo e o preenchimento lateral a fluidos 60 fps. A captura ocorre unicamente enquanto a tela está se movendo ou dobrada, e é interrompida instantes após a reabertura completa, o que também desativa o indicador de gravação do macOS. Os quadros permanecem exclusivamente na memória RAM e nunca são gravados ou enviados para a rede. Uma vez ao dia, o Softfold envia um sinal anônimo com um ID aleatório de instalação, versões do app e do macOS, modelo do Mac e se o efeito foi acionado no dia, apenas para contabilizar Macs ativos. Nenhum conteúdo de tela, arquivo, endereço IP ou dado pessoal é coletado. Você pode desativar o compartilhamento de estatísticas anônimas na janela do app a qualquer momento.
 
-O design de movimento completo está detalhado em [MOTION.md](MOTION.md).
+O design de movimento completo está detalhado em [MOTION.md](../../MOTION.md).
 
 ## Idiomas suportados
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-As verificações de desenvolvimento estão documentadas em [CHECKS.md](CHECKS.md), e as compilações assinadas em [RELEASE.md](RELEASE.md).
+As verificações de desenvolvimento estão documentadas em [CHECKS.md](../../CHECKS.md), e as compilações assinadas em [RELEASE.md](../../RELEASE.md).
 
 ## Contribuições
 
@@ -99,4 +99,4 @@ O Softfold teve início como uma bifurcação (fork) do [Hinge](https://github.c
 
 ## Licença
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

@@ -21,7 +21,7 @@
 
 <sub>Softfold ভালো লাগলে GitHub-এ একটি ⭐ দিয়ে প্রকল্পটি অন্যদের কাছে পৌঁছে দিতে সাহায্য করুন।</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · বাংলা · [🌍 সমস্ত ভাষা](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · বাংলা · [🌍 সমস্ত ভাষা](README.md)
 
 </div>
 

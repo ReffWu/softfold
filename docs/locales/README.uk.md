@@ -21,7 +21,7 @@
 
 <sub>Якщо вам подобається Softfold, зірочка ⭐ на GitHub допоможе більшій кількості людей дізнатися про проєкт.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Українська · [🌍 Всі мови](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Українська · [🌍 Всі мови](README.md)
 
 </div>
 

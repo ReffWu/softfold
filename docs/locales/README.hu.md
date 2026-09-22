@@ -21,7 +21,7 @@
 
 <sub>Ha tetszik a Softfold, egy ⭐ a GitHubon segít másoknak is rátalálni.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Magyar · [🌍 Összes nyelv](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Magyar · [🌍 Összes nyelv](README.md)
 
 </div>
 

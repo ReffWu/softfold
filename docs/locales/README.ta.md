@@ -21,7 +21,7 @@
 
 <sub>Softfold பிடித்திருந்தால் GitHub-ல் ⭐ இட்டு மற்றவர்களுக்கும் தெரியப்படுத்துங்கள்.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · தமிழ் · [🌍 அனைத்து மொழிகள்](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · தமிழ் · [🌍 அனைத்து மொழிகள்](README.md)
 
 </div>
 

@@ -21,7 +21,7 @@
 
 <sub>Dacă îți place Softfold, o ⭐ pe GitHub îi ajută pe alții să descopere proiectul.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Română · [🌍 Toate limbile](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Română · [🌍 Toate limbile](README.md)
 
 </div>
 

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
-    <img src="docs/readme/download-en-light.png" height="52" alt="Télécharger Softfold pour Mac">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-en-dark.png">
+    <img src="../readme/download-en-light.png" height="52" alt="Télécharger Softfold pour Mac">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Si vous appréciez Softfold, une ⭐ sur GitHub aide d'autres personnes à le découvrir.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · Français · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 Toutes les 39 langues](docs/locales/README.md)
+[English](../../README.md) · [Deutsch](README.de.md) · Français · [Español](README.es.md) · [🌍 Toutes les 39 langues](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
-    <img src="docs/readme/hero-en-light.webp" alt="Rabattez l'écran, et votre bureau s'incline tout en douceur.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-en-dark.webp">
+    <img src="../readme/hero-en-light.webp" alt="Rabattez l'écran, et votre bureau s'incline tout en douceur.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold lit l'angle d'ouverture via IOKit HID au centième de degré près, en 
 
 ScreenCaptureKit fournit le flux du bureau en temps réel, et Metal assure le rendu de la perspective, du flou progressif et du remplissage latéral à 60 ips constants. La capture ne s'exécute que lors de la fermeture ou du pliage, et s'arrête quelques secondes après la réouverture, ce qui éteint immédiatement l'indicateur d'enregistrement orange de macOS. Les images restent exclusivement dans la mémoire vive de votre Mac : aucun flux n'est enregistré ni téléversé. Une fois par jour, Softfold envoie un signal d'activité anonyme (contenant un identifiant aléatoire d'installation, la version de l'application et de macOS, le modèle de Mac et l'utilisation de l'effet) pour estimer le nombre de Mac actifs. Aucun contenu d'écran, fichier, adresse IP ou donnée personnelle n'est stocké. Vous pouvez désactiver « Partager les statistiques d'utilisation anonymes » dans la fenêtre de Softfold à tout moment.
 
-La conception complète des animations est détaillée dans [MOTION.md](MOTION.md).
+La conception complète des animations est détaillée dans [MOTION.md](../../MOTION.md).
 
 ## Langues prises en charge
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-Les vérifications de développement sont décrites dans [CHECKS.md](CHECKS.md), et les versions signées dans [RELEASE.md](RELEASE.md).
+Les vérifications de développement sont décrites dans [CHECKS.md](../../CHECKS.md), et les versions signées dans [RELEASE.md](../../RELEASE.md).
 
 ## Contribuer
 
@@ -99,4 +99,4 @@ Softfold est à l'origine un fork de [Hinge](https://github.com/Noveum/hinge) pa
 
 ## Licence
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

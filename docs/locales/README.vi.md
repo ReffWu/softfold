@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
-    <img src="docs/readme/download-en-light.png" height="52" alt="Tải Softfold cho Mac">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-en-dark.png">
+    <img src="../readme/download-en-light.png" height="52" alt="Tải Softfold cho Mac">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Nếu bạn yêu thích Softfold, một ⭐ trên GitHub sẽ giúp nhiều người biết đến ứng dụng hơn.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · Tiếng Việt · [🌍 Tất cả 39 ngôn ngữ](docs/locales/README.md)
+[English](../../README.md) · Tiếng Việt · [Français](README.fr.md) · [🌍 Tất cả 39 ngôn ngữ](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
-    <img src="docs/readme/hero-en-light.webp" alt="Gập màn hình lại, bàn làm việc sẽ nhẹ nhàng xếp lại.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-en-dark.webp">
+    <img src="../readme/hero-en-light.webp" alt="Gập màn hình lại, bàn làm việc sẽ nhẹ nhàng xếp lại.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold đọc góc mở nắp máy qua IOKit HID với độ chính xác đế
 
 ScreenCaptureKit cung cấp luồng bàn làm việc trực tiếp và Metal xử lý góc nhìn 3D, độ mờ lũy tiến và vùng tối viền xung quanh ở tốc độ mượt mà 60 fps. Quá trình chụp màn hình chỉ diễn ra trong lúc nắp máy đang đóng hoặc đang gập, và dừng lại vài giây sau khi nắp mở hẳn ra, giúp tắt chỉ báo ghi màn hình màu cam của macOS. Mọi khung hình chỉ lưu tạm trong bộ nhớ RAM, tuyệt đối không bị ghi lại hay tải lên mạng. Mỗi ngày một lần, Softfold gửi một tín hiệu ẩn danh gồm ID cài đặt ngẫu nhiên, phiên bản ứng dụng và macOS, kiểu máy Mac và việc hiệu ứng có được dùng trong ngày hay không để ước tính lượng máy Mac đang hoạt động. Không có nội dung màn hình, tệp, địa chỉ IP hay dữ liệu cá nhân nào bị thu thập. Bạn có thể tắt mục «Chia sẻ thống kê sử dụng ẩn danh» trong cửa sổ Softfold bất cứ lúc nào.
 
-Thiết kế chuyển động chi tiết có trong tài liệu [MOTION.md](MOTION.md).
+Thiết kế chuyển động chi tiết có trong tài liệu [MOTION.md](../../MOTION.md).
 
 ## Ngôn ngữ hỗ trợ
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-Các bước kiểm tra trong quá trình phát triển được mô tả tại [CHECKS.md](CHECKS.md), và quy trình phát hành có chữ ký tại [RELEASE.md](RELEASE.md).
+Các bước kiểm tra trong quá trình phát triển được mô tả tại [CHECKS.md](../../CHECKS.md), và quy trình phát hành có chữ ký tại [RELEASE.md](../../RELEASE.md).
 
 ## Đóng góp
 
@@ -99,4 +99,4 @@ Softfold khởi đầu là một bản phân nhánh (fork) từ [Hinge](https://
 
 ## Giấy phép
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

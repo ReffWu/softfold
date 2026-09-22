@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-zh-Hant-dark.png">
-    <img src="docs/readme/download-zh-Hant-light.png" height="52" alt="下載 Mac 版">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-zh-Hant-dark.png">
+    <img src="../readme/download-zh-Hant-light.png" height="52" alt="下載 Mac 版">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>喜歡 Softfold 的話，在 GitHub 上給個 ⭐，能讓更多人發現它。</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · 繁體中文 · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 探索全部 39 種語言](docs/locales/README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · 繁體中文 · [日本語](README.ja.md) · [🌍 探索全部 39 種語言](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-zh-Hant-dark.webp">
-    <img src="docs/readme/hero-zh-Hant-light.webp" alt="闔上螢幕，桌面溫柔地摺疊起來。">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-zh-Hant-dark.webp">
+    <img src="../readme/hero-zh-Hant-light.webp" alt="闔上螢幕，桌面溫柔地摺疊起來。">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold 透過 IOKit HID 讀取螢幕角度，感測器支援時精確到百分
 
 ScreenCaptureKit 提供即時桌面畫面，Metal 以 60 fps 繪製透視、漸進模糊和兩側填充。只有在闔上或已經摺疊時才會擷取畫面，螢幕打開幾秒後就停止，螢幕錄製的提示圖示也會跟著消失。畫面只留在你 Mac 的記憶體裡，不錄影、不上傳。為了統計有多少台 Mac 在使用，Softfold 每天傳送一次匿名心跳，內容只有隨機產生的安裝 ID、App 和 macOS 版本、Mac 機型，以及當天是否用過摺疊效果。不會儲存螢幕內容、檔案、IP 位址或任何個人資訊。在 Softfold 視窗裡關閉「分享匿名使用統計」即可停止。
 
-完整的動態設計請見 [MOTION.md](MOTION.md)。
+完整的動態設計請見 [MOTION.md](../../MOTION.md)。
 
 ## 語言
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-開發檢查請見 [CHECKS.md](CHECKS.md)，簽署發佈流程請見 [RELEASE.md](RELEASE.md)。
+開發檢查請見 [CHECKS.md](../../CHECKS.md)，簽署發佈流程請見 [RELEASE.md](../../RELEASE.md)。
 
 ## 參與貢獻
 
@@ -99,4 +99,4 @@ Softfold 最初 fork 自 Noveum.ai 的 [Hinge](https://github.com/Noveum/hinge)�
 
 ## 授權
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

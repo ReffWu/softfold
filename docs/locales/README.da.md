@@ -21,7 +21,7 @@
 
 <sub>Hvis du kan lide Softfold, hjælper en ⭐ på GitHub andre med at opdage projektet.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Dansk · [🌍 Flere sprog](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Dansk · [🌍 Flere sprog](README.md)
 
 </div>
 

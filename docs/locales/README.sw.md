@@ -21,7 +21,7 @@
 
 <sub>Kama unapenda Softfold, ⭐ kwenye GitHub inasaidia wengine kugundua mradi huu.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Kiswahili · [🌍 Lugha Zote](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Kiswahili · [🌍 Lugha Zote](README.md)
 
 </div>
 

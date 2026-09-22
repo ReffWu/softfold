@@ -21,7 +21,7 @@
 
 <sub>As jy van Softfold hou, help 'n ⭐ op GitHub ander om die projek te ontdek.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Afrikaans · [🌍 Alle Tale](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Afrikaans · [🌍 Alle Tale](README.md)
 
 </div>
 

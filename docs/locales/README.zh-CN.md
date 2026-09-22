@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-zh-Hans-dark.png">
-    <img src="docs/readme/download-zh-Hans-light.png" height="52" alt="下载 Mac 版">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-zh-Hans-dark.png">
+    <img src="../readme/download-zh-Hans-light.png" height="52" alt="下载 Mac 版">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>喜欢 Softfold 的话，在 GitHub 上点个 ⭐，能让更多人发现它。</sub>
 
-[English](README.md) · 简体中文 · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 探索全部 39 种语言](docs/locales/README.md)
+[English](../../README.md) · 简体中文 · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [🌍 探索全部 39 种语言](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-zh-Hans-dark.webp">
-    <img src="docs/readme/hero-zh-Hans-light.webp" alt="合上屏幕，桌面温柔地折叠起来。">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-zh-Hans-dark.webp">
+    <img src="../readme/hero-zh-Hans-light.webp" alt="合上屏幕，桌面温柔地折叠起来。">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold 通过 IOKit HID 读取屏幕角度，传感器支持时精确到百分
 
 ScreenCaptureKit 提供实时桌面画面，Metal 以 60 fps 渲染透视、渐进模糊和两侧填充。只有在合盖或已经折叠时才会截屏，屏幕打开几秒后就停止，屏幕录制的提示图标也会随之消失。画面只保留在你 Mac 的内存里，不录制、不上传。为了统计有多少台 Mac 在使用，Softfold 每天发送一次匿名心跳，内容只有随机生成的安装 ID、App 和 macOS 版本、Mac 型号，以及当天是否用过折叠效果。不会保存屏幕内容、文件、IP 地址或任何个人信息。在 Softfold 窗口里关闭「共享匿名使用统计」即可停止。
 
-完整的动效设计见 [MOTION.md](MOTION.md)。
+完整的动效设计见 [MOTION.md](../../MOTION.md)。
 
 ## 语言
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-开发检查见 [CHECKS.md](CHECKS.md)，签名发布流程见 [RELEASE.md](RELEASE.md)。
+开发检查见 [CHECKS.md](../../CHECKS.md)，签名发布流程见 [RELEASE.md](../../RELEASE.md)。
 
 ## 参与贡献
 
@@ -99,4 +99,4 @@ Softfold 最初 fork 自 Noveum.ai 的 [Hinge](https://github.com/Noveum/hinge)�
 
 ## 许可证
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

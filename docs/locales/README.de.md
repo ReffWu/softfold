@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
-    <img src="docs/readme/download-en-light.png" height="52" alt="Softfold für Mac herunterladen">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-en-dark.png">
+    <img src="../readme/download-en-light.png" height="52" alt="Softfold für Mac herunterladen">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Wenn dir Softfold gefällt, hilft ein ⭐ auf GitHub dabei, dass noch mehr Menschen die App entdecken.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · Deutsch · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 Alle 39 Sprachen](docs/locales/README.md)
+[English](../../README.md) · Deutsch · [Français](README.fr.md) · [Español](README.es.md) · [🌍 Alle 39 Sprachen](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
-    <img src="docs/readme/hero-en-light.webp" alt="Klappe das Display zu, und dein Schreibtisch faltet sich sanft zurück.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-en-dark.webp">
+    <img src="../readme/hero-en-light.webp" alt="Klappe das Display zu, und dein Schreibtisch faltet sich sanft zurück.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold liest den Deckelwinkel über IOKit HID mit einer Präzision von Hundert
 
 ScreenCaptureKit liefert den Live-Desktop, während Metal die räumliche Perspektive, den progressiven Blur und den seitlichen Übergang mit flüssigen 60 fps rendert. Die Erfassung läuft nur beim Schließen oder im gefalteten Zustand und stoppt wenige Sekunden nach dem erneuten Öffnen – wodurch auch der macOS-Aufnahmeindikator wieder erlischt. Sämtliche Frames verbleiben ausschließlich im Arbeitsspeicher deines Mac und werden weder aufgezeichnet noch übertragen. Einmal täglich sendet Softfold einen anonymen Heartbeat mit einer zufälligen Installations-ID, App- und macOS-Version, Mac-Modell sowie der Information, ob die Faltung an jenem Tag aktiv genutzt wurde, um aktive Installationen zu schätzen. Es werden keinerlei Bildschirminhalte, Dateien, IP-Adressen oder persönliche Daten erfasst. Deaktiviere einfach „Anonyme Nutzungsstatistiken teilen“ im Softfold-Fenster, um dies zu stoppen.
 
-Das vollständige Motion-Design findest du in [MOTION.md](MOTION.md).
+Das vollständige Motion-Design findest du in [MOTION.md](../../MOTION.md).
 
 ## Sprachen
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-Entwicklungsprüfungen sind in [CHECKS.md](CHECKS.md) dokumentiert, signierte Builds in [RELEASE.md](RELEASE.md).
+Entwicklungsprüfungen sind in [CHECKS.md](../../CHECKS.md) dokumentiert, signierte Builds in [RELEASE.md](../../RELEASE.md).
 
 ## Mitwirken
 
@@ -99,4 +99,4 @@ Softfold begann als Fork von [Hinge](https://github.com/Noveum/hinge) von Noveum
 
 ## Lizenz
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

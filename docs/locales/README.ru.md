@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
-    <img src="docs/readme/download-en-light.png" height="52" alt="Скачать Softfold для Mac">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-en-dark.png">
+    <img src="../readme/download-en-light.png" height="52" alt="Скачать Softfold для Mac">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Если вам нравится Softfold, звезда ⭐ на GitHub поможет другим пользователям узнать о проекте.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · Русский · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 Все 39 языков](docs/locales/README.md)
+[English](../../README.md) · Русский · [Deutsch](README.de.md) · [🌍 Все 39 языков](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
-    <img src="docs/readme/hero-en-light.webp" alt="Опустите крышку, и рабочий стол мягко складывается.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-en-dark.webp">
+    <img src="../readme/hero-en-light.webp" alt="Опустите крышку, и рабочий стол мягко складывается.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold считывает угол наклона крышки через IOKi
 
 ScreenCaptureKit передает поток рабочего стола в реальном времени, а фреймворк Metal визуализирует перспективу, прогрессивное размытие и боковые градиенты со стабильной частотой 60 кадров/с. Захват экрана активен только во время движения или в сложенном состоянии и прекращается через пару секунд после полного открытия, благодаря чему системный оранжевый индикатор записи гаснет. Кадры обрабатываются исключительно в оперативной памяти Mac, никогда не сохраняются на диск и не передаются по сети. Раз в сутки Softfold отправляет анонимный отчет со случайным идентификатором установки, версиями приложения и macOS, моделью Mac и фактом использования эффекта для подсчета активных устройств. Никакие снимки экрана, файлы, IP-адреса или персональные данные не сохраняются. Вы можете в любой момент отключить «Делиться анонимной статистикой» в окне приложения.
 
-Подробное описание физики движения приведено в [MOTION.md](MOTION.md).
+Подробное описание физики движения приведено в [MOTION.md](../../MOTION.md).
 
 ## Поддерживаемые языки
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-Проверки в процессе разработки описаны в [CHECKS.md](CHECKS.md), а подписание релизов - в [RELEASE.md](RELEASE.md).
+Проверки в процессе разработки описаны в [CHECKS.md](../../CHECKS.md), а подписание релизов - в [RELEASE.md](../../RELEASE.md).
 
 ## Участие в разработке
 
@@ -99,4 +99,4 @@ open build/Softfold.app
 
 ## Лицензия
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

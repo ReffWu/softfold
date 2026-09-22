@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-ko-dark.png">
-    <img src="docs/readme/download-ko-light.png" height="52" alt="Mac용 다운로드">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-ko-dark.png">
+    <img src="../readme/download-ko-light.png" height="52" alt="Mac용 다운로드">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Softfold가 마음에 드신다면 GitHub에서 ⭐를 눌러 주세요. 더 많은 사람이 찾을 수 있습니다.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · 한국어 · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · [Polski](README.pl.md) · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 39개 전체 언어 보기](docs/locales/README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · [日本語](README.ja.md) · 한국어 · [🌍 39개 전체 언어 보기](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-ko-dark.webp">
-    <img src="docs/readme/hero-ko-light.webp" alt="덮개를 닫으면, 데스크톱이 부드럽게 접힙니다.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-ko-dark.webp">
+    <img src="../readme/hero-ko-light.webp" alt="덮개를 닫으면, 데스크톱이 부드럽게 접힙니다.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold는 IOKit HID로 덮개 각도를 읽습니다. 센서가 지원하면 0
 
 ScreenCaptureKit이 실시간 데스크톱을 가져오고, Metal이 원근, 점진적 흐림, 양옆 채우기를 60fps로 렌더링합니다. 화면 캡처는 덮개를 닫는 동안이나 접혀 있을 때만 실행되고, 다시 열고 몇 초 뒤에 멈추므로 화면 기록 표시도 사라집니다. 화면은 Mac의 메모리에만 머물며 녹화나 업로드는 전혀 하지 않습니다. 사용 중인 Mac 수를 세기 위해 Softfold는 하루에 한 번 익명 하트비트를 보냅니다. 내용은 임의의 설치 ID, 앱과 macOS 버전, Mac 모델, 그날 접기 효과를 썼는지 여부뿐입니다. 화면 내용, 파일, IP 주소, 개인 정보는 저장하지 않습니다. Softfold 윈도우에서 '익명 사용 통계 공유'를 끄면 멈춥니다.
 
-움직임 설계의 자세한 내용은 [MOTION.md](MOTION.md)에 있습니다.
+움직임 설계의 자세한 내용은 [MOTION.md](../../MOTION.md)에 있습니다.
 
 ## 언어
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-개발 검사는 [CHECKS.md](CHECKS.md), 서명된 릴리스 절차는 [RELEASE.md](RELEASE.md)를 참고하세요.
+개발 검사는 [CHECKS.md](../../CHECKS.md), 서명된 릴리스 절차는 [RELEASE.md](../../RELEASE.md)를 참고하세요.
 
 ## 기여하기
 
@@ -99,4 +99,4 @@ Softfold는 Noveum.ai의 [Hinge](https://github.com/Noveum/hinge)(MIT 라이선�
 
 ## 라이선스
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

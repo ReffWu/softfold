@@ -21,7 +21,7 @@
 
 <sub>Jos pidät Softfoldista, ⭐ GitHubissa auttaa useampia löytämään sen.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Suomi · [🌍 Kaikki kielet](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Suomi · [🌍 Kaikki kielet](README.md)
 
 </div>
 

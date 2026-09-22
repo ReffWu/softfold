@@ -21,7 +21,7 @@
 
 <sub>Se Softfold plaĉas al vi, ⭐ en GitHub helpas aliajn malkovri la projekton.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Esperanto · [🌍 Ĉiuj Lingvoj](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Esperanto · [🌍 Ĉiuj Lingvoj](README.md)
 
 </div>
 

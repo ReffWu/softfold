@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/icon.png" width="128" height="128" alt="Softfold" />
+<img src="../icon.png" width="128" height="128" alt="Softfold" />
 
 # Softfold
 
@@ -8,8 +8,8 @@
 
 <a href="https://github.com/ReffWu/softfold/releases/latest/download/Softfold.dmg">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/download-en-dark.png">
-    <img src="docs/readme/download-en-light.png" height="52" alt="Pobierz Softfold na Maca">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/download-en-dark.png">
+    <img src="../readme/download-en-light.png" height="52" alt="Pobierz Softfold na Maca">
   </picture>
 </a>
 
@@ -21,14 +21,14 @@
 
 <sub>Jeśli podoba Ci się Softfold, gwiazdka ⭐ na GitHubie pomoże innym odkryć ten projekt.</sub>
 
-[English](README.md) · [简体中文](README.zh-CN.md) · [繁體中文](README.zh-TW.md) · [日本語](README.ja.md) · [한국어](README.ko.md) · [Deutsch](README.de.md) · [Français](README.fr.md) · [Español](README.es.md) · [Italiano](README.it.md) · [Português](README.pt-BR.md) · [Русский](README.ru.md) · [Nederlands](README.nl.md) · [Türkçe](README.tr.md) · Polski · [العربية](README.ar.md) · [Tiếng Việt](README.vi.md) · [🌍 Wszystkie 39 języków](docs/locales/README.md)
+[English](../../README.md) · Polski · [Deutsch](README.de.md) · [🌍 Wszystkie 39 języków](README.md)
 
 </div>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/readme/hero-en-dark.webp">
-    <img src="docs/readme/hero-en-light.webp" alt="Przymknij pokrywę, a biurko miękko się złoży.">
+    <source media="(prefers-color-scheme: dark)" srcset="../readme/hero-en-dark.webp">
+    <img src="../readme/hero-en-light.webp" alt="Przymknij pokrywę, a biurko miękko się złoży.">
   </picture>
 </p>
 
@@ -70,7 +70,7 @@ Softfold odczytuje kąt pokrywy za pośrednictwem IOKit HID z dokładnością do
 
 ScreenCaptureKit dostarcza obraz biurka w czasie rzeczywistym, a Metal renderuje perspektywę, progresywne rozmycie i boczne wypełnienie w płynnych 60 kl./s. Przechwytywanie działa wyłącznie podczas ruchu lub złożenia ekranu i zatrzymuje się kilka sekund po ponownym otwarciu, co gasi pomarańczowy wskaźnik nagrywania w macOS. Klatki pozostają wyłącznie w pamięci RAM i nigdy nie są zapisywane na dysku ani przesyłane do sieci. Raz dziennie Softfold wysyła anonimowy sygnał z losowym identyfikatorem instalacji, wersjami aplikacji i systemu macOS, modelem komputera oraz informacją o użyciu efektu w danym dniu, wyłącznie w celu szacowania liczby aktywnych komputerów Mac. Żadne zrzuty ekranu, pliki, adresy IP ani dane osobowe nie są gromadzone. W każdej chwili możesz wyłączyć opcję «Udostępniaj anonimowe statystyki» w oknie programu.
 
-Pełna koncepcja animacji została opisana w dokumencie [MOTION.md](MOTION.md).
+Pełna koncepcja animacji została opisana w dokumencie [MOTION.md](../../MOTION.md).
 
 ## Obsługiwane języki
 
@@ -87,7 +87,7 @@ make build
 open build/Softfold.app
 ```
 
-Procedury weryfikacji deweloperskiej opisano w [CHECKS.md](CHECKS.md), a podpisywanie wydań w [RELEASE.md](RELEASE.md).
+Procedury weryfikacji deweloperskiej opisano w [CHECKS.md](../../CHECKS.md), a podpisywanie wydań w [RELEASE.md](../../RELEASE.md).
 
 ## Współtworzenie
 
@@ -99,4 +99,4 @@ Projekt Softfold powstał jako fork repozytorium [Hinge](https://github.com/Nove
 
 ## Licencja
 
-[MIT](LICENSE)
+[MIT](../../LICENSE)

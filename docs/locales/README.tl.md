@@ -21,7 +21,7 @@
 
 <sub>Kung nagustuhan mo ang Softfold, makatutulong ang ⭐ sa GitHub para matuklasan ito ng iba.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Filipino · [🌍 Lahat ng Wika](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Filipino · [🌍 Lahat ng Wika](README.md)
 
 </div>
 

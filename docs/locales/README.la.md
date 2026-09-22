@@ -21,7 +21,7 @@
 
 <sub>Si Softfold tibi placet, stella ⭐ in GitHub adiuvat ut alii hoc opus reperiant.</sub>
 
-[English](../../README.md) · [简体中文](../../README.zh-CN.md) · Lingua Latina · [🌍 Omnes Linguae](README.md)
+[English](../../README.md) · [简体中文](README.zh-CN.md) · Lingua Latina · [🌍 Omnes Linguae](README.md)
 
 </div>
 

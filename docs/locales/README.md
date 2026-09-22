@@ -25,21 +25,21 @@ These languages are natively integrated into the Softfold application:
 | Language | Autonym | Documentation |
 | :--- | :--- | :--- |
 | English | English | [English](../../README.md) |
-| Simplified Chinese | 简体中文 | [简体中文](../../README.zh-CN.md) |
-| Traditional Chinese | 繁體中文 | [繁體中文](../../README.zh-TW.md) |
-| Japanese | 日本語 | [日本語](../../README.ja.md) |
-| Korean | 한국어 | [한국어](../../README.ko.md) |
-| German | Deutsch | [Deutsch](../../README.de.md) |
-| French | Français | [Français](../../README.fr.md) |
-| Spanish | Español | [Español](../../README.es.md) |
-| Italian | Italiano | [Italiano](../../README.it.md) |
-| Brazilian Portuguese | Português (Brasil) | [Português](../../README.pt-BR.md) |
-| Russian | Русский | [Русский](../../README.ru.md) |
-| Dutch | Nederlands | [Nederlands](../../README.nl.md) |
-| Turkish | Türkçe | [Türkçe](../../README.tr.md) |
-| Polish | Polski | [Polski](../../README.pl.md) |
-| Arabic | العربية | [العربية](../../README.ar.md) |
-| Vietnamese | Tiếng Việt | [Tiếng Việt](../../README.vi.md) |
+| Simplified Chinese | 简体中文 | [简体中文](README.zh-CN.md) |
+| Traditional Chinese | 繁體中文 | [繁體中文](README.zh-TW.md) |
+| Japanese | 日本語 | [日本語](README.ja.md) |
+| Korean | 한국어 | [한국어](README.ko.md) |
+| German | Deutsch | [Deutsch](README.de.md) |
+| French | Français | [Français](README.fr.md) |
+| Spanish | Español | [Español](README.es.md) |
+| Italian | Italiano | [Italiano](README.it.md) |
+| Brazilian Portuguese | Português (Brasil) | [Português](README.pt-BR.md) |
+| Russian | Русский | [Русский](README.ru.md) |
+| Dutch | Nederlands | [Nederlands](README.nl.md) |
+| Turkish | Türkçe | [Türkçe](README.tr.md) |
+| Polish | Polski | [Polski](README.pl.md) |
+| Arabic | العربية | [العربية](README.ar.md) |
+| Vietnamese | Tiếng Việt | [Tiếng Việt](README.vi.md) |
 
 ---
 
