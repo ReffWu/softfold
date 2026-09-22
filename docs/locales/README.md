@@ -18,9 +18,9 @@
 
 ---
 
-## Core Supported Languages
+## Core Languages
 
-These languages are natively integrated into the Softfold application:
+All 39 languages are natively integrated into the Softfold application:
 
 | | Language | Autonym | Documentation |
 | :---: | :--- | :--- | :--- |
