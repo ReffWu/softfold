@@ -69,13 +69,14 @@ fi
 
 mkdir -p "$feed"
 cp dist/Softfold.dmg "$feed/"
-"$packages/artifacts/sparkle/Sparkle/bin/generate_appcast" "$feed" \
+python3 scripts/generate-release-notes.py "$version"
+"$packages/artifacts/sparkle/Sparkle/bin/generate_appcast" --embed-release-notes "$feed" \
   --download-url-prefix "https://github.com/ReffWu/softfold/releases/download/v$version/"
 grep -q "sparkle:edSignature" "$feed/appcast.xml"
 
 if [ "${1:-}" = "--publish" ]; then
   gh release create -R ReffWu/softfold "v$version" dist/Softfold.dmg dist/Softfold.dmg.sha256 "$feed/appcast.xml" \
-    --title "Softfold $version" --generate-notes --target main --draft
+    --title "Softfold $version" --notes-file dist/release-notes.md --target main --draft
   gh release edit -R ReffWu/softfold "v$version" --draft=false --latest
 fi
 
