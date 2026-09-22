@@ -26,7 +26,7 @@ These languages are natively integrated into the Softfold application:
 | :---: | :--- | :--- | :--- |
 | 🇺🇸 | English | English | [English](../../README.md) |
 | 🇨🇳 | Simplified Chinese | 简体中文 | [简体中文](README.zh-CN.md) |
-| 🇹🇼 | Traditional Chinese | 繁體中文 | [繁體中文](README.zh-TW.md) |
+| 🇭🇰 | Traditional Chinese | 繁體中文 | [繁體中文](README.zh-TW.md) |
 | 🇯🇵 | Japanese | 日本語 | [日本語](README.ja.md) |
 | 🇰🇷 | Korean | 한국어 | [한국어](README.ko.md) |
 | 🇩🇪 | German | Deutsch | [Deutsch](README.de.md) |
