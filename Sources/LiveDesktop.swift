@@ -36,6 +36,7 @@ final class LidReading: ObservableObject {
 
 @MainActor
 final class LiveDesktop: NSObject, ObservableObject {
+  static let shared = LiveDesktop()
   let lid = LidReading()
   @Published private(set) var isActive = false
   @Published private(set) var isFolding = false

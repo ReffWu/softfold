@@ -6,19 +6,13 @@ import SwiftUI
 @main
 struct SoftfoldApp: App {
   @NSApplicationDelegateAdaptor(AppDelegate.self) private var delegate
-  @StateObject private var desktop = LiveDesktop()
+  @StateObject private var desktop = LiveDesktop.shared
   @StateObject private var updater = Updater()
   @AppStorage("showsMenuBarIcon") private var showsMenuBarIcon = true
 
   var body: some Scene {
     Window("Softfold", id: "main") {
       MainView(desktop: desktop, updater: updater)
-        .onAppear {
-          delegate.onTerminate = { desktop.shutDown() }
-          delegate.installToggleHotKey {
-            if !desktop.isStarting { desktop.setEnabled(!desktop.isEnabled) }
-          }
-        }
     }
     .windowStyle(.hiddenTitleBar)
     .windowResizability(.contentSize)
@@ -47,11 +41,21 @@ struct SoftfoldApp: App {
 
 @MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
-  var onTerminate: (() -> Void)?
   private var toggleHotKey: EventHotKeyRef?
   private var hotKeyHandler: EventHandlerRef?
 
   func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool { false }
+
+  func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows: Bool) -> Bool {
+    if !hasVisibleWindows {
+      let window =
+        sender.windows.first(where: { $0.title == "Softfold" && $0.canBecomeMain })
+        ?? sender.windows.first(where: { $0.canBecomeMain })
+      window?.makeKeyAndOrderFront(nil)
+      NSApp.activate(ignoringOtherApps: true)
+    }
+    return true
+  }
 
   func applicationWillFinishLaunching(_ notification: Notification) {
     DockIcon.apply()
@@ -59,12 +63,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ notification: Notification) {
     Heartbeat.start()
+    installToggleHotKey {
+      if !LiveDesktop.shared.isStarting {
+        LiveDesktop.shared.setEnabled(!LiveDesktop.shared.isEnabled)
+      }
+    }
   }
 
   func applicationWillTerminate(_ notification: Notification) {
     if let toggleHotKey { UnregisterEventHotKey(toggleHotKey) }
     if let hotKeyHandler { RemoveEventHandler(hotKeyHandler) }
-    onTerminate?()
+    LiveDesktop.shared.shutDown()
   }
 
   func installToggleHotKey(_ action: @escaping () -> Void) {
