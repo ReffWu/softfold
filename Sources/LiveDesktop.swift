@@ -297,7 +297,11 @@ final class LiveDesktop: NSObject, ObservableObject {
       motion.setEnabled(true)
       isActive = true
       isStarting = false
-      if motion.isClosing { beginRendering() }
+      if motion.isClosing {
+        beginRendering()
+      } else {
+        overlay?.orderOut(nil)
+      }
     } catch {
       guard self.session == session else { return }
       stop()
@@ -441,7 +445,7 @@ final class LiveDesktop: NSObject, ObservableObject {
       if self.overlay?.frame != screen.frame {
         self.stop()
         await self.start()
-      } else {
+      } else if self.isFolding {
         self.overlay?.orderFrontRegardless()
       }
     }
@@ -479,7 +483,6 @@ final class LiveDesktop: NSObject, ObservableObject {
     window.setFrame(area, display: false)
     overlay = window
     metalView = view
-    window.orderFrontRegardless()
     view.draw()
     let link = view.displayLink(target: self, selector: #selector(drawFrame(_:)))
     let refresh = Float(min(max(screen.maximumFramesPerSecond, 1), 60))
@@ -499,6 +502,7 @@ final class LiveDesktop: NSObject, ObservableObject {
 
   private func beginRendering() {
     guard isActive, motion.isClosing else { return }
+    overlay?.orderFrontRegardless()
     isFolding = true
     Heartbeat.recordFold()
     StarRequest.shared.recordFold()
@@ -516,6 +520,7 @@ final class LiveDesktop: NSObject, ObservableObject {
     guard !motion.isClosing else { return }
     isFolding = false
     displayLink?.isPaused = true
+    overlay?.orderOut(nil)
     pauseCapture()
   }
 
