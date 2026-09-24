@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-"""Generate multilingual release notes for Softfold releases (All 39 languages)."""
-
 import sys
 from pathlib import Path
 
@@ -362,7 +360,6 @@ LANGUAGES = [
 
 
 def generate_markdown(version: str) -> str:
-    """Generate GitHub release markdown with multilingual collapsible sections."""
     en = next(lang for lang in LANGUAGES if lang["code"] == "en")
     zh = next(lang for lang in LANGUAGES if lang["code"] == "zh-Hans")
 
@@ -414,7 +411,6 @@ def generate_markdown(version: str) -> str:
 
 
 def generate_html(version: str) -> str:
-    """Generate Sparkle-compatible HTML release notes for appcast."""
     en = next(lang for lang in LANGUAGES if lang["code"] == "en")
     zh = next(lang for lang in LANGUAGES if lang["code"] == "zh-Hans")
 
