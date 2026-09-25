@@ -192,6 +192,10 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
     let time = presentationTime ?? CACurrentMediaTime()
     presentationTime = nil
     let progress = motion.sample(at: time)
+    guard view.window?.isVisible == true else {
+      if progress <= 0 { settle() }
+      return
+    }
     guard progress > 0 else {
       clear(view)
       return
@@ -296,6 +300,11 @@ final class DesktopRenderer: NSObject, MTKViewDelegate {
       }
     }
     command.commit()
+  }
+
+  private func settle() {
+    wasPresented = false
+    onRest?()
   }
 
   func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {}

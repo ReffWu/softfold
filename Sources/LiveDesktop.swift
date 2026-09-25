@@ -458,7 +458,7 @@ final class LiveDesktop: NSObject, ObservableObject {
     window.isFloatingPanel = true
     window.becomesKeyOnlyIfNeeded = true
     window.title = "Softfold Desktop Overlay"
-    window.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.screenSaverWindow)))
+    window.level = NSWindow.Level(rawValue: Int(CGWindowLevelForKey(.assistiveTechHighWindow)))
     window.collectionBehavior = [
       .canJoinAllSpaces, .fullScreenAuxiliary, .stationary, .ignoresCycle,
     ]
